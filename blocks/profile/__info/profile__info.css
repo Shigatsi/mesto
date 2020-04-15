@@ -1,6 +1,9 @@
 .profile__info{
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  align-items: baseline;
+  grid-template-columns: 295px 24px;
+  grid-gap: 16px 17px;
   max-width: 336px;
   color: #fff;
+  margin-right: 246px;
 }

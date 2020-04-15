@@ -1,5 +1,6 @@
 .profile__lifestyle{
   font-weight: normal;
+  grid-area: 2;
   font-size: 18px;
   line-height: 22px;
   margin: 0;
