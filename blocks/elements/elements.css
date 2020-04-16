@@ -1,0 +1,12 @@
+@import url(./__item/elements__item.css);
+@import url(./__bar/elemets__bar.css);
+@import url(./__title/elements__title.css);
+
+.elements{
+  max-width: 882px;
+  display: grid;
+  grid-template-columns: repeat(3, 282px);
+  grid-auto-rows: auto;
+  grid-gap: 18px 21px;
+  margin:0 auto 66px;
+}
