@@ -1,0 +1,16 @@
+.popup__closeButton{
+  grid-column-start: 2;
+  grid-row-start: 1;
+  width: 40.7px;
+  height:40.7px;
+  transform: rotate(45deg);
+  border: none;
+  background-color: #000;
+  background-image: url(../../../images/Close_Icon.svg);
+}
+
+
+.popup__closeButton:hover{
+  cursor: pointer;
+  opacity: .6;
+}

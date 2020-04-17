@@ -1,0 +1,17 @@
+@import url(./__form/popup__form.css);
+@import url(./__closeButton/popup__closeButton.css);
+@import url(./__header/popup__header.css);
+@import url(./__name/poupp__name.css);
+@import url(./__lifestyle/popup__lifestyle.css);
+@import url(./__saveButton/popup__saveButton.css);
+
+
+.popup{
+  display: grid;
+  grid-template-columns:auto;
+  position:absolute;
+  left: 0;
+  top: 140px;
+  margin-left: calc((100% - 430px)/2);
+  display: none;
+}
