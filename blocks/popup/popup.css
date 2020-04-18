@@ -1,5 +1,7 @@
 @import url(./__form/popup__form.css);
 @import url(./__closeButton/popup__closeButton.css);
+@import url(./_status/popup_status_closed.css);
+@import url(./_status/popup_status_opened.css);
 @import url(./__header/popup__header.css);
 @import url(./__name/poupp__name.css);
 @import url(./__lifestyle/popup__lifestyle.css);
@@ -7,11 +9,11 @@
 
 
 .popup{
-  display: grid;
+  /* display: grid; */
   grid-template-columns:auto;
   position:absolute;
   left: 0;
   top: 140px;
   margin-left: calc((100% - 430px)/2);
-  display: none;
+  /* display: none; */
 }

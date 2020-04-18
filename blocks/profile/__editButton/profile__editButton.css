@@ -9,3 +9,7 @@
   opacity: .6;
   cursor: pointer;
 }
+
+.popup__editButton:focus{
+  outline: none;
+}
