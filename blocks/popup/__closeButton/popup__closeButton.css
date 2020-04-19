@@ -7,6 +7,8 @@
   border: none;
   background-color: #000;
   background-image: url(../../../images/Close_Icon.svg);
+  position: relative;
+  z-index: 3;
 }
 
 
