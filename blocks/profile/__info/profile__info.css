@@ -18,3 +18,10 @@
    "lifestyle lifestyle";
   }
 }
+
+@media screen and (max-width: 540px){
+  .profile__info{
+    grid-template-columns: 201px 18px;
+    grid-gap: 14px 1px;
+  }
+}

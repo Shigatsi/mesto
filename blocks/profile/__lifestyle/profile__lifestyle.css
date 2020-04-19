@@ -12,3 +12,10 @@
     justify-self: center;
   }
 }
+
+@media screen and (max-width: 540px){
+  .profile__lifestyle{
+    font-size: 14px;
+    line-height: 17px;
+  }
+}

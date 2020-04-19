@@ -9,11 +9,17 @@
 
 
 .popup{
-  /* display: grid; */
+
   grid-template-columns:auto;
   position:absolute;
   left: 0;
   top: 140px;
   margin-left: calc((100% - 430px)/2);
-  /* display: none; */
+
+}
+
+@media screen and (max-width: 540px){
+  .popup{
+    margin-left: calc((100% - 280px)/2);
+  }
 }

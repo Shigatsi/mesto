@@ -19,3 +19,10 @@
     justify-content: center;
   }
 }
+
+@media screen and (max-width: 540px){
+  .elements{
+    margin:0 auto 48px;
+    grid-gap: 20px;
+  }
+}

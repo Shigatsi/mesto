@@ -6,7 +6,7 @@
   transform: rotate(45deg);
   border: none;
   background-color: #000;
-  background-image: url(../../../images/Close_Icon.svg);
+  background:center url(../../../images/Close_Icon.svg);
   position: relative;
   z-index: 3;
 }
@@ -19,4 +19,11 @@
 
 .popup__closeButton:focus{
   outline: none;
+}
+
+@media screen and (max-width: 540px){
+  .popup__closeButton{
+    width: 30.5px;
+    height:30.5px;
+  }
 }

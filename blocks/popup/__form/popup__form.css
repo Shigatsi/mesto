@@ -9,3 +9,9 @@
   position: relative;
   z-index: 3;
 }
+
+@media screen and (max-width: 540px){
+  .popup__form{
+    width: 280px;
+  }
+}

@@ -2,7 +2,7 @@
 
 .header{
   max-width: 882px;
-  min-height: 74px;
+  min-height: 56px;
   margin: 0 auto 40px;
   padding-top: 45px;
 }
@@ -13,9 +13,9 @@
   }
 }
 
-/* @media screen and (max-width: 800px){
+@media screen and (max-width: 540px){
   .header{
     max-width: calc(100% - 54px);
     padding-top: 28px;
   }
-} */
+}

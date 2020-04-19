@@ -5,3 +5,10 @@
   color: #545454;
   text-align: left;
 }
+
+@media screen and (max-width: 540px){
+  .footer__copyright{
+    font-size: 14px;
+    line-height: 17px;
+  }
+}

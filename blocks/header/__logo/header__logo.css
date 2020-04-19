@@ -3,9 +3,9 @@
   max-height: 100%;
 }
 
-/* @media screen and (max-width: 800px){
+@media screen and (max-width: 540px){
   .header__logo{
     max-width: 103.74px;
    max-height: 24.4px;
   }
-} */
+}

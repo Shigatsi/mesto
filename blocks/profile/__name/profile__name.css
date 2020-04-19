@@ -5,3 +5,10 @@
   margin: 0;
   grid-area: Name;
 }
+@media screen and (max-width: 540px){
+  .profile__name{
+    font-weight: 500;
+    font-size: 27px;
+    text-align: center;
+  }
+}
