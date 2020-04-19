@@ -1,3 +1,4 @@
+@import url(./__data/profile__data.css);
 @import url(./__avatar/profile__avatar.css);
 @import url(./__info/profile__info.css);
 @import url(./__name/profile__name.css);
@@ -10,4 +11,18 @@
   margin: 0 auto 50px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 1024px){
+  .profile{
+    max-width: calc(100% - 142px)
+  }
+}
+
+@media screen and (max-width: 800px){
+  .profile{
+    flex-direction: column;
+
+  }
 }

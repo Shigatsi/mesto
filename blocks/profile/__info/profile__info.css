@@ -5,5 +5,16 @@
   grid-gap: 16px 17px;
   max-width: 336px;
   color: #fff;
-  margin-right: 246px;
+  grid-template-areas:
+  "Name Btn"
+   "lifestyle .";
+
+}
+
+@media screen and (max-width: 800px){
+  .profile__info{
+    grid-template-areas:
+  "Name Btn"
+   "lifestyle lifestyle";
+  }
 }

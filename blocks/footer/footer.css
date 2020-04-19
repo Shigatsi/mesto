@@ -1,8 +1,14 @@
-@import url(./__copyright/footer__coperight.css);
+@import url(./__copyright/footer__copyright.css);
 
 .footer{
   min-height: 78px;
   max-width: 882px;
   margin: 0 auto;
 
+}
+
+@media screen and (max-width: 1024px){
+  .footer{
+    max-width: calc(100% - 142px);
+  }
 }

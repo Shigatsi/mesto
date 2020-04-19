@@ -2,7 +2,10 @@
   background: no-repeat url(../../../images/editButton.svg);
   width: 24px;
   height: 24px;
-  border-style: none;
+  align-self: center;
+  margin-top: 5px;
+  border: none;
+
 }
 
 .profile__editButton:hover{
