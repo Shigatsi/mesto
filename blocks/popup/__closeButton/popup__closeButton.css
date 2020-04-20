@@ -27,3 +27,10 @@
     height:30.5px;
   }
 }
+
+@media screen and (max-width: 400px){
+  .popup__closeButton{
+    width: 22.8px;
+    height:22.8px;
+  }
+}

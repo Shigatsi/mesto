@@ -19,3 +19,13 @@
 .popup__saveButton:focus{
   outline: none;
 }
+
+@media screen and (max-width: 540px){
+  .popup__saveButton{
+    margin: 24px 18px 0;
+    font-size: 14px;
+    line-height: 18px;
+    height: 46.15px;
+  }
+
+}

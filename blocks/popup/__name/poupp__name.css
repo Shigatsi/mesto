@@ -1,8 +1,15 @@
 .popup__name{
   font-family: inherit;
-  width: 358px;
   height: 27.26px;
   margin: 54px 36px 0;
   border: none;
   border-bottom: 1px solid #bcbcc4;
+  font-size: 14px;
+  line-height: 17px;
+}
+@media screen and (max-width: 540px){
+  .popup__name{
+    margin: 27px 18px 0;
+    height: 18px;
+  }
 }
