@@ -1,6 +1,7 @@
-const editButton = document.querySelector('.profile__editButton');
+const editButton = document.querySelector('.profile__edit-button');
 const closeButton = document.querySelector('.popup__closeButton');
 const overlay = document.querySelector('.overlay');
+// let form = document.querySelector('.popup__form');
 let popupStatus = document.querySelector('.popup');
 let inputName = document.querySelector('.popup__name');
 let inputLifestyle = document.querySelector('.popup__lifestyle');
@@ -12,7 +13,6 @@ popupStatus.classList.add('popup_status_closed');
 overlay.classList.add('overlay_status_hide');
 
 function showPopup() {
-  console.log('Мы кликнули по editButton');
   popupStatus.classList.remove('popup_status_closed');
   popupStatus.classList.add('popup_status_opened');
   overlay.classList.remove('overlay_status_hide');
@@ -22,7 +22,6 @@ function showPopup() {
 }
 
 function hidePopup(){
-  console.log('Мы кликнули по closeButton');
   popupStatus.classList.add('popup_status_closed');
   popupStatus.classList.remove('popup_status_opened');
   overlay.classList.add('overlay_status_hide');
