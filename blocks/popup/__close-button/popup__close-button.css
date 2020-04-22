@@ -1,4 +1,4 @@
-.popup__closeButton{
+.popup__close-button{
   grid-column-start: 2;
   grid-row-start: 1;
   width: 40.7px;
@@ -12,24 +12,24 @@
 }
 
 
-.popup__closeButton:hover{
+.popup__close-button:hover{
   cursor: pointer;
   opacity: .6;
 }
 
-.popup__closeButton:focus{
+.popup__close-button:focus{
   outline: none;
 }
 
 @media screen and (max-width: 540px){
-  .popup__closeButton{
+  .popup__close-button{
     width: 30.5px;
     height:30.5px;
   }
 }
 
 @media screen and (max-width: 400px){
-  .popup__closeButton{
+  .popup__close-button{
     width: 22.8px;
     height:22.8px;
   }

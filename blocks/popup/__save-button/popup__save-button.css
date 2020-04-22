@@ -1,4 +1,4 @@
-.popup__saveButton{
+.popup__save-button{
   background-color: #000;
   height: 50.15px;
   font-weight: normal;
@@ -11,17 +11,17 @@
   margin: 48px 36px 0;
 }
 
-.popup__saveButton:hover{
+.popup__save-button:hover{
   cursor: pointer;
   opacity: .8;
 }
 
-.popup__saveButton:focus{
+.popup__save-button:focus{
   outline: none;
 }
 
 @media screen and (max-width: 540px){
-  .popup__saveButton{
+  .popup__save-button{
     margin: 24px 18px 0;
     font-size: 14px;
     line-height: 18px;
