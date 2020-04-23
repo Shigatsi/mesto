@@ -4,11 +4,13 @@
   height: 18.13px;
   align-self: center;
   border: none;
+
 }
 
 .elements__like-button:hover{
   opacity: .6;
   cursor: pointer;
+  transition: .2s ease-in-out;
 }
 
 .elements__like-button:focus{

@@ -1,6 +1,6 @@
 # Проект 4: Место
 
-### link will be here
+### https://shigatsi.github.io/mesto/
 
  Интерактивная страница о путешествиях
 

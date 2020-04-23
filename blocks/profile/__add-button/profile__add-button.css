@@ -10,6 +10,7 @@
 .profile__add-button:hover{
   opacity: .6;
   cursor: pointer;
+  transition: .2s ease-in-out;
 }
 
 .profile__add-button:focus{

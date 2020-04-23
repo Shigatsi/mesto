@@ -12,6 +12,7 @@
 .profile__edit-button:hover{
   opacity: .6;
   cursor: pointer;
+  transition: .2s ease-in-out;
 }
 
 .popup__edit-button:focus{
