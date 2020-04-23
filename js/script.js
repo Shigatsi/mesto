@@ -5,20 +5,16 @@ const overlay = document.querySelector('.overlay');
 let popupStatus = document.querySelector('.popup');
 let inputName = document.getElementById('popup_name');
 let inputLifestyle = document.getElementById('popup_lifestyle');
-let Name = document.querySelector('.profile__name');
-let Lifestyle = document.querySelector('.profile__lifestyle');
-
-
-popupStatus.classList.add('popup_status_closed');
-overlay.classList.add('overlay_status_hide');
+let profileName = document.querySelector('.profile__name');
+let profileLifestyle = document.querySelector('.profile__lifestyle');
 
 function showPopup() {
   popupStatus.classList.remove('popup_status_closed');
   popupStatus.classList.add('popup_status_opened');
   overlay.classList.remove('overlay_status_hide');
   overlay.classList.add('overlay_staus_seen');
-  inputName.value = Name.textContent;
-  inputLifestyle.value = Lifestyle.textContent;
+  inputName.value = profileName.textContent;
+  inputLifestyle.value = profileLifestyle.textContent;
 }
 
 function hidePopup(){
@@ -31,10 +27,11 @@ function hidePopup(){
 
 function formSubmitHandler (evt) {
   evt.preventDefault();
-  Name.textContent = inputName.value;
-  Lifestyle.textContent = inputLifestyle.value;
-  popupStatus.classList.add('popup_status_closed');
-  popupStatus.classList.remove('popup_status_opened');
+  profileName.textContent = inputName.value;
+  profileLifestyle.textContent = inputLifestyle.value;
+  hidePopup;
+  // popupStatus.classList.add('popup_status_closed');
+  // popupStatus.classList.remove('popup_status_opened');
   overlay.classList.add('overlay_status_hide');
   overlay.classList.remove('overlay_status_seen');
 };
