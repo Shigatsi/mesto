@@ -28,14 +28,10 @@ function formSubmitHandler (evt) {
   evt.preventDefault();
   profileName.textContent = inputName.value;
   profileLifestyle.textContent = inputLifestyle.value;
-<<<<<<< HEAD
-  hidePopup;
-  // popupStatus.classList.add('popup_status_closed');
-  // popupStatus.classList.remove('popup_status_opened');
-=======
   popupStatus.classList.add('popup_status_closed');
   popupStatus.classList.remove('popup_status_opened');
->>>>>>> bugfix
+  popupStatus.classList.add('popup_status_closed');
+  popupStatus.classList.remove('popup_status_opened');
   overlay.classList.add('overlay_status_hide');
   overlay.classList.remove('overlay_status_seen');
 };
