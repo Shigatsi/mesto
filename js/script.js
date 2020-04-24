@@ -7,20 +7,33 @@ let inputLifestyle = document.getElementById('popup_lifestyle');
 let profileName = document.querySelector('.profile__name');
 let profileLifestyle = document.querySelector('.profile__lifestyle');
 
-function showPopup() {
-  popupStatus.classList.remove('popup_status_closed');
-  popupStatus.classList.add('popup_status_opened');
+
+function showOverlay(){
   overlay.classList.remove('overlay_status_hide');
   overlay.classList.add('overlay_staus_seen');
+};
+
+function hideOverlay(){
+  overlay.classList.add('overlay_status_hide');
+  overlay.classList.remove('overlay_status_seen');
+};
+
+function showPopup() {
+  showOverlay();
+  popupStatus.classList.remove('popup_status_closed');
+  popupStatus.classList.add('popup_status_opened');
+  // overlay.classList.remove('overlay_status_hide');
+  // overlay.classList.add('overlay_staus_seen');
   inputName.value = profileName.textContent;
   inputLifestyle.value = profileLifestyle.textContent;
 }
 
 function hidePopup(){
+  hideOverlay();
   popupStatus.classList.add('popup_status_closed');
   popupStatus.classList.remove('popup_status_opened');
-  overlay.classList.add('overlay_status_hide');
-  overlay.classList.remove('overlay_status_seen');
+  // overlay.classList.add('overlay_status_hide');
+  // overlay.classList.remove('overlay_status_seen');
 };
 
 
@@ -28,10 +41,7 @@ function formSubmitHandler (evt) {
   evt.preventDefault();
   profileName.textContent = inputName.value;
   profileLifestyle.textContent = inputLifestyle.value;
-  popupStatus.classList.add('popup_status_closed');
-  popupStatus.classList.remove('popup_status_opened');
-  overlay.classList.add('overlay_status_hide');
-  overlay.classList.remove('overlay_status_seen');
+  hidePopup();
 };
 
 popupStatus.addEventListener('submit', formSubmitHandler);
