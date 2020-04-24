@@ -1,41 +1,63 @@
 const editButton = document.querySelector('.profile__edit-button');
 const closeButton = document.querySelector('.popup__close-button');
 const overlay = document.querySelector('.overlay');
+// Находим форму в DOM
 let popupStatus = document.querySelector('.popup');
 let inputName = document.getElementById('popup_name');
 let inputLifestyle = document.getElementById('popup_lifestyle');
 let profileName = document.querySelector('.profile__name');
 let profileLifestyle = document.querySelector('.profile__lifestyle');
 
-function showPopup() {
-  popupStatus.classList.remove('popup_status_closed');
-  popupStatus.classList.add('popup_status_opened');
+
+function showOverlay(){
   overlay.classList.remove('overlay_status_hide');
   overlay.classList.add('overlay_staus_seen');
+};
+
+function hideOverlay(){
+  overlay.classList.add('overlay_status_hide');
+  overlay.classList.remove('overlay_status_seen');
+};
+
+function showPopup() {
+  showOverlay();
+  popupStatus.classList.remove('popup_status_closed');
+  popupStatus.classList.add('popup_status_opened');
   inputName.value = profileName.textContent;
   inputLifestyle.value = profileLifestyle.textContent;
 }
 
 function hidePopup(){
+  hideOverlay();
   popupStatus.classList.add('popup_status_closed');
   popupStatus.classList.remove('popup_status_opened');
-  overlay.classList.add('overlay_status_hide');
-  overlay.classList.remove('overlay_status_seen');
 };
 
-
+// Обработчик «отправки» формы, хотя пока
+// она никуда отправляться не будет
 function formSubmitHandler (evt) {
-  evt.preventDefault();
+  evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
+                        // Так мы можем определить свою логику отправки.
+                        // О том, как это делать, расскажем позже.
+  // Получите значение полей из свойства value
+  // Выберите элементы, куда должны быть вставлены значения полей
+  // Вставьте новые значения с помощью textContent
   profileName.textContent = inputName.value;
   profileLifestyle.textContent = inputLifestyle.value;
+<<<<<<< HEAD
   popupStatus.classList.add('popup_status_closed');
   popupStatus.classList.remove('popup_status_opened');
   popupStatus.classList.add('popup_status_closed');
   popupStatus.classList.remove('popup_status_opened');
   overlay.classList.add('overlay_status_hide');
   overlay.classList.remove('overlay_status_seen');
+=======
+  hidePopup();
+>>>>>>> bugfix
 };
 
+// Прикрепляем обработчик к форме:
+// он будет следить за событием “submit” - «отправка»
 popupStatus.addEventListener('submit', formSubmitHandler);
 editButton.addEventListener('click', showPopup);
 closeButton.addEventListener('click', hidePopup);

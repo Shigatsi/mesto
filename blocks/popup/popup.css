@@ -10,7 +10,8 @@
 .popup{
 
   grid-template-columns:auto;
-  position:absolute;
+  position:fixed;
+  z-index: 3;
   left: 0;
   top: 140px;
   margin-left: calc((100% - 430px)/2);
