@@ -11,7 +11,7 @@
   </head>
   <body>
     <div class="page">
-      <div class="overlay"></div>
+      <div class="overlay overlay_status_hide"></div>
       <header class="header">
         <img class="header__logo" src="./images/logo.svg" alt="Логотип Mesto Russia"/>
       </header>
@@ -74,14 +74,14 @@
         <footer class="footer">
           <p class="footer__copyright">	&#169;Евгения "Shigatsi" Зубкова</p>
         </footer>
-        <form class="popup" name="popup" method="POST" action="#">
+        <form class="popup popup_status_closed" name="popup" method="POST" action="#">
           <div class="popup__form">
             <h2 class="popup__header">Редактировать профиль</h2>
             <input type="text" id="popup_name" required placeholder="Введите Имя Фамимилию"  class="popup__input"/>
             <input type="text" id="popup_lifestyle" required placeholder="Введите род занятий/хобби" class="popup__input"/>
             <button type="submit" class="popup__save-button">Сохранить</button>
           </div>
-          <button class="popup__close-button"></button>
+          <button type="button" class="popup__close-button"></button>
         </form>
       </main>
     </div>
