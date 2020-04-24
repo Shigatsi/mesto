@@ -44,16 +44,7 @@ function formSubmitHandler (evt) {
   // Вставьте новые значения с помощью textContent
   profileName.textContent = inputName.value;
   profileLifestyle.textContent = inputLifestyle.value;
-<<<<<<< HEAD
-  popupStatus.classList.add('popup_status_closed');
-  popupStatus.classList.remove('popup_status_opened');
-  popupStatus.classList.add('popup_status_closed');
-  popupStatus.classList.remove('popup_status_opened');
-  overlay.classList.add('overlay_status_hide');
-  overlay.classList.remove('overlay_status_seen');
-=======
   hidePopup();
->>>>>>> bugfix
 };
 
 // Прикрепляем обработчик к форме:
