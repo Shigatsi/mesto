@@ -5,6 +5,7 @@
   min-height: 56px;
   margin: 0 auto 40px;
   padding-top: 45px;
+  border-bottom: 1px solid rgb(84, 84, 84, .7);
 }
 
 @media screen and (max-width: 1024px){
