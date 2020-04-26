@@ -1,7 +1,7 @@
 @import url(./__copyright/footer__copyright.css);
 
 .footer{
-  min-height: 78px;
+  padding-bottom: 60px;
   max-width: 882px;
   margin: 0 auto;
 
@@ -16,6 +16,6 @@
 @media screen and (max-width: 540px){
   .footer{
     max-width: calc(100% - 38px);
-    min-height: 50px;
+    padding-bottom: 36px;
   }
 }

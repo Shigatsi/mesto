@@ -8,7 +8,7 @@
   color: #fff;
   border-radius: 2px;
   border-style: none;
-  margin: 48px 36px 0;
+  margin: 48px 36px 36px;
 }
 
 .popup__save-button:hover{
@@ -23,7 +23,7 @@
 
 @media screen and (max-width: 540px){
   .popup__save-button{
-    margin: 24px 18px 0;
+    margin: 24px 18px 18px;
     font-size: 14px;
     line-height: 18px;
     height: 46.15px;
