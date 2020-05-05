@@ -74,12 +74,21 @@
         <footer class="footer">
           <p class="footer__copyright">	&#169;Евгения "Shigatsi" Зубкова</p>
         </footer>
-        <form class="popup popup_status_closed" name="popup" method="POST" action="#">
+        <form class="popup popup_profile popup_status_closed" name="popup" method="POST" action="#">
           <div class="popup__form">
             <h2 class="popup__header">Редактировать профиль</h2>
-            <input type="text" id="popup_name" required placeholder="Введите Имя, Фамилию" maxlength="223" class="popup__input"/>  <!-- максимальная длина имени, что мне удалось найти 223 символа, вкл пробелы -->
-            <input type="text" id="popup_lifestyle" required placeholder="Введите род занятий/хобби" maxlength="166" class="popup__input"/> <!-- может регистрироваться Дейнерис Бурерожденная и т.д. -->
-            <button type="submit" class="popup__save-button">Сохранить</button>
+            <input type="text" id="popup_name" required placeholder="Введите Имя, Фамилию" class="popup__input popup__input_name"/>
+            <input type="text" id="popup_lifestyle" required placeholder="Введите род занятий/хобби" class="popup__input popup__input_lifestyle"/>
+            <button type="submit" class="popup__save-button popup__save-button_profile">Сохранить</button>
+          </div>
+          <button type="button" class="popup__close-button popup__close-button_profile"></button>
+        </form>
+        <form class="popup popup_status_closed" name="popup" method="POST" action="#">
+          <div class="popup__form">
+            <h2 class="popup__header">Новое место</h2>
+            <input type="text" id="popup_name" required placeholder="Название" maxlength="223" class="popup__input"/>
+            <input type="text" id="popup_lifestyle" required placeholder="Ссылка на картинку"class="popup__input"/>
+            <button type="submit" class="popup__save-button">Создать</button>
           </div>
           <button type="button" class="popup__close-button"></button>
         </form>
