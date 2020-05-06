@@ -56,7 +56,6 @@ function addCards (card){
 }
 
 //вывод карточек на страницу
-
 initialCards.forEach(addCards);
 
 function showOverlay(){
