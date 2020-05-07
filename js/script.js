@@ -1,6 +1,8 @@
 const editButton = document.querySelector('.profile__edit-button');
 const closeButton = document.querySelector('.popup__close-button');
 const overlay = document.querySelector('.overlay');
+const rbinButton = document.querySelector('.elements__rbin-button');
+
 //сюда будут добавляться карточки
 const elemSection = document.querySelector('.elements');
 // Находим форму в DOM
@@ -9,6 +11,32 @@ let inputName = document.getElementById('popup_name');
 let inputLifestyle = document.getElementById('popup_lifestyle');
 let profileName = document.querySelector('.profile__name');
 let profileLifestyle = document.querySelector('.profile__lifestyle');
+
+//popup edit form значения
+// const editForm = [
+//   {
+//     title: 'Редактировать профиль',
+//     inutFirst:{
+//       id: 'popup_name',
+//       placeholder: 'Имя, Фамилия'
+//     },
+//     inutSecond:{
+//       id: 'popup_lifestyle',
+//       placeholder: 'Род занятий/хобби'
+//     }
+//   },
+//   {
+//     title: 'Новое место',
+//     inutFirst:{
+//       id: 'popup_place',
+//       placeholder: 'Название'
+//     },
+//     inutSecond:{
+//       id: 'popup_link',
+//       placeholder: 'Ссылка на картинку'
+//     }
+//   }
+// ]
 
 //"коробка" с карточками изначальными
 const initialCards = [
@@ -43,6 +71,12 @@ const initialCards = [
       alt: 'крутой обрыв у замерзшего озера'
   }
 ];
+//УДОЛЕНИЕ
+
+// const elemItem = document.querySelector('.elements__item');
+// rbinButton.addEventListener('click', function(){
+//   elemItem.remove();
+// });
 
 
 //функция для карточек из "коробки"
@@ -52,11 +86,39 @@ function addCards (card){
   cardElement.querySelector('.elements__title').textContent = card.name;
   cardElement.querySelector('.elements__image').src=card.link;
   cardElement.querySelector('.elements__image').alt = card.alt;
+  //like
+  cardElement.querySelector('.elements__like-button').addEventListener('click', function(event){
+    event.target.classList.add('elements__like-button_active',true);
+  })
+
+  //delete
+  cardElement.querySelector('.elements__rbin-button');
+  addEventListener('click', function(evt){
+    console.log(evt);
+   event.target.parent.remove();
+  })
   elemSection.append(cardElement);
+
+  // //УДОЛение
+  // const rbinButton = document.querySelector('.elements__rbin-button');
+  // console.log(rbinButton); //УДОЛИ ПЕРЕД ОТПРАВКОЙ НА КР!!!!!!
+  // // rbinButton.addEventListener('click', function(evt){
+  //   console.log(event);
+  // //   const elemItem = document.querySelector('.elements__item');
+  // // evt.target.elemItem.remove();
+  //  });
+
 }
 
 //вывод карточек на страницу
 initialCards.forEach(addCards);
+
+// //наполнение попапов
+// function fillPopupForm (popupForm){
+//   const popupFormTemplate = document.querySelector('#edit-popup');
+//   const popupFormElement = elementTemplate.cloneNode(true);
+//   popupFormElement.querySelector('.popup__header').textContent =
+// }
 
 function showOverlay(){
   overlay.classList.remove('overlay_status_hide');
