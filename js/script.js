@@ -1,8 +1,12 @@
 const editButton = document.querySelector('.profile__edit-button');
-const closeButton = document.querySelector('.popup__close-button');
+const closeButton = document.querySelectorAll('.popup__close-button');
 const overlay = document.querySelector('.overlay');
+const addCardButton = document.querySelector('.profile__add-button');
 const rbinButton = document.querySelector('.elements__rbin-button');
-
+const profileForm = document.querySelector('#edit-profile');
+const placeForm = document.querySelector('#edit-place');
+//темплейт в DOM вызов по ID
+const elementTemplate = document.querySelector('#element-template').content;
 //сюда будут добавляться карточки
 const elemSection = document.querySelector('.elements');
 // Находим форму в DOM
@@ -12,31 +16,7 @@ let inputLifestyle = document.getElementById('popup_lifestyle');
 let profileName = document.querySelector('.profile__name');
 let profileLifestyle = document.querySelector('.profile__lifestyle');
 
-//popup edit form значения
-// const editForm = [
-//   {
-//     title: 'Редактировать профиль',
-//     inutFirst:{
-//       id: 'popup_name',
-//       placeholder: 'Имя, Фамилия'
-//     },
-//     inutSecond:{
-//       id: 'popup_lifestyle',
-//       placeholder: 'Род занятий/хобби'
-//     }
-//   },
-//   {
-//     title: 'Новое место',
-//     inutFirst:{
-//       id: 'popup_place',
-//       placeholder: 'Название'
-//     },
-//     inutSecond:{
-//       id: 'popup_link',
-//       placeholder: 'Ссылка на картинку'
-//     }
-//   }
-// ]
+
 
 //"коробка" с карточками изначальными
 const initialCards = [
@@ -71,54 +51,61 @@ const initialCards = [
       alt: 'крутой обрыв у замерзшего озера'
   }
 ];
-//УДОЛЕНИЕ
-
-// const elemItem = document.querySelector('.elements__item');
-// rbinButton.addEventListener('click', function(){
-//   elemItem.remove();
-// });
 
 
-//функция для карточек из "коробки"
-function addCards (card){
-  const elementTemplate = document.querySelector('#element-template').content;
+//создаем карточки
+function createCards (card){
   const cardElement = elementTemplate.cloneNode(true);
   cardElement.querySelector('.elements__title').textContent = card.name;
   cardElement.querySelector('.elements__image').src=card.link;
   cardElement.querySelector('.elements__image').alt = card.alt;
-  //like
-  cardElement.querySelector('.elements__like-button').addEventListener('click', function(event){
-    event.target.classList.add('elements__like-button_active',true);
-  })
-
-  //delete
-  cardElement.querySelector('.elements__rbin-button');
-  addEventListener('click', function(evt){
-    console.log(evt);
-   event.target.parent.remove();
-  })
-  elemSection.append(cardElement);
-
-  // //УДОЛение
-  // const rbinButton = document.querySelector('.elements__rbin-button');
-  // console.log(rbinButton); //УДОЛИ ПЕРЕД ОТПРАВКОЙ НА КР!!!!!!
-  // // rbinButton.addEventListener('click', function(evt){
-  //   console.log(event);
-  // //   const elemItem = document.querySelector('.elements__item');
-  // // evt.target.elemItem.remove();
-  //  });
-
+  elemSection.appendChild(cardElement);
 }
 
-//вывод карточек на страницу
-initialCards.forEach(addCards);
+//рендерим карточки
+function renderCards (){
+  initialCards.forEach(createCards)
+}
 
-// //наполнение попапов
-// function fillPopupForm (popupForm){
-//   const popupFormTemplate = document.querySelector('#edit-popup');
-//   const popupFormElement = elementTemplate.cloneNode(true);
-//   popupFormElement.querySelector('.popup__header').textContent =
+//выводим карточки
+renderCards();
+
+
+
+const likeButton = document.querySelector('.elements__like-button');
+likeButton.addEventListener('click', function(event){
+  console.log(event);
+})
+
+
+//функция для карточек из "коробки"
+//ниже все работает (просто надо немного поэксперементировать)
+// function addCards (card){
+//   const elementTemplate = document.querySelector('#element-template').content;
+//   const cardElement = elementTemplate.cloneNode(true);
+//   cardElement.querySelector('.elements__title').textContent = card.name;
+//   cardElement.querySelector('.elements__image').src=card.link;
+//   cardElement.querySelector('.elements__image').alt = card.alt;
+//   //like
+//   cardElement.querySelector('.elements__like-button').addEventListener('click', function(event){
+//     event.target.classList.add('elements__like-button_active',true);
+//   })
+
+//   //delete
+//   cardElement.querySelector('.elements__rbin-button');
+//   addEventListener('click', function(evt){
+//     console.log(evt);
+//    event.target.parent.remove();
+//   })
+//   elemSection.append(cardElement);
 // }
+
+// //вывод карточек на страницу
+// initialCards.forEach(addCards);
+
+
+
+
 
 function showOverlay(){
   overlay.classList.remove('overlay_status_hide');
@@ -130,19 +117,11 @@ function hideOverlay(){
   overlay.classList.remove('overlay_status_seen');
 };
 
-function showPopup() {
-  showOverlay();
-  popupStatus.classList.remove('popup_status_closed');
-  popupStatus.classList.add('popup_status_opened');
-  inputName.value = profileName.textContent;
-  inputLifestyle.value = profileLifestyle.textContent;
-}
-
-function hidePopup(){
-  hideOverlay();
-  popupStatus.classList.add('popup_status_closed');
-  popupStatus.classList.remove('popup_status_opened');
-};
+// function hidePopup(){
+//   hideOverlay();
+//   popupStatus.classList.add('popup_status_closed');
+//   popupStatus.classList.remove('popup_status_opened');
+// };
 
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
@@ -158,8 +137,24 @@ function formSubmitHandler (evt) {
   hidePopup();
 };
 
+function setOpenProfileFormHandler(){
+  showOverlay();
+  profileForm.classList.add('popup_status_opened');
+  inputName.value = profileName.textContent;
+  inputLifestyle.value = profileLifestyle.textContent;
+}
+
+function setOpenPlaceFormHandler(){
+  showOverlay()
+  placeForm.classList.add('popup_status_opened');
+}
+
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
 popupStatus.addEventListener('submit', formSubmitHandler);
-editButton.addEventListener('click', showPopup);
-closeButton.addEventListener('click', hidePopup);
+editButton.addEventListener('click',setOpenProfileFormHandler);
+addCardButton.addEventListener('click', setOpenPlaceFormHandler);
+// closeButton.addEventListener('click', hidePopup);
+// closeButton.addEventListener('click', function(event){
+//   console.log(event);
+// });
