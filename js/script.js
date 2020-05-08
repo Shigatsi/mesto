@@ -1,23 +1,15 @@
-const editButton = document.querySelector('.profile__edit-button');
-// const closeButton = document.querySelector('.popup__close-button');
-const overlay = document.querySelector('.overlay');
-const addCardButton = document.querySelector('.profile__add-button');
-const rbinButton = document.querySelector('.elements__rbin-button');
-const profileForm = document.querySelector('#edit-profile');
-const placeForm = document.querySelector('#edit-place');
-
-//темплейт в DOM вызов по ID
-const elementTemplate = document.querySelector('#element-template').content;
-//сюда будут добавляться карточки
-const elemSection = document.querySelector('.elements');
-// Находим форму в DOM
-let popupStatus = document.querySelector('.popup');
-let inputName = document.getElementById('popup_name');
-let inputLifestyle = document.getElementById('popup_lifestyle');
-let profileName = document.querySelector('.profile__name');
-let profileLifestyle = document.querySelector('.profile__lifestyle');
-let inputPlace = document.querySelector('#popup_place');
-let inputLink = document.querySelector('#popup_link');
+const editButton = document.querySelector('.profile__edit-button');//кнопка редактирования профиля
+const overlay = document.querySelector('.overlay');//затемнение страницы при открытии формы
+const addCardButton = document.querySelector('.profile__add-button');//кнопка добавления новой формы
+const profileForm = document.querySelector('#edit-profile');//форма редактирования профиля
+const placeForm = document.querySelector('#edit-place');//форма редактирования места
+const elementTemplate = document.querySelector('#element-template').content;//темплейт в DOM вызов по ID
+const elemSection = document.querySelector('.elements');//сюда будут добавляться карточки
+let popupStatus = document.querySelector('.popup');// Находим форму в DOM
+let inputName = document.getElementById('popup_name');//ввод имени профиля
+let inputLifestyle = document.getElementById('popup_lifestyle');// ввод професси в профиле
+let inputPlace = document.querySelector('#popup_place');//ввод названия места
+let inputLink = document.querySelector('#popup_link');//ввод ссылки на фото места
 
 
 //"коробка" с карточками изначальными
@@ -61,9 +53,11 @@ function createCards (card){
   cardElement.querySelector('.elements__title').textContent = card.name;
   cardElement.querySelector('.elements__image').src=card.link;
   cardElement.querySelector('.elements__image').alt = card.alt;
+  //кнопка лайк.событие клик
   cardElement.querySelector('.elements__like-button').addEventListener('click',setLikeActive);
-
-  elemSection.appendChild(cardElement);
+  //кнопка корзина.событие клик
+  cardElement.querySelector('.elements__rbin-button').addEventListener('click',deletButtonHandler);
+  elemSection.append(cardElement);
 }
 
 //рендерим карточки
@@ -75,12 +69,16 @@ function renderCards (){
 //выводим карточки
 renderCards();
 
-
 //like
 function setLikeActive(event){
-      event.target.classList.add('elements__like-button_active',true);
+  event.target.classList.add('elements__like-button_active',true);
 };
 
+//delete
+function deletButtonHandler(event){
+  console.log(event.target.closest('.elements__item'));
+  event.target.closest('.elements__item').remove();
+}
 
 //функция для карточек из "коробки"
 //ниже все работает (просто надо немного поэксперементировать)
