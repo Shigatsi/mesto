@@ -1,10 +1,11 @@
 const editButton = document.querySelector('.profile__edit-button');
-const closeButton = document.querySelectorAll('.popup__close-button');
+// const closeButton = document.querySelector('.popup__close-button');
 const overlay = document.querySelector('.overlay');
 const addCardButton = document.querySelector('.profile__add-button');
 const rbinButton = document.querySelector('.elements__rbin-button');
 const profileForm = document.querySelector('#edit-profile');
 const placeForm = document.querySelector('#edit-place');
+
 //темплейт в DOM вызов по ID
 const elementTemplate = document.querySelector('#element-template').content;
 //сюда будут добавляться карточки
@@ -15,7 +16,8 @@ let inputName = document.getElementById('popup_name');
 let inputLifestyle = document.getElementById('popup_lifestyle');
 let profileName = document.querySelector('.profile__name');
 let profileLifestyle = document.querySelector('.profile__lifestyle');
-
+let inputPlace = document.querySelector('#popup_place');
+let inputLink = document.querySelector('#popup_link');
 
 
 //"коробка" с карточками изначальными
@@ -59,23 +61,25 @@ function createCards (card){
   cardElement.querySelector('.elements__title').textContent = card.name;
   cardElement.querySelector('.elements__image').src=card.link;
   cardElement.querySelector('.elements__image').alt = card.alt;
+  cardElement.querySelector('.elements__like-button').addEventListener('click',setLikeActive);
+
   elemSection.appendChild(cardElement);
 }
 
 //рендерим карточки
 function renderCards (){
-  initialCards.forEach(createCards)
+  initialCards.forEach(createCards);
+
 }
 
 //выводим карточки
 renderCards();
 
 
-
-const likeButton = document.querySelector('.elements__like-button');
-likeButton.addEventListener('click', function(event){
-  console.log(event);
-})
+//like
+function setLikeActive(event){
+      event.target.classList.add('elements__like-button_active',true);
+};
 
 
 //функция для карточек из "коробки"
@@ -117,44 +121,58 @@ function hideOverlay(){
   overlay.classList.remove('overlay_status_seen');
 };
 
-// function hidePopup(){
-//   hideOverlay();
-//   popupStatus.classList.add('popup_status_closed');
-//   popupStatus.classList.remove('popup_status_opened');
-// };
-
-// Обработчик «отправки» формы, хотя пока
-// она никуда отправляться не будет
-function formSubmitHandler (evt) {
-  evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
-                        // Так мы можем определить свою логику отправки.
-                        // О том, как это делать, расскажем позже.
-  // Получите значение полей из свойства value
-  // Выберите элементы, куда должны быть вставлены значения полей
-  // Вставьте новые значения с помощью textContent
-  profileName.textContent = inputName.value;
-  profileLifestyle.textContent = inputLifestyle.value;
-  hidePopup();
+function setClosePopupHandler(){
+  hideOverlay();
+  popupStatus.classList.add('popup_status_closed');
+  popupStatus.classList.remove('popup_status_opened');
 };
 
-function setOpenProfileFormHandler(){
-  showOverlay();
-  profileForm.classList.add('popup_status_opened');
-  inputName.value = profileName.textContent;
-  inputLifestyle.value = profileLifestyle.textContent;
-}
+// // Обработчик «отправки» формы, хотя пока
+// // она никуда отправляться не будет
+// function formSubmitHandler (evt) {
+//   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
+//                         // Так мы можем определить свою логику отправки.
+//                         // О том, как это делать, расскажем позже.
+//   // Получите значение полей из свойства value
+//   // Выберите элементы, куда должны быть вставлены значения полей
+//   // Вставьте новые значения с помощью textContent
+//   profileName.textContent = inputName.value;
+//   profileLifestyle.textContent = inputLifestyle.value;
+//   setClosePopupHandler();
+// };
+
+// function setOpenProfileFormHandler(){
+//   showOverlay();
+//   profileForm.classList.add('popup_status_opened');
+//   inputName.value = profileName.textContent;
+//   inputLifestyle.value = profileLifestyle.textContent;
+// }
 
 function setOpenPlaceFormHandler(){
   showOverlay()
   placeForm.classList.add('popup_status_opened');
 }
 
+//обработчик события, добавляем новые карточки it's a life!!!!!!
+function formPlaceSubmitHandler (evt) {
+  evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
+    const card = createCards({name: inputPlace.value, link: inputLink.value});
+    console.log(inputPlace.value, inputLink.value);
+    elemSection.prepend(card);
+    inputPlace.value = '';
+    inputLink.value = '';
+    setClosePopupHandler();
+};
+
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
-popupStatus.addEventListener('submit', formSubmitHandler);
-editButton.addEventListener('click',setOpenProfileFormHandler);
+// popupStatus.addEventListener('submit', formSubmitHandler);
+popupStatus.addEventListener('submit', formPlaceSubmitHandler);
+//editButton.addEventListener('click',setOpenProfileFormHandler);
 addCardButton.addEventListener('click', setOpenPlaceFormHandler);
-// closeButton.addEventListener('click', hidePopup);
-// closeButton.addEventListener('click', function(event){
-//   console.log(event);
-// });
+document.querySelectorAll('.popup__close-button').forEach(function(closeButton){
+  closeButton.addEventListener('click', function(event){
+    console.log(event);
+    event.setClosePopupHandler();
+  });
+});
