@@ -13,12 +13,13 @@ const addCardButton = document.querySelector('.profile__add-button');//кноп�
 const closePlaceFormBtn = document.querySelector('#place-close');//кнопка закрытия формы добавления места
 const submitPlaceFormBtn = document.querySelector('#place-submit');//кнопка сохранения нового места
 
+
 const profileName = document.querySelector('.profile__name');//имя профиля
 const profileLifestyle = document.querySelector('.profile__lifestyle');//профессия профиля
 let inputName = document.getElementById('popup_name');//ввод имени профиля
 let inputLifestyle = document.getElementById('popup_lifestyle');// ввод професси в профиле
-let inputPlace = document.querySelector('#popup_place');//ввод названия места
-let inputLink = document.querySelector('#popup_link');//ввод ссылки на фото места
+const inputPlace = document.querySelector('#popup_place');//ввод названия места
+const inputLink = document.querySelector('#popup_link');//ввод ссылки на фото места
 
 
 //"коробка" с карточками изначальными
@@ -63,7 +64,7 @@ function createCards (card){
   cardElement.querySelector('.elements__image').src=card.link;
   cardElement.querySelector('.elements__image').alt = card.alt;
   //кнопка лайк.событие клик
-  cardElement.querySelector('.elements__like-button').addEventListener('click',setLikeActive);
+  cardElement.querySelector('.elements__like-button').addEventListener('click',toggleLikeActive);
   //кнопка корзина.событие клик
   cardElement.querySelector('.elements__rbin-button').addEventListener('click',deletButtonHandler);
   //кнопка-изображение для открытия формы просмотра фото
@@ -83,8 +84,8 @@ function renderCards (){
 renderCards();
 
 //like
-function setLikeActive(event){
-  event.target.classList.add('elements__like-button_active',true);
+function toggleLikeActive(event){
+  event.target.classList.toggle('elements__like-button_active');
 };
 
 //delete
@@ -132,30 +133,27 @@ function ClosePopup(btn){
 
 
 
-// // Обработчик «отправки» формы, хотя пока
-// // она никуда отправляться не будет
-// function formSubmitHandler (evt) {
-//   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
-//                         // Так мы можем определить свою логику отправки.
-//                         // О том, как это делать, расскажем позже.
-//   // Получите значение полей из свойства value
-//   // Выберите элементы, куда должны быть вставлены значения полей
-//   // Вставьте новые значения с помощью textContent
-//   profileName.textContent = inputName.value;
-//   profileLifestyle.textContent = inputLifestyle.value;
-//   ClosePopup(evt.target);
-// };
-
-
-
-
+// Обработчик «отправки» формы, хотя пока
+// она никуда отправляться не будет
+function formProfileSubmitHandler (evt) {
+  console.log(evt);
+  evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
+                        // Так мы можем определить свою логику отправки.
+                        // О том, как это делать, расскажем позже.
+  // Получите значение полей из свойства value
+  // Выберите элементы, куда должны быть вставлены значения полей
+  // Вставьте новые значения с помощью textContent
+  profileName.textContent = inputName.value;
+  profileLifestyle.textContent = inputLifestyle.value;
+  ClosePopup(evt.target);
+};
 
 //обработчик события, добавляем новые карточки it's a life!!!!!!
 function formPlaceSubmitHandler (evt) {
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
     const card = createCards({name: inputPlace.value, link: inputLink.value});
     console.log(inputPlace.value, inputLink.value);
-    elemSection.prepend(card);
+    elemSection.append(card);
     inputPlace.value = '';
     inputLink.value = '';
     ClosePopup(evt.target);
@@ -184,3 +182,10 @@ closePlaceFormBtn.addEventListener('click', function (event) {
   console.log(event.target);
   ClosePopup(event.target);
 })
+
+//добавление карточки
+placeForm.addEventListener('submit',formPlaceSubmitHandler);
+
+
+//редактирование профиля
+profileForm.addEventListener('submit', formProfileSubmitHandler);
