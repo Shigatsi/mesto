@@ -1,25 +1,22 @@
+@import url(./_type/popup_type_edit.css);
+@import url(./_type/popup_type_image-disp.css);
 @import url(./__form/popup__form.css);
 @import url(./__close-button/popup__close-button.css);
-@import url(./_status/popup_status_closed.css);
-@import url(./_status/popup_status_opened.css);
 @import url(./__header/popup__header.css);
 @import url(./__input/popup__input.css);
 @import url(./__save-button/popup__save-button.css);
+@import url(./__fullsize-img-container/popup__fullsize-img-container.css);
+@import url(./__fullsize-img-caption/popup__fullsize-img-caption.css);
+@import url(./__fullsize-img/popup__fullsize-img.css);
 
 
 .popup{
-
-  grid-template-columns:auto;
   position:fixed;
-  z-index: 3;
+  z-index: 4;
+  display: grid;
   left: 0;
-  top: 140px;
-  margin-left: calc((100% - 430px)/2);
-
-}
-
-@media screen and (max-width: 540px){
-  .popup{
-    margin-left: calc((100% - 280px)/2);
-  }
+  grid-template-columns:auto;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility .5s ease-in-out, opacity .5s ease-in-out;
 }

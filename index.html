@@ -28,72 +28,48 @@
             <button class="profile__add-button" type="button"></button>
         </section>
         <section class="elements">
-          <div class="elements__item">
-            <img class="elements__image" src="./images/kirill-pershin-1088404-unsplash.jpg" alt="Старинные развалины в Карачаевске"/>
-            <div class="elements__bar">
-              <h2 class="elements__title">Карачаевск</h2>
-              <button class="elements__like-button" type="button"></button>
-            </div>
-          </div>
-          <div class="elements__item">
-            <img class="elements__image" src="./images/kirill-pershin-1404681-unsplash.jpg" alt="Гора Эльбрус на закате"/>
-            <div class="elements__bar">
-              <h2 class="elements__title">Гора Эльбрус</h2>
-              <button class="elements__like-button" type="button"></button>
-            </div>
-          </div>
-          <div class="elements__item">
-            <img class="elements__image" src="./images/kirill-pershin-1556355-unsplash.jpg" alt="Горный пик Домбай"/>
-            <div class="elements__bar">
-              <h2 class="elements__title">Домбай </h2>
-              <button class="elements__like-button" type="button"></button>
-            </div>
-          </div>
-          <div class="elements__item">
-            <img class="elements__image" src="./images/kirill-pershin-1404681-unsplash.jpg" alt="Гора Эльбрус на закате"/>
-            <div class="elements__bar">
-              <h2 class="elements__title">Гора Эльбрус</h2>
-              <button class="elements__like-button" type="button"></button>
-            </div>
-          </div>
-          <div class="elements__item">
-            <img class="elements__image" src="./images/kirill-pershin-1556355-unsplash.jpg" alt="Горный пик Домбай"/>
-            <div class="elements__bar">
-              <h2 class="elements__title">Домбай </h2>
-              <button class="elements__like-button" type="button"></button>
-            </div>
-          </div>
-          <div class="elements__item">
-            <img class="elements__image" src="./images/kirill-pershin-1088404-unsplash.jpg"  alt="Старинные развалины в Карачаевске"/>
-            <div class="elements__bar">
-              <h2 class="elements__title">Карачаево-Ч..</h2>
-              <button class="elements__like-button" type="button"></button>
-            </div>
-          </div>
+
         </section>
         <footer class="footer">
           <p class="footer__copyright">	&#169;Евгения "Shigatsi" Зубкова</p>
         </footer>
-        <form class="popup popup_profile popup_status_closed" name="popup" method="POST" action="#">
+        <form class="popup popup_type_edit" id="edit-profile" name="popup" method="POST" action="#">
           <div class="popup__form">
             <h2 class="popup__header">Редактировать профиль</h2>
-            <input type="text" id="popup_name" required placeholder="Введите Имя, Фамилию" class="popup__input popup__input_name"/>
-            <input type="text" id="popup_lifestyle" required placeholder="Введите род занятий/хобби" class="popup__input popup__input_lifestyle"/>
-            <button type="submit" class="popup__save-button popup__save-button_profile">Сохранить</button>
+            <input type="text" id="popup_name" required placeholder="Имя, Фамилия" class="popup__input"/>
+            <input type="text" id="popup_lifestyle" required placeholder="Род занятий/хобби" class="popup__input"/>
+            <button type="submit" id="profile-submit" class="popup__save-button">Сохранить</button>
           </div>
-          <button type="button" class="popup__close-button popup__close-button_profile"></button>
+          <button type="button" id="profile-close"  class="popup__close-button"></button>
         </form>
-        <form class="popup popup_status_closed" name="popup" method="POST" action="#">
+        <form class="popup popup_type_edit" id="edit-place" name="popup" method="POST" action="#">
           <div class="popup__form">
             <h2 class="popup__header">Новое место</h2>
-            <input type="text" id="popup_name" required placeholder="Название" maxlength="223" class="popup__input"/>
-            <input type="text" id="popup_lifestyle" required placeholder="Ссылка на картинку"class="popup__input"/>
-            <button type="submit" class="popup__save-button">Создать</button>
+            <input type="text" id="popup_place" required placeholder="Название" class="popup__input"/>
+            <input type="text" id="popup_link" required placeholder="Ссылка на картинку" class="popup__input"/>
+            <button type="submit" id="place-submit" class="popup__save-button">Сохранить</button>
           </div>
-          <button type="button" class="popup__close-button"></button>
+          <button type="button" id="place-close" class="popup__close-button"></button>
         </form>
+          <form class="popup popup_type_image-disp" id="img-fullsize">
+            <button type="button" id="img-close" class="popup__close-button"></button>
+            <figure class="popup__fullsize-img-container">
+             <img class = "popup__fullsize-img" src="" alt="">
+              <figcaption class="popup__fullsize-img-caption"></figcaption>
+            </figure>
+         </form>
       </main>
     </div>
+    <template id ="element-template">
+      <div class="elements__item">
+        <button class="elements__rbin-button" type="button"></button>
+        <img class="elements__image" src=""  alt=""/>
+        <div class="elements__bar">
+          <h2 class="elements__title"></h2>
+          <button class="elements__like-button elements__like-button_empty" type="button"></button>
+        </div>
+      </div>
+    </template>
     <script src="./js/script.js"></script>
   </body>
 </html>

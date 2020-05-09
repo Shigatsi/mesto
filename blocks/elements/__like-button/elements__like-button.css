@@ -1,9 +1,12 @@
+@import url(./elements__like-button_empty.css);
+@import url(./elements__like-button_active.css);
+
 .elements__like-button{
-  background: no-repeat url(../../../images/heart.svg);
   width: 20.76px;
   height: 18.13px;
   align-self: center;
   border: none;
+
 
 }
 
