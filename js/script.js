@@ -6,12 +6,11 @@ const overlay = document.querySelector('.overlay');//затемнение стр
 const profileForm = document.querySelector('#edit-profile');//форма редактирования профиля
 const editButton = document.querySelector('.profile__edit-button');//кнопка редактирования профиля
 const closeProfileFormBtn = document.querySelector('#profile-close');//кнопка закрытия формы ред профиля
-const submitProfileFormBtn = document.querySelector('#profile-submit');//кнопка сохранения изменений профиля
+
 
 const placeForm = document.querySelector('#edit-place');//форма добавления места
 const addCardButton = document.querySelector('.profile__add-button');//кнопка добавления нового места
 const closePlaceFormBtn = document.querySelector('#place-close');//кнопка закрытия формы добавления места
-const submitPlaceFormBtn = document.querySelector('#place-submit');//кнопка сохранения нового места
 
 
 const profileName = document.querySelector('.profile__name');//имя профиля
@@ -120,7 +119,7 @@ function hideOverlay(){
 
 //функция открытия форм
 function openPopup(btn){
-  showOverlay()
+  showOverlay();
   if (btn.classList.contains('profile__edit-button')){
     inputName.value = profileName.textContent;
     inputLifestyle.value = profileLifestyle.textContent;
@@ -147,7 +146,7 @@ function ClosePopup(btn){
   if(btn.id='img-close'){
     imgForm.classList.remove('popup_opened');
 }
-}
+};
 
 
 
@@ -178,27 +177,27 @@ function formPlaceSubmitHandler (evt) {
 //открытие формы "Редактировать профиль"
 editButton.addEventListener('click', function (event) {
   openPopup(event.target);
-})
+});
 
 //открытие формы "Новое место"
 addCardButton.addEventListener('click', function (event) {
   openPopup(event.target);
-})
+});
 
 //закрытие формы "Редактировать профиль"
 closeProfileFormBtn.addEventListener('click', function (event) {
   ClosePopup(event.target);
-})
+});
 
 //закрытие формы "Новое место"
 closePlaceFormBtn.addEventListener('click', function (event) {
   ClosePopup(event.target);
-})
+});
 
 //закрытие формы просмотра изображения
 closeImgFormBtn.addEventListener('click', function (event) {
   ClosePopup(event.target);
-})
+});
 
 //добавление карточки
 placeForm.addEventListener('submit',formPlaceSubmitHandler);
