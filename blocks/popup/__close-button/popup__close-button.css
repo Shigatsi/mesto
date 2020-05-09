@@ -9,6 +9,7 @@
   background:center url(../../../images/Close_Icon.svg);
   position: relative;
   z-index: 3;
+  align-self: end;
 }
 
 

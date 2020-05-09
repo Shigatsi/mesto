@@ -20,10 +20,3 @@
   opacity: 0;
   transition: visibility .5s ease-in-out, opacity .5s ease-in-out;
 }
-
-
-@media screen and (max-width: 540px){
-  .popup{
-    margin-left: calc((100% - 280px)/2);
-  }
-}
