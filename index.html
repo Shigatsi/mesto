@@ -33,7 +33,7 @@
         <footer class="footer">
           <p class="footer__copyright">	&#169;Евгения "Shigatsi" Зубкова</p>
         </footer>
-        <form class="popup" id="edit-profile" name="popup" method="POST" action="#">
+        <form class="popup popup_type_edit" id="edit-profile" name="popup" method="POST" action="#">
           <div class="popup__form">
             <h2 class="popup__header">Редактировать профиль</h2>
             <input type="text" id="popup_name" required placeholder="Имя, Фамилия" class="popup__input"/>
@@ -42,7 +42,7 @@
           </div>
           <button type="button" id="profile-close"  class="popup__close-button"></button>
         </form>
-        <form class="popup" id="edit-place" name="popup" method="POST" action="#">
+        <form class="popup popup_type_edit" id="edit-place" name="popup" method="POST" action="#">
           <div class="popup__form">
             <h2 class="popup__header">Новое место</h2>
             <input type="text" id="popup_place" required placeholder="Название" class="popup__input"/>
@@ -51,6 +51,15 @@
           </div>
           <button type="button" id="place-close" class="popup__close-button"></button>
         </form>
+        <div class=" popup__image">
+          <form class="popup popup_type_image-disp" id="img-fullsize">
+            <button type="button" id="img-close" class="popup__close-button"></button>
+            <figure class="popup__fullsize-img-container">
+             <img class = "popup__fullsize-img" src="" alt="">
+              <figcaption class="popup__fullsize-img-caption"></figcaption>
+            </figure>
+         </form>
+      </div>
       </main>
     </div>
     <template id ="element-template">

@@ -16,10 +16,15 @@ const submitPlaceFormBtn = document.querySelector('#place-submit');//кнопк�
 
 const profileName = document.querySelector('.profile__name');//имя профиля
 const profileLifestyle = document.querySelector('.profile__lifestyle');//профессия профиля
-let inputName = document.getElementById('popup_name');//ввод имени профиля
-let inputLifestyle = document.getElementById('popup_lifestyle');// ввод професси в профиле
+const inputName = document.getElementById('popup_name');//ввод имени профиля
+const inputLifestyle = document.getElementById('popup_lifestyle');// ввод професси в профиле
 const inputPlace = document.querySelector('#popup_place');//ввод названия места
 const inputLink = document.querySelector('#popup_link');//ввод ссылки на фото места
+
+const imgForm = document.querySelector('#img-fullsize');//форма просмотра полноразмерного изображения
+const closeImgFormBtn = document.querySelector('#img-close');//кнопка закрытия формы просмотра изображения
+const fullsizeImg = document.querySelector('.popup__fullsize-img');//полноразмерное изображение
+const fullsizeImgCaption = document.querySelector('.popup__fullsize-img-caption');// подпись для полноразмерного изображения
 
 
 //"коробка" с карточками изначальными
@@ -68,7 +73,7 @@ function createCards (card){
   //кнопка корзина.событие клик
   cardElement.querySelector('.elements__rbin-button').addEventListener('click',deletButtonHandler);
   //кнопка-изображение для открытия формы просмотра фото
-  // cardElement.querySelector('.elements__image').addEventListener('click', setOpenPlaceImageHandler);
+  cardElement.querySelector('.elements__image').addEventListener('click', setOpenPlaceImageHandler);
 
   elemSection.prepend(cardElement);//задать чтобы изначальные карточки загрпужались отдельно?! но как?
   return cardElement;
@@ -77,7 +82,6 @@ function createCards (card){
 //рендерим карточки
 function renderCards (){
   initialCards.forEach(createCards);
-
 }
 
 //выводим карточки
@@ -90,9 +94,17 @@ function toggleLikeActive(event){
 
 //delete
 function deletButtonHandler(event){
-  console.log(event.target.closest('.elements__item'));
   event.target.closest('.elements__item').remove();//otvalbashki
 }
+
+//fullsize
+function setOpenPlaceImageHandler(event){
+  fullsizeImg.src = event.target.src;
+  fullsizeImgCaption.textContent = event.target.nextElementSibling.firstElementChild.textContent;
+  openPopup(event.target);
+}
+
+
 
 //показать затемнение
 function showOverlay(){
@@ -118,6 +130,9 @@ function openPopup(btn){
   if (btn.classList.contains('profile__add-button')){
     placeForm.classList.add('popup_opened');
   }
+  if(btn.classList.contains('elements__image')){
+    imgForm.classList.add('popup_opened');
+  }
 };
 
 //функция закрытия форм
@@ -129,6 +144,9 @@ function ClosePopup(btn){
   if(btn.id='place-close'){
     placeForm.classList.remove('popup_opened');
   }
+  if(btn.id='img-close'){
+    imgForm.classList.remove('popup_opened');
+}
 }
 
 
@@ -136,7 +154,6 @@ function ClosePopup(btn){
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
 function formProfileSubmitHandler (evt) {
-  console.log(evt);
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
                         // Так мы можем определить свою логику отправки.
                         // О том, как это делать, расскажем позже.
@@ -152,7 +169,6 @@ function formProfileSubmitHandler (evt) {
 function formPlaceSubmitHandler (evt) {
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
     const card = createCards({name: inputPlace.value, link: inputLink.value});
-    console.log(inputPlace.value, inputLink.value);
     elemSection.append(card);
     inputPlace.value = '';
     inputLink.value = '';
@@ -161,25 +177,26 @@ function formPlaceSubmitHandler (evt) {
 
 //открытие формы "Редактировать профиль"
 editButton.addEventListener('click', function (event) {
-  console.log(event.target);
   openPopup(event.target);
 })
 
 //открытие формы "Новое место"
 addCardButton.addEventListener('click', function (event) {
-  console.log(event.target);
   openPopup(event.target);
 })
 
 //закрытие формы "Редактировать профиль"
 closeProfileFormBtn.addEventListener('click', function (event) {
-  console.log(event.target);
   ClosePopup(event.target);
 })
 
 //закрытие формы "Новое место"
 closePlaceFormBtn.addEventListener('click', function (event) {
-  console.log(event.target);
+  ClosePopup(event.target);
+})
+
+//закрытие формы просмотра изображения
+closeImgFormBtn.addEventListener('click', function (event) {
   ClosePopup(event.target);
 })
 
