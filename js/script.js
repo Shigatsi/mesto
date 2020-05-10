@@ -61,50 +61,6 @@ const initialCards = [
 ];
 
 
-//создаем карточки
-function createCards (card){
-  const cardElement = elementTemplate.cloneNode(true);
-  cardElement.querySelector('.elements__title').textContent = card.name;
-  cardElement.querySelector('.elements__image').src=card.link;
-  cardElement.querySelector('.elements__image').alt = card.alt;
-  //кнопка лайк.событие клик
-  cardElement.querySelector('.elements__like-button').addEventListener('click',toggleLikeActive);
-  //кнопка корзина.событие клик
-  cardElement.querySelector('.elements__rbin-button').addEventListener('click',deletButtonHandler);
-  //кнопка-изображение для открытия формы просмотра фото
-  cardElement.querySelector('.elements__image').addEventListener('click', setOpenPlaceImageHandler);
-
-  elemSection.prepend(cardElement);//задать чтобы изначальные карточки загрпужались отдельно?! но как?
-  return cardElement;
-}
-
-//рендерим карточки
-function renderCards (){
-  initialCards.forEach(createCards);
-}
-
-//выводим карточки
-renderCards();
-
-//like
-function toggleLikeActive(event){
-  event.target.classList.toggle('elements__like-button_active');
-};
-
-//delete
-function deletButtonHandler(event){
-  event.target.closest('.elements__item').remove();//otvalbashki
-}
-
-//fullsize
-function setOpenPlaceImageHandler(event){
-  fullsizeImg.src = event.target.src;
-  fullsizeImgCaption.textContent = event.target.nextElementSibling.firstElementChild.textContent;
-  openPopup(event.target);
-}
-
-
-
 //показать затемнение
 function showOverlay(){
   overlay.classList.remove('overlay_status_hide');
@@ -148,6 +104,55 @@ function ClosePopup(btn){
 }
 };
 
+//like
+function toggleLikeActive(event){
+  event.target.classList.toggle('elements__like-button_active');
+};
+
+//delete
+function deletButtonHandler(event){
+  const elemElementItem =  event.target.closest('.elements__item');//выбираем карточку, которую надо удалить
+  //удоляем "слушателей"
+  elemElementItem.querySelector('.elements__like-button').removeEventListener('click', toggleLikeActive);
+  elemElementItem.querySelector('.elements__rbin-button').removeEventListener('click', deletButtonHandler);
+  elemElementItem.querySelector('.elements__image').removeEventListener('click', setOpenPlaceImageHandler);
+  elemElementItem.remove();//otvalbashki
+}
+
+//fullsize
+function setOpenPlaceImageHandler(event){
+  fullsizeImg.src = event.target.src;
+  fullsizeImgCaption.textContent = event.target.alt;
+  openPopup(event.target);
+}
+
+
+//создание карточки
+function createCard (card){
+  const cardElement = elementTemplate.cloneNode(true);
+  cardElement.querySelector('.elements__title').textContent = card.name;
+  const cardElementImage = cardElement.querySelector('.elements__image');
+  cardElementImage.src=card.link;
+  cardElementImage.alt = card.alt;
+  //кнопка лайк.событие клик
+  cardElement.querySelector('.elements__like-button').addEventListener('click',toggleLikeActive);
+  //кнопка корзина.событие клик
+  cardElement.querySelector('.elements__rbin-button').addEventListener('click',deletButtonHandler);
+  //кнопка-изображение для открытия формы просмотра фото
+  cardElementImage.addEventListener('click', setOpenPlaceImageHandler);
+  elemSection.prepend(cardElement);//задать чтобы изначальные карточки загрпужались отдельно?! но как?
+  return cardElement;
+}
+
+//рендерим карточки
+function renderCard (){
+  initialCards.forEach(createCard);
+}
+
+//выводим карточки
+renderCard();
+
+
 
 
 // Обработчик «отправки» формы, хотя пока
@@ -167,7 +172,7 @@ function formProfileSubmitHandler (evt) {
 //обработчик события, добавляем новые карточки it's a life!!!!!!
 function formPlaceSubmitHandler (evt) {
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
-    const card = createCards({name: inputPlace.value, link: inputLink.value});
+    const card = createCard({name: inputPlace.value, link: inputLink.value, alt: inputPlace.value});
     elemSection.append(card);
     inputPlace.value = '';
     inputLink.value = '';
