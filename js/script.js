@@ -1,7 +1,7 @@
 const elementTemplate = document.querySelector('#element-template').content;//темплейт в DOM вызов по ID
 const elemSection = document.querySelector('.elements');//сюда будут добавляться карточки
 
-const overlay = document.querySelector('.overlay');//затемнение страницы при открытии формы
+const popupSection = document.querySelector('.popups');//секция с формами
 
 const profileForm = document.querySelector('#edit-profile');//форма редактирования профиля
 const editButton = document.querySelector('.profile__edit-button');//кнопка редактирования профиля
@@ -61,48 +61,40 @@ const initialCards = [
 ];
 
 
-//показать затемнение
-function showOverlay(){
-  overlay.classList.remove('overlay_status_hide');
-  overlay.classList.add('overlay_staus_seen');
-};
 
-//скрыть затемнение
-function hideOverlay(){
-  overlay.classList.add('overlay_status_hide');
-  overlay.classList.remove('overlay_status_seen');
-};
-
-//функция открытия форм
-function openPopup(btn){
-  showOverlay();
-  if (btn.classList.contains('profile__edit-button')){
+//функция открытия и закрытия форм
+function togglePopupVisibility(btn){
+  if (btn.classList.contains('profile__edit-button')|| btn.id === 'profile-close'){
     inputName.value = profileName.textContent;
     inputLifestyle.value = profileLifestyle.textContent;
-    profileForm.classList.add('popup_opened');
+    profileForm.classList.toggle('popups_hidden');
+    popupSection.classList.toggle('popups_hidden');
 
   }
-  if (btn.classList.contains('profile__add-button')){
-    placeForm.classList.add('popup_opened');
+  if (btn.classList.contains('profile__add-button')||btn.id==='place-close'){
+    placeForm.classList.toggle('popups_hidden');
+    popupSection.classList.toggle('popups_hidden');
   }
-  if(btn.classList.contains('elements__image')){
-    imgForm.classList.add('popup_opened');
+  if(btn.classList.contains('elements__image')||btn.id==='img-close'){
+    imgForm.classList.toggle('popups_hidden');
+    popupSection.classList.toggle('popups_hidden');
   }
+
 };
 
-//функция закрытия форм
-function ClosePopup(btn){
-  hideOverlay();
-  if(btn.id = 'profile-close'){
-    profileForm.classList.remove('popup_opened');
-  }
-  if(btn.id='place-close'){
-    placeForm.classList.remove('popup_opened');
-  }
-  if(btn.id='img-close'){
-    imgForm.classList.remove('popup_opened');
-}
-};
+// //функция закрытия форм
+// function ClosePopup(btn){
+//   hideOverlay();
+//   if(btn.id === 'profile-close'){
+//     profileForm.classList.remove('popup_opened');
+//   }
+//   if(btn.id==='place-close'){
+//     placeForm.classList.remove('popup_opened');
+//   }
+//   if(btn.id==='img-close'){
+//     imgForm.classList.remove('popup_opened');
+// }
+// };
 
 //like
 function toggleLikeActive(event){
@@ -123,7 +115,7 @@ function deletButtonHandler(event){
 function setOpenPlaceImageHandler(event){
   fullsizeImg.src = event.target.src;
   fullsizeImgCaption.textContent = event.target.alt;
-  openPopup(event.target);
+  togglePopupVisibility(event.target);
 }
 
 
@@ -181,27 +173,28 @@ function formPlaceSubmitHandler (evt) {
 
 //открытие формы "Редактировать профиль"
 editButton.addEventListener('click', function (event) {
-  openPopup(event.target);
+  console.log(event.target)
+  togglePopupVisibility(event.target);
 });
 
 //открытие формы "Новое место"
 addCardButton.addEventListener('click', function (event) {
-  openPopup(event.target);
+  togglePopupVisibility(event.target);
 });
 
 //закрытие формы "Редактировать профиль"
 closeProfileFormBtn.addEventListener('click', function (event) {
-  ClosePopup(event.target);
+  togglePopupVisibility(event.target);
 });
 
 //закрытие формы "Новое место"
 closePlaceFormBtn.addEventListener('click', function (event) {
-  ClosePopup(event.target);
+  togglePopupVisibility(event.target);
 });
 
 //закрытие формы просмотра изображения
 closeImgFormBtn.addEventListener('click', function (event) {
-  ClosePopup(event.target);
+  togglePopupVisibility(event.target);
 });
 
 //добавление карточки

@@ -16,7 +16,11 @@
   display: grid;
   left: 0;
   grid-template-columns:auto;
-  visibility: hidden;
-  opacity: 0;
+  /* visibility: visible;
+  opacity: 1; */
+  -moz-transition: visibility .5s ease-in-out, opacity .5s ease-in-out;
+  -webkit-transition: visibility .5s ease-in-out, opacity .5s ease-in-out;
+  -o-transition: visibility .5s ease-in-out, opacity .5s ease-in-out;
+  -ms-transition: visibility .5s ease-in-out, opacity .5s ease-in-out;
   transition: visibility .5s ease-in-out, opacity .5s ease-in-out;
 }
