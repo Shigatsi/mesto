@@ -64,14 +64,14 @@ const initialCards = [
 
 //функция открытия и закрытия форм
 function togglePopupVisibility(btn){
-  if (btn.classList.contains('profile__edit-button')|| btn.id === 'profile-close'){
+  if (btn.classList.contains('profile__edit-button')|| (btn.id === 'profile-close') || (btn.id === 'edit-profile')){
     inputName.value = profileName.textContent;
     inputLifestyle.value = profileLifestyle.textContent;
     profileForm.classList.toggle('popups_hidden');
     popupSection.classList.toggle('popups_hidden');
 
   }
-  if (btn.classList.contains('profile__add-button')||btn.id==='place-close'){
+  if (btn.classList.contains('profile__add-button')|| (btn.id==='place-close') || (btn.id === 'edit-place')){
     placeForm.classList.toggle('popups_hidden');
     popupSection.classList.toggle('popups_hidden');
   }
@@ -81,20 +81,6 @@ function togglePopupVisibility(btn){
   }
 
 };
-
-// //функция закрытия форм
-// function ClosePopup(btn){
-//   hideOverlay();
-//   if(btn.id === 'profile-close'){
-//     profileForm.classList.remove('popup_opened');
-//   }
-//   if(btn.id==='place-close'){
-//     placeForm.classList.remove('popup_opened');
-//   }
-//   if(btn.id==='img-close'){
-//     imgForm.classList.remove('popup_opened');
-// }
-// };
 
 //like
 function toggleLikeActive(event){
@@ -132,19 +118,26 @@ function createCard (card){
   cardElement.querySelector('.elements__rbin-button').addEventListener('click',deletButtonHandler);
   //кнопка-изображение для открытия формы просмотра фото
   cardElementImage.addEventListener('click', setOpenPlaceImageHandler);
-  elemSection.prepend(cardElement);//задать чтобы изначальные карточки загрпужались отдельно?! но как?
+  // elemSection.prepend(cardElement);//задать чтобы изначальные карточки загрпужались отдельно?! но как?
   return cardElement;
 }
 
-//рендерим карточки
-function renderCard (){
-  initialCards.forEach(createCard);
+//массив начальных карточек
+function cardsLoad(cards){
+let cardMass = [];
+
+cards.forEach((item) => {
+cardMass.push(createCard(item))
+})
+return cardMass;
 }
-
-//выводим карточки
-renderCard();
-
-
+//добавляем в секцию
+cardsLoad(initialCards);
+function renderCards(cards){
+  elemSection.prepend(...cards);
+}
+//рендерим
+renderCards(cardsLoad(initialCards));
 
 
 // Обработчик «отправки» формы, хотя пока
@@ -158,22 +151,21 @@ function formProfileSubmitHandler (evt) {
   // Вставьте новые значения с помощью textContent
   profileName.textContent = inputName.value;
   profileLifestyle.textContent = inputLifestyle.value;
-  ClosePopup(evt.target);
+  togglePopupVisibility(evt.target);
 };
 
 //обработчик события, добавляем новые карточки it's a life!!!!!!
 function formPlaceSubmitHandler (evt) {
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
     const card = createCard({name: inputPlace.value, link: inputLink.value, alt: inputPlace.value});
-    elemSection.append(card);
+    elemSection.prepend(card);
     inputPlace.value = '';
     inputLink.value = '';
-    ClosePopup(evt.target);
+    togglePopupVisibility(evt.target);
 };
 
 //открытие формы "Редактировать профиль"
 editButton.addEventListener('click', function (event) {
-  console.log(event.target)
   togglePopupVisibility(event.target);
 });
 
