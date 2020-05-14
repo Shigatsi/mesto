@@ -63,23 +63,17 @@ const initialCards = [
 
 
 //функция открытия и закрытия форм
-function togglePopupVisibility(btn){
-  if (btn.classList.contains('profile__edit-button')|| (btn.id === 'profile-close') || (btn.id === 'edit-profile')){
-    inputName.value = profileName.textContent;
-    inputLifestyle.value = profileLifestyle.textContent;
-    profileForm.classList.toggle('popups_hidden');
-    popupSection.classList.toggle('popups_hidden');
+function togglePopupVisibility(popupElement){
 
+  if ((popupElement.id === 'edit-profile') && (popupElement.classList.contains('popups_hidden'))){
+     inputName.value = profileName.textContent;
+     inputLifestyle.value=profileLifestyle.textContent;
   }
-  if (btn.classList.contains('profile__add-button')|| (btn.id==='place-close') || (btn.id === 'edit-place')){
-    placeForm.classList.toggle('popups_hidden');
-    popupSection.classList.toggle('popups_hidden');
+  if ((popupElement.id === 'edit-place') && (popupElement.classList.contains('popups_hidden'))){
+    inputPlace.value = '';
+    inputLink.value = '';
   }
-  if(btn.classList.contains('elements__image')||btn.id==='img-close'){
-    imgForm.classList.toggle('popups_hidden');
-    popupSection.classList.toggle('popups_hidden');
-  }
-
+  popupElement.classList.toggle('popups_hidden');
 };
 
 //like
@@ -91,7 +85,7 @@ function toggleLikeActive(event){
 function setOpenPlaceImageHandler(event){
   fullsizeImg.src = event.target.src;
   fullsizeImgCaption.textContent = event.target.alt;
-  togglePopupVisibility(event.target);
+  togglePopupVisibility(imgForm);
 }
 
 //delete
@@ -146,7 +140,7 @@ function formProfileSubmitHandler (evt) {
   // Вставьте новые значения с помощью textContent
   profileName.textContent = inputName.value;
   profileLifestyle.textContent = inputLifestyle.value;
-  togglePopupVisibility(evt.target);
+  togglePopupVisibility(profileForm);
 };
 
 //обработчик события, добавляем новые карточки it's a life!!!!!!
@@ -156,32 +150,30 @@ function formPlaceSubmitHandler (evt) {
     elemSection.prepend(card);
     inputPlace.value = '';
     inputLink.value = '';
-    togglePopupVisibility(evt.target);
+    togglePopupVisibility(placeForm);
 };
 
 //открытие формы "Редактировать профиль"
-editButton.addEventListener('click', function (event) {
-  togglePopupVisibility(event.target);
+editButton.addEventListener('click',() => {
+  togglePopupVisibility(profileForm);
 });
 
 //открытие формы "Новое место"
-addCardButton.addEventListener('click', function (event) {
-  togglePopupVisibility(event.target);
+addCardButton.addEventListener('click',() => {togglePopupVisibility(placeForm);
 });
 
 //закрытие формы "Редактировать профиль"
-closeProfileFormBtn.addEventListener('click', function (event) {
-  togglePopupVisibility(event.target);
+closeProfileFormBtn.addEventListener('click',() => {
+  togglePopupVisibility(profileForm);
 });
 
 //закрытие формы "Новое место"
-closePlaceFormBtn.addEventListener('click', function (event) {
-  togglePopupVisibility(event.target);
+closePlaceFormBtn.addEventListener('click',() => {togglePopupVisibility(placeForm);
 });
 
 //закрытие формы просмотра изображения
-closeImgFormBtn.addEventListener('click', function (event) {
-  togglePopupVisibility(event.target);
+closeImgFormBtn.addEventListener('click', ()=> {
+  togglePopupVisibility(imgForm);
 });
 
 //добавление карточки
