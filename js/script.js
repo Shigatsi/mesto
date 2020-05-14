@@ -87,6 +87,13 @@ function toggleLikeActive(event){
   event.target.classList.toggle('elements__like-button_active');
 };
 
+//fullsize
+function setOpenPlaceImageHandler(event){
+  fullsizeImg.src = event.target.src;
+  fullsizeImgCaption.textContent = event.target.alt;
+  togglePopupVisibility(event.target);
+}
+
 //delete
 function deletButtonHandler(event){
   const elemElementItem =  event.target.closest('.elements__item');//выбираем карточку, которую надо удалить
@@ -96,14 +103,6 @@ function deletButtonHandler(event){
   elemElementItem.querySelector('.elements__image').removeEventListener('click', setOpenPlaceImageHandler);
   elemElementItem.remove();//otvalbashki
 }
-
-//fullsize
-function setOpenPlaceImageHandler(event){
-  fullsizeImg.src = event.target.src;
-  fullsizeImgCaption.textContent = event.target.alt;
-  togglePopupVisibility(event.target);
-}
-
 
 //создание карточки
 function createCard (card){
@@ -124,15 +123,11 @@ function createCard (card){
 
 //массив начальных карточек
 function cardsLoad(cards){
-let cardMass = [];
-
-cards.forEach((item) => {
-cardMass.push(createCard(item))
-})
-return cardMass;
+  return cards.map(card=>{
+    return createCard(card)});
 }
+
 //добавляем в секцию
-cardsLoad(initialCards);
 function renderCards(cards){
   elemSection.prepend(...cards);
 }
