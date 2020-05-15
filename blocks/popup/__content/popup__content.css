@@ -1,5 +1,4 @@
 .popup__content{
-  z-index: 3;
   display: grid;
   grid-template-columns:auto;
   grid-template-columns:auto;
