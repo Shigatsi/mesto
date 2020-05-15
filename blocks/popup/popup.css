@@ -1,6 +1,4 @@
-@import url(./_hidden/popup_hidden.css);
 @import url(./__content/popup__content.css);
-@import url(./_type/popup_type_image-disp.css);
 @import url(./__form/popup__form.css);
 @import url(./__close-button/popup__close-button.css);
 @import url(./__header/popup__header.css);
@@ -28,25 +26,9 @@
   visibility: visible;
   opacity:1;
 
-  -moz-transition: visibility 0s, opacity .5s ease-in-out;
-  -webkit-transition: visibility 0s, opacity .5s ease-in-out;
-  -o-transition: visibility 0s, opacity .5s ease-in-out;
-  -ms-transition: visibility 0s, opacity .5s ease-in-out;
-  transition: visibility 0s, opacity .5s ease-in-out;
+  -moz-transition: visibility 0s, opacity .5s linear;
+  -webkit-transition: visibility 0s, opacity .5s linear;
+  -o-transition: visibility 0s, opacity .5s linear;
+  -ms-transition: visibility 0s, opacity .5s linear;
+  transition: visibility 0s, opacity .5s linear;
 }
-
-
-/* .popup{
-  position:fixed;
-  z-index: 4;
-  display: grid;
-  left: 0;
-  grid-template-columns:auto;
-  visibility: visible;
-  opacity: 1;
-  -moz-transition: visibility .5s ease-in-out, opacity .5s ease-in-out;
-  -webkit-transition: visibility .5s ease-in-out, opacity .5s ease-in-out;
-  -o-transition: visibility .5s ease-in-out, opacity .5s ease-in-out;
-  -ms-transition: visibility .5s ease-in-out, opacity .5s ease-in-out;
-  transition: visibility .5s ease-in-out, opacity .5s ease-in-out;
-} */

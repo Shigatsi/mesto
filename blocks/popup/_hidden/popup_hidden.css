@@ -1,0 +1,9 @@
+.popup_hidden{
+  visibility: hidden;
+  opacity:0;
+  -moz-transition: visibility 0s, opacity 1s linear;
+  -webkit-transition: visibility 0s, opacity 1s linear;
+  -o-transition: visibility 0s, opacity 1s linear;
+  -ms-transition: visibility 0s, opacity 1s linear;
+  transition: visibility 0s, opacity 1s linear;
+}
