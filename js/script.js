@@ -1,7 +1,7 @@
 const elementTemplate = document.querySelector('#element-template').content;//темплейт в DOM вызов по ID
 const elemSection = document.querySelector('.elements');//сюда будут добавляться карточки
 
-const popupSection = document.querySelector('.popups');//секция с формами
+const popupSection = document.querySelector('.popup');//секция с формами
 
 const profileForm = document.querySelector('#edit-profile');//форма редактирования профиля
 const editButton = document.querySelector('.profile__edit-button');//кнопка редактирования профиля
@@ -64,17 +64,22 @@ const initialCards = [
 
 //функция открытия и закрытия форм
 function togglePopupVisibility(popupElement){
+  popupElement.classList.toggle('popup_hidden');
+}
 
-  if ((popupElement.id === 'edit-profile') && (popupElement.classList.contains('popups_hidden'))){
-     inputName.value = profileName.textContent;
-     inputLifestyle.value=profileLifestyle.textContent;
-  }
-  if ((popupElement.id === 'edit-place') && (popupElement.classList.contains('popups_hidden'))){
-    inputPlace.value = '';
-    inputLink.value = '';
-  }
-  popupElement.classList.toggle('popups_hidden');
-};
+//подготовка к открытию формы редактирования профиля
+function setOpenProfileHandler(event){
+  inputName.value = profileName.textContent;
+  inputLifestyle.value=profileLifestyle.textContent;
+  togglePopupVisibility(profileForm);
+}
+
+//подготовка к открытию формы добавления карточек
+function setOpenPlaceHandler(event){
+  inputPlace.value = '';
+  inputLink.value = '';
+  togglePopupVisibility(placeForm);
+}
 
 //like
 function toggleLikeActive(event){
@@ -111,14 +116,12 @@ function createCard (card){
   cardElement.querySelector('.elements__rbin-button').addEventListener('click',deletButtonHandler);
   //кнопка-изображение для открытия формы просмотра фото
   cardElementImage.addEventListener('click', setOpenPlaceImageHandler);
-  // elemSection.prepend(cardElement);//задать чтобы изначальные карточки загрпужались отдельно?! но как?
   return cardElement;
 }
 
 //массив начальных карточек
 function cardsLoad(cards){
-  return cards.map(card=>{
-    return createCard(card)});
+  return cards.map(createCard);
 }
 
 //добавляем в секцию
@@ -154,13 +157,10 @@ function formPlaceSubmitHandler (evt) {
 };
 
 //открытие формы "Редактировать профиль"
-editButton.addEventListener('click',() => {
-  togglePopupVisibility(profileForm);
-});
+editButton.addEventListener('click', setOpenProfileHandler);
 
 //открытие формы "Новое место"
-addCardButton.addEventListener('click',() => {togglePopupVisibility(placeForm);
-});
+addCardButton.addEventListener('click', setOpenPlaceHandler);
 
 //закрытие формы "Редактировать профиль"
 closeProfileFormBtn.addEventListener('click',() => {
