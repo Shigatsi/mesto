@@ -1,7 +1,7 @@
 const elementTemplate = document.querySelector('#element-template').content;//темплейт в DOM вызов по ID
 const elemSection = document.querySelector('.elements');//сюда будут добавляться карточки
 
-const popupSection = document.querySelector('.popup');//секция с формами
+
 
 const profileForm = document.querySelector('#edit-profile');//форма редактирования профиля
 const editButton = document.querySelector('.profile__edit-button');//кнопка редактирования профиля
@@ -79,6 +79,23 @@ function setOpenPlaceHandler(event){
   inputPlace.value = '';
   inputLink.value = '';
   togglePopupVisibility(placeForm);
+}
+
+//функция закрытия попапа по клику на оверлей
+function setClosePopupOverlayClick (evt, formElement){
+  if(evt.target.classList.contains('popup')){
+    togglePopupVisibility(evt.target);
+  }
+}
+
+//close popup func by Esc-button
+function setClosePopupEscKeyUp(){
+  const popupSection = document.querySelectorAll('.popup');
+  popupSection.forEach((formElement)=>{
+    if(!formElement.classList.contains('popup_hidden')){
+      togglePopupVisibility(formElement);
+    }
+  })
 }
 
 //like
@@ -167,13 +184,25 @@ closeProfileFormBtn.addEventListener('click',() => {
   togglePopupVisibility(profileForm);
 });
 
+//close profile edit form by overlay 'click'
+profileForm.addEventListener('click',(evt) => {setClosePopupOverlayClick (evt, profileForm);
+});
+
 //закрытие формы "Новое место"
 closePlaceFormBtn.addEventListener('click',() => {togglePopupVisibility(placeForm);
+});
+
+//close place edit form by overlay 'click'
+placeForm.addEventListener('click',(evt) => {setClosePopupOverlayClick (evt, placeForm);
 });
 
 //закрытие формы просмотра изображения
 closeImgFormBtn.addEventListener('click', ()=> {
   togglePopupVisibility(imgForm);
+});
+
+//close image view form by overlay 'click'
+imgForm.addEventListener('click',(evt) => {setClosePopupOverlayClick (evt, imgForm);
 });
 
 //добавление карточки
@@ -182,3 +211,14 @@ placeForm.addEventListener('submit',formPlaceSubmitHandler);
 
 //редактирование профиля
 profileForm.addEventListener('submit', formProfileSubmitHandler);
+
+//create forms massive
+const popupSection = Array.from(document.querySelectorAll('.popup'));//секция с формами
+
+
+//close popup by Esc-button
+document.addEventListener('keyup',(evt)=>{
+  if(evt.key==='Escape'){
+    setClosePopupEscKeyUp();
+  }
+})
