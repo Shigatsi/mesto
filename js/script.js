@@ -60,16 +60,25 @@ const initialCards = [
   }
 ];
 
-// // включение валидации вызовом enableValidation
-// // все настройки передаются при вызове
-// enableValidation({
+// // // включение валидации вызовом enableValidation
+// // // все настройки передаются при вызове
+// const enableValidation = ({
 //   formSelector: '.popup__form',
 //   inputSelector: '.popup__input',
 //   submitButtonSelector: '.popup__button',
 //   inactiveButtonClass: 'popup__button_disabled',
 //   inputErrorClass: 'popup__input_type_error',
-//   errorClass: 'popup__error_visible'
+//   errorClass: 'popup__input-error_hidden'
 // });
+
+const validationObj = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__input-error_hidden'
+}
 
 
 //функция открытия и закрытия форм

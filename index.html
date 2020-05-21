@@ -36,8 +36,10 @@
           <div class="popup__content">
             <form class="popup__form" name="edit_profile" method="POST" action="#" novalidate>
               <h2 class="popup__header">Редактировать профиль</h2>
-              <input type="text" id="popup_name" name="name" minlength="2" maxlength="40" pattern="[а-яёА-ЯЁA-Za-z \-]" required placeholder="Имя, Фамилия" class="popup__input"/>
+              <input type="text" id="popup_name" name="name" minlength="2" maxlength="40" pattern="[а-яёА-ЯЁA-Za-z \-]*" required placeholder="Имя, Фамилия" class="popup__input"/>
+              <span class='popup__input-error popup__input-error_hidden' id='popup_name-input-error'></span>
               <input type="text" id="popup_lifestyle" name="lifestyle" minlength="2" maxlength="200" required placeholder="Род занятий/хобби" class="popup__input"/>
+              <span class='popup__input-error popup__input-error_hidden' id='popup_lifestyle-input-error'></span>
               <button type="submit" id="profile-submit" class="popup__save-button">Сохранить</button>
             </form>
           <button type="button" id="profile-close"  class="popup__close-button"></button>
@@ -48,8 +50,10 @@
             <form class="popup__form" name="edit_place" method="POST" action="#" novalidate>
               <h2 class="popup__header">Новое место</h2>
               <input type="text" id="popup_place" name="place" minlength="1" maxlength="30" required placeholder="Название" class="popup__input"/>
+              <span class='popup__input-error popup__input-error_hidden' id='popup_place-input-error'></span>
               <input type="url" id="popup_link"name="place_url" required placeholder="Ссылка на картинку" class="popup__input"/>
-              <button type="submit" id="place-submit" class="popup__save-button popup__save-button_disabled">Сохранить</button>
+              <span class='popup__input-error' id='popup_link-input-error'></span>
+              <button type="submit" id="place-submit" class="popup__save-button">Сохранить</button>
             </form>
             <button type="button" id="place-close" class="popup__close-button"></button>
           </div>
@@ -76,5 +80,6 @@
       </div>
     </template>
     <script src="./js/script.js"></script>
+    <script src="./js/validate.js"></script>
   </body>
 </html>
