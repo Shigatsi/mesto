@@ -12,6 +12,7 @@
   border-style: none;
   margin: 48px 36px 36px;
   opacity: 1;
+  pointer-events: initial;
 }
 
 .popup__save-button:hover{
