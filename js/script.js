@@ -86,10 +86,20 @@ function togglePopupVisibility(popupElement){
   popupElement.classList.toggle('popup_hidden');
 }
 
+// очищение поля ошибок, в случае закрытия окнаСМОТРИ СЮДА!!!!!
+function setInputsErrorClear(form){
+    form.querySelectorAll('.popup__input-error').forEach(element => {
+        element.classList.add('popup__input-error_hidden');
+  });
+};
+
 //подготовка к открытию формы редактирования профиля
 function setOpenProfileHandler(event){
   inputName.value = profileName.textContent;
   inputLifestyle.value=profileLifestyle.textContent;
+
+  setInputsErrorClear(profileForm);
+
   togglePopupVisibility(profileForm);
 }
 
@@ -97,6 +107,9 @@ function setOpenProfileHandler(event){
 function setOpenPlaceHandler(event){
   inputPlace.value = '';
   inputLink.value = '';
+
+  setInputsErrorClear(placeForm);
+
   togglePopupVisibility(placeForm);
 }
 
@@ -204,7 +217,7 @@ closeProfileFormBtn.addEventListener('click',() => {
 });
 
 //close profile edit form by overlay 'click'
-profileForm.addEventListener('click',(evt) => {setClosePopupOverlayClick (evt, profileForm);
+profileForm.addEventListener('mousedown',(evt) => {setClosePopupOverlayClick (evt, profileForm);
 });
 
 //закрытие формы "Новое место"
@@ -212,7 +225,7 @@ closePlaceFormBtn.addEventListener('click',() => {togglePopupVisibility(placeFor
 });
 
 //close place edit form by overlay 'click'
-placeForm.addEventListener('click',(evt) => {setClosePopupOverlayClick (evt, placeForm);
+placeForm.addEventListener('mousedown',(evt) => {setClosePopupOverlayClick (evt, placeForm);
 });
 
 //закрытие формы просмотра изображения
@@ -221,7 +234,7 @@ closeImgFormBtn.addEventListener('click', ()=> {
 });
 
 //close image view form by overlay 'click'
-imgForm.addEventListener('click',(evt) => {setClosePopupOverlayClick (evt, imgForm);
+imgForm.addEventListener('mousedown',(evt) => {setClosePopupOverlayClick (evt, imgForm);
 });
 
 //добавление карточки

@@ -38,7 +38,7 @@ const hasInvalidInput = (inputList) =>{
 //Переключение активации кнопки
 const toggleButtonState = (inputList, buttonElement,obj)=>{
   if(hasInvalidInput(inputList)){
-    buttonElement.classList.add(obj['inactiveButtonClass']);//сделать чисто переключалку мб? чекнуть перед ревью'popup__save-button_disabled'
+    buttonElement.classList.add(obj['inactiveButtonClass']);//popup__save-button_disabled'
     buttonElement.setAttribute('disabled','disabled');
   }else{
     buttonElement.classList.remove(obj['inactiveButtonClass']);
