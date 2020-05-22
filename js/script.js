@@ -86,7 +86,7 @@ function togglePopupVisibility(popupElement){
   popupElement.classList.toggle('popup_hidden');
 }
 
-// очищение поля ошибок, в случае закрытия окнаСМОТРИ СЮДА!!!!!
+// очищение поля ошибок, в случае закрытия окна
 function setInputsErrorClear(form){
     form.querySelectorAll('.popup__input-error').forEach(element => {
         element.classList.add('popup__input-error_hidden');
