@@ -73,6 +73,8 @@ const validationObj = {
   errorClass: 'popup__input-error_hidden'
 }
 
+const {formSelector, inputSelector, inputErrorSelector, submitButtonSelector, inactiveButtonClass, inputErrorClass, errorClass} = validationObj; //деструктруризация объекта
+
 //close popup func by Esc-button
 function closePopupEscKeyUp(){
   popupSection.forEach((formElement)=>{
