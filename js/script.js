@@ -103,10 +103,10 @@ function togglePopupVisibility(popupElement){
 
 // очищение поля ошибок, в случае закрытия окна
 function setInputsErrorClear(form, obj){
-  Array.from(form.querySelectorAll(obj['inputErrorSelector'])).forEach(element =>{
-    element.classList.add(obj['errorClass']);
-  })
-}
+  Array.from(form.querySelectorAll(inputErrorSelector)).forEach(element =>{
+    element.classList.add(errorClass);
+  });
+};
 
 //подготовка к открытию формы редактирования профиля
 function setOpenProfileHandler(event){

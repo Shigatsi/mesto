@@ -5,10 +5,10 @@ const showInputError = (formElement, inputElement, errorMessage, obj) => {
   // Находим элемент ошибки внутри самой функции
   const errorElement = formElement.querySelector(`#${inputElement.id}-input-error`);
 
-  inputElement.classList.add(inputErrorClass);//'popup__input_type_error' obj['inputErrorClass']
+  inputElement.classList.add(inputErrorClass);//'popup__input_type_error'
   // Показываем сообщение об ошибке
   errorElement.textContent = errorMessage;
-    errorElement.classList.remove(errorClass);//'popup__input-error_hidden'obj['errorClass']
+    errorElement.classList.remove(errorClass);//'popup__input-error_hidden'
 };
 
 // Функция, которая удаляет класс с ошибкой
@@ -17,7 +17,7 @@ const hideInputError = (formElement, inputElement, obj) => {
   const errorElement = formElement.querySelector(`#${inputElement.id}-input-error`);
 
   inputElement.classList.remove(inputErrorClass);
-  // Скрываем сообщение об ошибкеobj['inputErrorClass']
+  // Скрываем сообщение об ошибке
   errorElement.classList.add(errorClass);
   // Очистим ошибку
   errorElement.textContent = '';

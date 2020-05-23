@@ -12,7 +12,7 @@
 
 
 .popup{
-  margin: 0;
+  margin: 0 -42.7px 0 0;
   position: fixed;
   left: 0;
   top: 0;
@@ -32,4 +32,16 @@
   -o-transition: visibility 0s, opacity .5s linear;
   -ms-transition: visibility 0s, opacity .5s linear;
   transition: visibility 0s, opacity .5s linear;
+}
+
+@media screen and (max-width: 540px){
+  .popup{
+    margin:0 -30.5px 0 0;
+  }
+}
+
+@media screen and (max-width: 400px){
+  .popup{
+    margin:0 -22.8px 0 0;
+  }
 }
