@@ -75,24 +75,19 @@ const validationObj = {
 
 //close popup func by Esc-button
 function closePopupEscKeyUp(){
-  popupSection.forEach((formElement)=>{
-    if(!formElement.classList.contains('popup_hidden')){
-      togglePopupVisibility(formElement);
-    }
-  })
-}
+  popupSection.forEach((popupElement)=>{
+    if(!popupElement.classList.contains('popup_hidden')){
+      closePopup(popupElement);
+    };
+  document.removeEventListener('keyup', setEscButtonHandler);
+  });
+};
 
 //обработчик нажатия на кнопку ESC
 function setEscButtonHandler (evt){
   if(evt.key==='Escape'){
     closePopupEscKeyUp();
-    document.removeEventListener('keyup', setEscButtonHandler);
   };
-};
-
-//добавление/удоление слушателя Esc
-function toggleEscEventListener(){
-  document.addEventListener('keyup',setEscButtonHandler);
 };
 
 //функция изменения видимости форм
@@ -100,40 +95,48 @@ function togglePopupVisibility(popupElement){
   popupElement.classList.toggle('popup_hidden');
 }
 
-// очищение поля ошибок, в случае закрытия окна !!чекнуть объкт, кажеца не нужен!!
+// очищение поля ошибок, в случае закрытия окна
 function setInputsErrorClear(form, obj){
   Array.from(form.querySelectorAll(obj.inputErrorSelector)).forEach(element =>{
     element.classList.add(obj.errorClass);
   });
 };
 
-//открытие/закрытие формы
-function togglePopup (popupElement){
+//открытие окна
+function openPopup (popupElement) {
   togglePopupVisibility(popupElement);
-  toggleEscEventListener();
+  document.addEventListener('keyup',setEscButtonHandler);
+  document.addEventListener('mousedown',closePopupOverlayClick);
   if(popupElement.id != 'img-fullsize'){
     setInputsErrorClear(popupElement, validationObj);
-  }
-}
+  };
+};
+
+//закрытие окна
+function closePopup (popupElement) {
+  document.removeEventListener('keyup', setEscButtonHandler);
+  document.removeEventListener('mousedown',closePopupOverlayClick);
+  togglePopupVisibility(popupElement);
+};
 
 //подготовка к открытию формы редактирования профиля
 function setOpenProfileHandler(){
   inputName.value = profileName.textContent;
   inputLifestyle.value=profileLifestyle.textContent;
-  togglePopup(profileForm);
+  openPopup(profileForm);
 }
 
 //подготовка к открытию формы добавления карточек
 function setOpenPlaceHandler(){
   inputPlace.value = '';
   inputLink.value = '';
-  togglePopup(placeForm);
+  openPopup(placeForm);
 }
 
 //функция закрытия попапа по клику на оверлей
 function closePopupOverlayClick (evt){
   if(evt.target.classList.contains('popup')){
-    togglePopupVisibility(evt.target);
+    closePopup(evt.target);
   }
 }
 
@@ -146,7 +149,7 @@ function toggleLikeActive(event){
 function setOpenPlaceImageHandler(event){
   fullsizeImg.src = event.target.src;
   fullsizeImgCaption.textContent = event.target.alt;
-  togglePopup(imgForm);
+  openPopup(imgForm);
 }
 
 //delete
@@ -220,30 +223,18 @@ addCardButton.addEventListener('click', setOpenPlaceHandler);
 
 //закрытие формы "Редактировать профиль"
 closeProfileFormBtn.addEventListener('click',() => {
-  togglePopup(profileForm);
-});
-
-//close profile edit form by overlay 'click'
-profileForm.addEventListener('mousedown',(evt) => {closePopupOverlayClick (evt, profileForm);
+  closePopup(profileForm);
 });
 
 //закрытие формы "Новое место"
 closePlaceFormBtn.addEventListener('click',() =>{
-  togglePopup(placeForm);
+  closePopup(placeForm);
 
-});
-
-//close place edit form by overlay 'click'
-placeForm.addEventListener('mousedown',(evt) => {closePopupOverlayClick (evt, placeForm);
 });
 
 //закрытие формы просмотра изображения
 closeImgFormBtn.addEventListener('click', ()=> {
-  togglePopup(imgForm);
-});
-
-//close image view form by overlay 'click'
-imgForm.addEventListener('mousedown',(evt) => {closePopupOverlayClick (evt, imgForm);
+  closePopup(imgForm);
 });
 
 //добавление карточки
