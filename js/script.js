@@ -73,9 +73,6 @@ const validationObj = {
   errorClass: 'popup__input-error_hidden'
 }
 
-//деструктруризация объекта
-const {formSelector, inputSelector, inputErrorSelector, submitButtonSelector, inactiveButtonClass, inputErrorClass, errorClass} = validationObj;
-
 //close popup func by Esc-button
 function closePopupEscKeyUp(){
   popupSection.forEach((formElement)=>{
@@ -104,9 +101,9 @@ function togglePopupVisibility(popupElement){
 }
 
 // очищение поля ошибок, в случае закрытия окна !!чекнуть объкт, кажеца не нужен!!
-function setInputsErrorClear(form){
-  Array.from(form.querySelectorAll(inputErrorSelector)).forEach(element =>{
-    element.classList.add(errorClass);
+function setInputsErrorClear(form, obj){
+  Array.from(form.querySelectorAll(obj.inputErrorSelector)).forEach(element =>{
+    element.classList.add(obj.errorClass);
   });
 };
 
@@ -115,7 +112,7 @@ function togglePopup (popupElement){
   togglePopupVisibility(popupElement);
   toggleEscEventListener();
   if(popupElement.id != 'img-fullsize'){
-    setInputsErrorClear(popupElement);
+    setInputsErrorClear(popupElement, validationObj);
   }
 }
 
