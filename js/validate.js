@@ -1,7 +1,7 @@
 
 
 // Функция, которая добавляет класс с ошибкой
-const showInputError = (formElement, inputElement, errorMessage, obj) => {
+const showInputError = (formElement, inputElement, errorMessage) => {
   // Находим элемент ошибки внутри самой функции
   const errorElement = formElement.querySelector(`#${inputElement.id}-input-error`);
 
@@ -12,7 +12,7 @@ const showInputError = (formElement, inputElement, errorMessage, obj) => {
 };
 
 // Функция, которая удаляет класс с ошибкой
-const hideInputError = (formElement, inputElement, obj) => {
+const hideInputError = (formElement, inputElement) => {
   // Находим элемент ошибки внутри самой функции
   const errorElement = formElement.querySelector(`#${inputElement.id}-input-error`);
 
@@ -36,7 +36,7 @@ const hasInvalidInput = (inputList) =>{
 };
 
 //Переключение активации кнопки
-const toggleButtonState = (inputList, buttonElement, obj)=>{
+const toggleButtonState = (inputList, buttonElement)=>{
   if(hasInvalidInput(inputList)){
     buttonElement.classList.add(inactiveButtonClass);//popup__save-button_disabled'
     buttonElement.setAttribute('disabled','true');

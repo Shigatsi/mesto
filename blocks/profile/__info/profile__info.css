@@ -1,7 +1,6 @@
 .profile__info{
   display: grid;
   align-items: baseline;
-  grid-template-columns: 295px 24px;
   grid-gap: 16px 17px;
   max-width: 336px;
   color: #fff;
@@ -21,7 +20,6 @@
 
 @media screen and (max-width: 540px){
   .profile__info{
-    grid-template-columns: 201px 18px;
     grid-gap: 14px 1px;
   }
 }

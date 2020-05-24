@@ -73,7 +73,8 @@ const validationObj = {
   errorClass: 'popup__input-error_hidden'
 }
 
-const {formSelector, inputSelector, inputErrorSelector, submitButtonSelector, inactiveButtonClass, inputErrorClass, errorClass} = validationObj; //деструктруризация объекта
+//деструктруризация объекта
+const {formSelector, inputSelector, inputErrorSelector, submitButtonSelector, inactiveButtonClass, inputErrorClass, errorClass} = validationObj;
 
 //close popup func by Esc-button
 function closePopupEscKeyUp(){
@@ -84,47 +85,52 @@ function closePopupEscKeyUp(){
   })
 }
 
-//добавление/удоление слушателя Esc
-function toggleEscEventListener(){
-  document.addEventListener('keyup',function setEscButtonHandler (evt){
-    if(evt.key==='Escape'){
-      closePopupEscKeyUp();
-      console.log('Esc!');
-      document.removeEventListener('keyup', setEscButtonHandler);
-    };
-  });
+//обработчик нажатия на кнопку ESC
+function setEscButtonHandler (evt){
+  if(evt.key==='Escape'){
+    closePopupEscKeyUp();
+    document.removeEventListener('keyup', setEscButtonHandler);
+  };
 };
 
+//добавление/удоление слушателя Esc
+function toggleEscEventListener(){
+  document.addEventListener('keyup',setEscButtonHandler);
+};
 
-//функция открытия и закрытия форм
+//функция изменения видимости форм
 function togglePopupVisibility(popupElement){
   popupElement.classList.toggle('popup_hidden');
 }
 
-// очищение поля ошибок, в случае закрытия окна
-function setInputsErrorClear(form, obj){
+// очищение поля ошибок, в случае закрытия окна !!чекнуть объкт, кажеца не нужен!!
+function setInputsErrorClear(form){
   Array.from(form.querySelectorAll(inputErrorSelector)).forEach(element =>{
     element.classList.add(errorClass);
   });
 };
 
+//открытие/закрытие формы
+function togglePopup (popupElement){
+  togglePopupVisibility(popupElement);
+  toggleEscEventListener();
+  if(popupElement.id != 'img-fullsize'){
+    setInputsErrorClear(popupElement);
+  }
+}
+
 //подготовка к открытию формы редактирования профиля
-function setOpenProfileHandler(event){
+function setOpenProfileHandler(){
   inputName.value = profileName.textContent;
   inputLifestyle.value=profileLifestyle.textContent;
-  toggleEscEventListener();
-  setInputsErrorClear(profileForm, validationObj);
-  togglePopupVisibility(profileForm);
+  togglePopup(profileForm);
 }
 
 //подготовка к открытию формы добавления карточек
-function setOpenPlaceHandler(event){
+function setOpenPlaceHandler(){
   inputPlace.value = '';
   inputLink.value = '';
-  toggleEscEventListener();
-  setInputsErrorClear(placeForm, validationObj);
-
-  togglePopupVisibility(placeForm);
+  togglePopup(placeForm);
 }
 
 //функция закрытия попапа по клику на оверлей
@@ -143,8 +149,7 @@ function toggleLikeActive(event){
 function setOpenPlaceImageHandler(event){
   fullsizeImg.src = event.target.src;
   fullsizeImgCaption.textContent = event.target.alt;
-  toggleEscEventListener();
-  togglePopupVisibility(imgForm);
+  togglePopup(imgForm);
 }
 
 //delete
@@ -210,8 +215,6 @@ function formPlaceSubmitHandler (evt) {
     togglePopupVisibility(placeForm);
 };
 
-
-
 //открытие формы "Редактировать профиль"
 editButton.addEventListener('click', setOpenProfileHandler);
 
@@ -220,9 +223,7 @@ addCardButton.addEventListener('click', setOpenPlaceHandler);
 
 //закрытие формы "Редактировать профиль"
 closeProfileFormBtn.addEventListener('click',() => {
-  togglePopupVisibility(profileForm);
-  // removeEscEventListener();
-  toggleEscEventListener();
+  togglePopup(profileForm);
 });
 
 //close profile edit form by overlay 'click'
@@ -231,9 +232,8 @@ profileForm.addEventListener('mousedown',(evt) => {closePopupOverlayClick (evt, 
 
 //закрытие формы "Новое место"
 closePlaceFormBtn.addEventListener('click',() =>{
-  togglePopupVisibility(placeForm);
-  // removeEscEventListener();
-  toggleEscEventListener();
+  togglePopup(placeForm);
+
 });
 
 //close place edit form by overlay 'click'
@@ -242,9 +242,7 @@ placeForm.addEventListener('mousedown',(evt) => {closePopupOverlayClick (evt, pl
 
 //закрытие формы просмотра изображения
 closeImgFormBtn.addEventListener('click', ()=> {
-  togglePopupVisibility(imgForm);
-  // removeEscEventListener();
-  toggleEscEventListener();
+  togglePopup(imgForm);
 });
 
 //close image view form by overlay 'click'
