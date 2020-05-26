@@ -61,8 +61,6 @@ const initialCards = [
   }
 ];
 
-
-
 const validationObj = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
@@ -73,20 +71,14 @@ const validationObj = {
   errorClass: 'popup__input-error_hidden'
 }
 
-//close popup func by Esc-button
-function closePopupEscKeyUp(){
-  popupSection.forEach((popupElement)=>{
-    if(!popupElement.classList.contains('popup_hidden')){
-      closePopup(popupElement);
-    };
-  document.removeEventListener('keyup', setEscButtonHandler);
-  });
-};
-
 //обработчик нажатия на кнопку ESC
 function setEscButtonHandler (evt){
   if(evt.key==='Escape'){
-    closePopupEscKeyUp();
+    popupSection.forEach((popupElement)=>{
+      if(!popupElement.classList.contains('popup_hidden')){
+        closePopup(popupElement);
+      };
+    });
   };
 };
 
@@ -96,9 +88,9 @@ function togglePopupVisibility(popupElement){
 }
 
 // очищение поля ошибок, в случае закрытия окна
-function setInputsErrorClear(form, obj){
-  Array.from(form.querySelectorAll(obj.inputErrorSelector)).forEach(element =>{
-    element.classList.add(obj.errorClass);
+function setInputsErrorClear(form, popupCharObj ){
+  Array.from(form.querySelectorAll(popupCharObj .inputErrorSelector)).forEach(element =>{
+    element.classList.add(popupCharObj.errorClass);
   });
 };
 
@@ -107,7 +99,7 @@ function openPopup (popupElement) {
   togglePopupVisibility(popupElement);
   document.addEventListener('keyup',setEscButtonHandler);
   document.addEventListener('mousedown',closePopupOverlayClick);
-  if(popupElement.id != 'img-fullsize'){
+  if(popupElement.id !== 'img-fullsize'){
     setInputsErrorClear(popupElement, validationObj);
   };
 };
@@ -202,7 +194,7 @@ function formProfileSubmitHandler (evt) {
   // Вставьте новые значения с помощью textContent
   profileName.textContent = inputName.value;
   profileLifestyle.textContent = inputLifestyle.value;
-  togglePopupVisibility(profileForm);
+  closePopup(profileForm);
 };
 
 //обработчик события, добавляем новые карточки it's a life!!!!!!
@@ -212,7 +204,7 @@ function formPlaceSubmitHandler (evt) {
     elemSection.prepend(card);
     inputPlace.value = '';
     inputLink.value = '';
-    togglePopupVisibility(placeForm);
+    closePopup(placeForm);
 };
 
 //открытие формы "Редактировать профиль"
