@@ -1,3 +1,5 @@
+import {Card} from './card.js';
+
 const elementTemplate = document.querySelector('#element-template').content;//темплейт в DOM вызов по ID
 const elemSection = document.querySelector('.elements');//сюда будут добавляться карточки
 
@@ -21,10 +23,10 @@ const inputLifestyle = document.getElementById('popup_lifestyle');// ввод п
 const inputPlace = document.querySelector('#popup_place');//ввод названия места
 const inputLink = document.querySelector('#popup_link');//ввод ссылки на фото места
 
-const imgForm = document.querySelector('#img-fullsize');//форма просмотра полноразмерного изображения
+export const imgForm = document.querySelector('#img-fullsize');//форма просмотра полноразмерного изображения
 const closeImgFormBtn = document.querySelector('#img-close');//кнопка закрытия формы просмотра изображения
-const fullsizeImg = document.querySelector('.popup__fullsize-img');//полноразмерное изображение
-const fullsizeImgCaption = document.querySelector('.popup__fullsize-img-caption');// подпись для полноразмерного изображения
+export const fullsizeImg = document.querySelector('.popup__fullsize-img');//полноразмерное изображение
+export const fullsizeImgCaption = document.querySelector('.popup__fullsize-img-caption');// подпись для полноразмерного изображения
 
 
 //"коробка" с карточками изначальными
@@ -103,7 +105,7 @@ function setInputsErrorClear(form, obj){
 };
 
 //открытие окна
-function openPopup (popupElement) {
+export function openPopup (popupElement) {
   togglePopupVisibility(popupElement);
   document.addEventListener('keyup',setEscButtonHandler);
   document.addEventListener('mousedown',closePopupOverlayClick);
@@ -139,57 +141,6 @@ function closePopupOverlayClick (evt){
     closePopup(evt.target);
   }
 }
-
-//like
-function toggleLikeActive(event){
-  event.target.classList.toggle('elements__like-button_active');
-};
-
-//fullsize
-function setOpenPlaceImageHandler(event){
-  fullsizeImg.src = event.target.src;
-  fullsizeImgCaption.textContent = event.target.alt;
-  openPopup(imgForm);
-}
-
-//delete
-function deletButtonHandler(event){
-  const elemElementItem =  event.target.closest('.elements__item');//выбираем карточку, которую надо удалить
-  //удоляем "слушателей"
-  elemElementItem.querySelector('.elements__like-button').removeEventListener('click', toggleLikeActive);
-  elemElementItem.querySelector('.elements__rbin-button').removeEventListener('click', deletButtonHandler);
-  elemElementItem.querySelector('.elements__image').removeEventListener('click', setOpenPlaceImageHandler);
-  elemElementItem.remove();//otvalbashki
-}
-
-//создание карточки
-function createCard (card){
-  const cardElement = elementTemplate.cloneNode(true);
-  cardElement.querySelector('.elements__title').textContent = card.name;
-  const cardElementImage = cardElement.querySelector('.elements__image');
-  cardElementImage.src=card.link;
-  cardElementImage.alt = card.alt;
-  //кнопка лайк.событие клик
-  cardElement.querySelector('.elements__like-button').addEventListener('click',toggleLikeActive);
-  //кнопка корзина.событие клик
-  cardElement.querySelector('.elements__rbin-button').addEventListener('click',deletButtonHandler);
-  //кнопка-изображение для открытия формы просмотра фото
-  cardElementImage.addEventListener('click', setOpenPlaceImageHandler);
-  return cardElement;
-}
-
-//массив начальных карточек
-function cardsLoad(cards){
-  return cards.map(createCard);
-}
-
-//добавляем в секцию
-function renderCards(cards){
-  elemSection.prepend(...cards);
-}
-//рендерим
-renderCards(cardsLoad(initialCards));
-
 
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
