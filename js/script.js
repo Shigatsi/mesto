@@ -1,3 +1,6 @@
+
+import {FormValidator} from './FormValidator.js';
+
 import {Card} from './card.js';
 
 const elementTemplate = document.querySelector('#element-template').content;//темплейт в DOM вызов по ID
@@ -64,8 +67,8 @@ const initialCards = [
 ];
 
 
-
-const validationObj = {
+//validationObj
+ const validationObj = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
   inputErrorSelector:'.popup__input-error',
@@ -74,6 +77,12 @@ const validationObj = {
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__input-error_hidden'
 }
+
+const formLifestyleValidation = new FormValidator(validationObj, profileForm);
+formLifestyleValidation.enableFormValidation();
+
+const formAddPlaceValidation = new FormValidator(validationObj,placeForm);
+formAddPlaceValidation.enableFormValidation();
 
 //close popup func by Esc-button
 function closePopupEscKeyUp(){
@@ -110,7 +119,7 @@ export function openPopup (popupElement) {
   document.addEventListener('keyup',setEscButtonHandler);
   document.addEventListener('mousedown',closePopupOverlayClick);
   if(popupElement.id != 'img-fullsize'){
-    setInputsErrorClear(popupElement, validationObj);
+    setInputsErrorClear(popupElement, validationObj);//validationObj
   };
 };
 
@@ -142,6 +151,13 @@ function closePopupOverlayClick (evt){
   }
 }
 
+initialCards.forEach((item)=>{
+  const card = new Card(item, '#element-template');
+  const cardElement = card.generateCard();
+
+  elemSection.append(cardElement);
+})
+
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
 function formProfileSubmitHandler (evt) {
@@ -159,8 +175,9 @@ function formProfileSubmitHandler (evt) {
 //обработчик события, добавляем новые карточки it's a life!!!!!!
 function formPlaceSubmitHandler (evt) {
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
-    const card = createCard({name: inputPlace.value, link: inputLink.value, alt: inputPlace.value});
-    elemSection.prepend(card);
+    const userCard = new Card ({name: inputPlace.value, link: inputLink.value, alt: inputPlace.value}, '#element-template')
+    const cardElement = userCard.generateCard();
+    elemSection.prepend(cardElement);
     inputPlace.value = '';
     inputLink.value = '';
     togglePopupVisibility(placeForm);

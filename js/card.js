@@ -20,7 +20,8 @@ export class Card{
 
   //приватный метод like
   _toggleLikeActive(){
-    this._element.querySelector('elements__like-button').toggle('elements__like-button_active');
+    console.log(this._element.querySelector('.elements__like-button'));
+    this._element.querySelector('.elements__like-button').classList.toggle('elements__like-button_active');
   }
 
   //приватный метод fullsize
