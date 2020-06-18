@@ -38,14 +38,14 @@ import {openPopup} from './utils.js';
 import {closePopup} from './utils.js';
 
 //подготовка к открытию формы редактирования профиля
-function setOpenProfileHandler(){
+function hendleOpenProfiler(){
   inputName.value = profileName.textContent;
   inputLifestyle.value=profileLifestyle.textContent;
   openPopup(profileForm);
 }
 
 //подготовка к открытию формы добавления карточек
-function setOpenPlaceHandler(){
+function handleOpenPlace(){
   inputPlace.value = '';
   inputLink.value = '';
   openPopup(placeForm);
@@ -85,10 +85,10 @@ function formPlaceSubmitHandler (evt) {
 };
 
 //открытие формы "Редактировать профиль"
-editButton.addEventListener('click', setOpenProfileHandler);
+editButton.addEventListener('click', hendleOpenProfiler);
 
 //открытие формы "Новое место"
-addCardButton.addEventListener('click', setOpenPlaceHandler);
+addCardButton.addEventListener('click', handleOpenPlace);
 
 //закрытие формы "Редактировать профиль"
 closeProfileFormBtn.addEventListener('click',() => {

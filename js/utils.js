@@ -27,7 +27,7 @@ function setInputsErrorClear(form, popupCharObj ){
 //открытие окна
 export function openPopup (popupElement) {
   togglePopupVisibility(popupElement);
-  document.addEventListener('keyup',setEscButtonHandler);
+  document.addEventListener('keyup',handleEscButtonClose);
   document.addEventListener('mousedown',closePopupOverlayClick);
   if(popupElement.id != 'img-fullsize'){
     setInputsErrorClear(popupElement, formConfig);
@@ -36,7 +36,7 @@ export function openPopup (popupElement) {
 
 //закрытие окна
 export function closePopup (popupElement) {
-  document.removeEventListener('keyup', setEscButtonHandler);
+  document.removeEventListener('keyup', handleEscButtonClose);
   document.removeEventListener('mousedown',closePopupOverlayClick);
   togglePopupVisibility(popupElement);
 };
@@ -55,7 +55,7 @@ function togglePopupVisibility(popupElement){
 }
 
 //обработчик нажатия на кнопку ESC
-function setEscButtonHandler (evt){
+function handleEscButtonClose (evt){
   if(evt.key==='Escape'){
     popupSection.forEach((popupElement)=>{
       if(!popupElement.classList.contains('popup_hidden')){
