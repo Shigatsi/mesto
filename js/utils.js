@@ -3,7 +3,7 @@ export const imgForm = document.querySelector('#img-fullsize');//форма пр
 
 export const fullsizeImg = document.querySelector('.popup__fullsize-img');//полноразмерное изображение
 export const fullsizeImgCaption = document.querySelector('.popup__fullsize-img-caption');// подпись для полноразмерного изображения
-
+//create forms massive
 export const popupSection = Array.from(document.querySelectorAll('.popup'));//секция с формами
 
 //объект настроек с селекторами и классами формы

@@ -1,15 +1,10 @@
 
 import {FormValidator} from './FormValidator.js';
-
 import Card from './card.js';
+import {imgForm, formConfig}  from './utils.js';
+import {initialCards} from './initialCards.js';
 
-import {imgForm, popupSection, formConfig}  from './utils.js';
-const elementTemplate = document.querySelector('#element-template').content;//темплейт в DOM вызов по ID
 const elemSection = document.querySelector('.elements');//сюда будут добавляться карточки
-
-//create forms massive
-
-
 const profileForm = document.querySelector('#edit-profile');//форма редактирования профиля
 const editButton = document.querySelector('.profile__edit-button');//кнопка редактирования профиля
 const closeProfileFormBtn = document.querySelector('#profile-close');//кнопка закрытия формы ред профиля
@@ -27,40 +22,6 @@ const inputLifestyle = document.getElementById('popup_lifestyle');// ввод п
 const inputPlace = document.querySelector('#popup_place');//ввод названия места
 const inputLink = document.querySelector('#popup_link');//ввод ссылки на фото места
 
-//"коробка" с карточками изначальными
-const initialCards = [
-  {
-      name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg',
-      alt: 'горная долина'
-  },
-  {
-      name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg',
-      alt: 'лесное озеро зимой'
-  },
-  {
-      name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg',
-      alt: 'панельные дома'
-  },
-  {
-      name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg',
-      alt: 'сопка в далеке'
-  },
-  {
-      name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg',
-      alt: 'железная дорога через лес'
-  },
-  {
-      name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg',
-      alt: 'крутой обрыв у замерзшего озера'
-  }
-];
-
 
 
 
@@ -69,28 +30,6 @@ formLifestyleValidation.enableFormValidation();
 
 const formAddPlaceValidation = new FormValidator(formConfig,placeForm);
 formAddPlaceValidation.enableFormValidation();
-
-//close popup func by Esc-button
-function closePopupEscKeyUp(){
-  popupSection.forEach((popupElement)=>{
-    if(!popupElement.classList.contains('popup_hidden')){
-      closePopup(popupElement);
-    };
-  document.removeEventListener('keyup', setEscButtonHandler);
-  });
-};
-
-//обработчик нажатия на кнопку ESC
-function setEscButtonHandler (evt){
-  if(evt.key==='Escape'){
-    popupSection.forEach((popupElement)=>{
-      if(!popupElement.classList.contains('popup_hidden')){
-        closePopup(popupElement);
-      };
-    });
-  };
-};
-
 
 //открытие окна
 import {openPopup} from './utils.js';
@@ -112,13 +51,7 @@ function setOpenPlaceHandler(){
   openPopup(placeForm);
 }
 
-// //функция закрытия попапа по клику на оверлей
-// function closePopupOverlayClick (evt){
-//   if(evt.target.classList.contains('popup')){
-//     closePopup(evt.target);
-//   }
-// }
-
+//рисуем массив начальных карточек
 initialCards.forEach((item)=>{
   const card = new Card(item, '#element-template');
   const cardElement = card.generateCard();
