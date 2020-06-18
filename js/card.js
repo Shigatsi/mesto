@@ -1,4 +1,4 @@
-import {fullsizeImg, fullsizeImgCaption, openPopup, imgForm } from './script.js';
+import {fullsizeImg, fullsizeImgCaption, openPopup, imgForm } from './index.js';
 
 export class Card{
   constructor(data, cardSelector){
