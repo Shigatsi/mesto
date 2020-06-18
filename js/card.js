@@ -1,6 +1,6 @@
-import {fullsizeImg, fullsizeImgCaption, openPopup, imgForm } from './index.js';
+import {fullsizeImg, fullsizeImgCaption, openPopup, imgForm } from './utils.js';
 
-export class Card{
+export default class Card{
   constructor(data, cardSelector){
     this._name = data.name;
     this._alt = data.alt;
@@ -20,14 +20,14 @@ export class Card{
 
   //приватный метод like
   _toggleLikeActive(){
-    console.log(this._element.querySelector('.elements__like-button'));
     this._element.querySelector('.elements__like-button').classList.toggle('elements__like-button_active');
   }
 
   //приватный метод fullsize
-  _setOpenPlaceImageHandler(){
-    fullsizeImg.src = this._element.querySelector('.elements__image').src;
-    fullsizeImgCaption.textContent = this._element.querySelector('.elements__image').alt;
+  _imageFullsizeHandler(){
+    const elemImg = this._element.querySelector('.elements__image');
+    fullsizeImg.src = elemImg.src;
+    fullsizeImgCaption.textContent = elemImg.alt;
     openPopup(imgForm);
   }
 
@@ -43,7 +43,7 @@ export class Card{
     //кнопка корзина: удоление карточки
     this._element.querySelector('.elements__rbin-button').addEventListener('click', ()=>{this._deletButtonHandler()});
     //кнопка-изображение: для открытия формы просмотра фото
-    this._element.querySelector('.elements__image').addEventListener('click',()=>{this._setOpenPlaceImageHandler()});
+    this._element.querySelector('.elements__image').addEventListener('click',()=>{this._imageFullsizeHandler()});
   }
 
    //публичный метод создание карточки

@@ -1,19 +1,20 @@
 
 import {FormValidator} from './FormValidator.js';
 
-import {Card} from './card.js';
+import Card from './card.js';
 
+import {imgForm, popupSection, formConfig}  from './utils.js';
 const elementTemplate = document.querySelector('#element-template').content;//темплейт в DOM вызов по ID
 const elemSection = document.querySelector('.elements');//сюда будут добавляться карточки
 
 //create forms massive
-const popupSection = Array.from(document.querySelectorAll('.popup'));//секция с формами
+
 
 const profileForm = document.querySelector('#edit-profile');//форма редактирования профиля
 const editButton = document.querySelector('.profile__edit-button');//кнопка редактирования профиля
 const closeProfileFormBtn = document.querySelector('#profile-close');//кнопка закрытия формы ред профиля
 
-
+const closeImgFormBtn = document.querySelector('#img-close');//кнопка закрытия формы просмотра изображения
 const placeForm = document.querySelector('#edit-place');//форма добавления места
 const addCardButton = document.querySelector('.profile__add-button');//кнопка добавления нового места
 const closePlaceFormBtn = document.querySelector('#place-close');//кнопка закрытия формы добавления места
@@ -25,12 +26,6 @@ const inputName = document.getElementById('popup_name');//ввод имени п
 const inputLifestyle = document.getElementById('popup_lifestyle');// ввод професси в профиле
 const inputPlace = document.querySelector('#popup_place');//ввод названия места
 const inputLink = document.querySelector('#popup_link');//ввод ссылки на фото места
-
-export const imgForm = document.querySelector('#img-fullsize');//форма просмотра полноразмерного изображения
-const closeImgFormBtn = document.querySelector('#img-close');//кнопка закрытия формы просмотра изображения
-export const fullsizeImg = document.querySelector('.popup__fullsize-img');//полноразмерное изображение
-export const fullsizeImgCaption = document.querySelector('.popup__fullsize-img-caption');// подпись для полноразмерного изображения
-
 
 //"коробка" с карточками изначальными
 const initialCards = [
@@ -67,21 +62,12 @@ const initialCards = [
 ];
 
 
-//validationObj
- const validationObj = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  inputErrorSelector:'.popup__input-error',
-  submitButtonSelector: '.popup__save-button',
-  inactiveButtonClass: 'popup__save-button_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__input-error_hidden'
-}
 
-const formLifestyleValidation = new FormValidator(validationObj, profileForm);
+
+const formLifestyleValidation = new FormValidator(formConfig, profileForm);
 formLifestyleValidation.enableFormValidation();
 
-const formAddPlaceValidation = new FormValidator(validationObj,placeForm);
+const formAddPlaceValidation = new FormValidator(formConfig,placeForm);
 formAddPlaceValidation.enableFormValidation();
 
 //close popup func by Esc-button
@@ -105,34 +91,12 @@ function setEscButtonHandler (evt){
   };
 };
 
-//функция изменения видимости форм
-function togglePopupVisibility(popupElement){
-  popupElement.classList.toggle('popup_hidden');
-}
-
-// очищение поля ошибок, в случае закрытия окна
-function setInputsErrorClear(form, popupCharObj ){
-  Array.from(form.querySelectorAll(popupCharObj .inputErrorSelector)).forEach(element =>{
-    element.classList.add(popupCharObj.errorClass);
-  });
-};
 
 //открытие окна
-export function openPopup (popupElement) {
-  togglePopupVisibility(popupElement);
-  document.addEventListener('keyup',setEscButtonHandler);
-  document.addEventListener('mousedown',closePopupOverlayClick);
-  if(popupElement.id != 'img-fullsize'){
-    setInputsErrorClear(popupElement, validationObj);//validationObj
-  };
-};
+import {openPopup} from './utils.js';
 
 //закрытие окна
-function closePopup (popupElement) {
-  document.removeEventListener('keyup', setEscButtonHandler);
-  document.removeEventListener('mousedown',closePopupOverlayClick);
-  togglePopupVisibility(popupElement);
-};
+import {closePopup} from './utils.js';
 
 //подготовка к открытию формы редактирования профиля
 function setOpenProfileHandler(){
@@ -148,12 +112,12 @@ function setOpenPlaceHandler(){
   openPopup(placeForm);
 }
 
-//функция закрытия попапа по клику на оверлей
-function closePopupOverlayClick (evt){
-  if(evt.target.classList.contains('popup')){
-    closePopup(evt.target);
-  }
-}
+// //функция закрытия попапа по клику на оверлей
+// function closePopupOverlayClick (evt){
+//   if(evt.target.classList.contains('popup')){
+//     closePopup(evt.target);
+//   }
+// }
 
 initialCards.forEach((item)=>{
   const card = new Card(item, '#element-template');
