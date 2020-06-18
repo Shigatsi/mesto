@@ -26,10 +26,10 @@ const inputLink = document.querySelector('#popup_link');//ввод ссылки 
 
 
 const formLifestyleValidation = new FormValidator(formConfig, profileForm);
-formLifestyleValidation.enableFormValidation();
+formLifestyleValidation.enableValidation();
 
 const formAddPlaceValidation = new FormValidator(formConfig,placeForm);
-formAddPlaceValidation.enableFormValidation();
+formAddPlaceValidation.enableValidation();
 
 //открытие окна
 import {openPopup} from './utils.js';

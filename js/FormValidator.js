@@ -80,7 +80,7 @@ export class FormValidator {
   }
 
   //публичный метод: включает валидацию формы
-  enableFormValidation() {
+  enableValidation() {
     this._setEventListeners(this._formElement, this._formConfig);
   }
 
