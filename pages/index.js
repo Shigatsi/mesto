@@ -1,26 +1,17 @@
 
-import {FormValidator} from './FormValidator.js';
-import Card from './card.js';
-import {imgForm, formConfig}  from './utils.js';
-import {initialCards} from './initialCards.js';
+import {FormValidator} from '../components/FormValidator.js';
+import Card from '../components/Card.js';
+import {
+  cardListSelector,
+  elemSection,
+  initialCards,
+  imgForm,
+  formConfig,
+  profileForm,
+  placeForm,
+}  from '../utils/constants.js';
+import Section from '../components/Section.js'
 
-const elemSection = document.querySelector('.elements');//сюда будут добавляться карточки
-const profileForm = document.querySelector('#edit-profile');//форма редактирования профиля
-const editButton = document.querySelector('.profile__edit-button');//кнопка редактирования профиля
-const closeProfileFormBtn = document.querySelector('#profile-close');//кнопка закрытия формы ред профиля
-
-const closeImgFormBtn = document.querySelector('#img-close');//кнопка закрытия формы просмотра изображения
-const placeForm = document.querySelector('#edit-place');//форма добавления места
-const addCardButton = document.querySelector('.profile__add-button');//кнопка добавления нового места
-const closePlaceFormBtn = document.querySelector('#place-close');//кнопка закрытия формы добавления места
-
-
-const profileName = document.querySelector('.profile__name');//имя профиля
-const profileLifestyle = document.querySelector('.profile__lifestyle');//профессия профиля
-const inputName = document.getElementById('popup_name');//ввод имени профиля
-const inputLifestyle = document.getElementById('popup_lifestyle');// ввод професси в профиле
-const inputPlace = document.querySelector('#popup_place');//ввод названия места
-const inputLink = document.querySelector('#popup_link');//ввод ссылки на фото места
 
 
 
@@ -32,10 +23,10 @@ const formAddPlaceValidation = new FormValidator(formConfig,placeForm);
 formAddPlaceValidation.enableValidation();
 
 //открытие окна
-import {openPopup} from './utils.js';
+import {openPopup} from '../utils/utils.js';
 
 //закрытие окна
-import {closePopup} from './utils.js';
+import {closePopup} from '../utils/utils.js';
 
 //подготовка к открытию формы редактирования профиля
 function hendleOpenProfiler(){
@@ -52,12 +43,28 @@ function handleOpenPlace(){
 }
 
 //рисуем массив начальных карточек
-initialCards.forEach((item)=>{
-  const card = new Card(item, '#element-template');
-  const cardElement = card.generateCard();
 
-  elemSection.append(cardElement);
-})
+const cardList = new Section ({
+  items: initialCards,
+  renderer: (item) => {
+    const card = new Card(item, '#element-template');
+    const cardElement = card.generateCard();
+    cardList.addItem(cardElement);
+    },
+  },
+  cardListSelector
+);
+
+cardList.renderItems();
+
+
+// //рисуем массив начальных карточек
+// initialCards.forEach((item)=>{
+//   const card = new Card(item, '#element-template');
+//   const cardElement = card.generateCard();
+
+//   elemSection.append(cardElement);
+// })
 
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет

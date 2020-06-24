@@ -1,21 +1,4 @@
 
-export const imgForm = document.querySelector('#img-fullsize');//форма просмотра полноразмерного изображения
-
-export const fullsizeImg = document.querySelector('.popup__fullsize-img');//полноразмерное изображение
-export const fullsizeImgCaption = document.querySelector('.popup__fullsize-img-caption');// подпись для полноразмерного изображения
-//create forms massive
-export const popupSection = Array.from(document.querySelectorAll('.popup'));//секция с формами
-
-//объект настроек с селекторами и классами формы
-export const formConfig = {
- formSelector: '.popup__form',
- inputSelector: '.popup__input',
- inputErrorSelector:'.popup__input-error',
- submitButtonSelector: '.popup__save-button',
- inactiveButtonClass: 'popup__save-button_disabled',
- inputErrorClass: 'popup__input_type_error',
- errorClass: 'popup__input-error_hidden'
-}
 
 // очищение поля ошибок, в случае закрытия окна
 function setInputsErrorClear(form, popupCharObj ){

@@ -1,4 +1,9 @@
-import {fullsizeImg, fullsizeImgCaption, openPopup, imgForm } from './utils.js';
+import {
+  fullsizeImg,
+  fullsizeImgCaption,
+  imgForm } from '../utils/constants.js';
+
+import {  openPopup } from '../utils/utils.js';
 
 export default class Card{
   constructor(data, cardSelector){
