@@ -9,6 +9,13 @@ import {
   formConfig,
   profileForm,
   placeForm,
+  editButton,
+  addCardButton,
+  closeProfileFormBtn,
+  closePlaceFormBtn,
+  closeImgFormBtn,
+  inputPlace,
+  inputLink
 }  from '../utils/constants.js';
 import Section from '../components/Section.js'
 
