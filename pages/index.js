@@ -8,8 +8,8 @@ import {
   initialCards,
   imgForm,
   formConfig,
-  profileForm,
   placeForm,
+  profileForm,
   editButton,
   addCardButton,
   closeProfileFormBtn,
@@ -19,6 +19,7 @@ import {
   inputLink
 }  from '../utils/constants.js';
 import Section from '../components/Section.js'
+import PopupWithForm from '../components/PopupWithForm.js';
 
 
 
@@ -50,7 +51,7 @@ function handleOpenPlace(){
   openPopup(placeForm);
 }
 
-//рисуем массив начальных карточек
+//создаем массив начальных карточек
 const cardList = new Section ({
   items: initialCards,
   renderer: (item) => {
@@ -66,7 +67,7 @@ const cardList = new Section ({
   },
   cardListSelector
 );
-
+//рисуем массив начальных карточек
 cardList.renderItems();
 
 
@@ -74,6 +75,18 @@ cardList.renderItems();
 const fullSizeImg = new PopupWithImage ('#img-fullsize');
 console.log(fullSizeImg);
 fullSizeImg.setEventListeners();
+
+//эксземпляры PopupWithForm
+//форма добавления места
+const placeFormAdd = new PopupWithForm({
+  popupSelector:'#edit-place',
+  handleFormSubmit:(popupData)=>{
+    cardList.renderItems([{ name: popupData.place, link: popupData.url }])
+  }
+});
+placeFormAdd.setEventListeners();
+
+
 
 // //рисуем массив начальных карточек
 // initialCards.forEach((item)=>{
@@ -85,17 +98,17 @@ fullSizeImg.setEventListeners();
 
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
-function formProfileSubmitHandler (evt) {
-  evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
-                        // Так мы можем определить свою логику отправки.
-                        // О том, как это делать, расскажем позже.
-  // Получите значение полей из свойства value
-  // Выберите элементы, куда должны быть вставлены значения полей
-  // Вставьте новые значения с помощью textContent
-  profileName.textContent = inputName.value;
-  profileLifestyle.textContent = inputLifestyle.value;
-  closePopup(profileForm);
-};
+// function formProfileSubmitHandler (evt) {
+//   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
+//                         // Так мы можем определить свою логику отправки.
+//                         // О том, как это делать, расскажем позже.
+//   // Получите значение полей из свойства value
+//   // Выберите элементы, куда должны быть вставлены значения полей
+//   // Вставьте новые значения с помощью textContent
+//   profileName.textContent = inputName.value;
+//   profileLifestyle.textContent = inputLifestyle.value;
+//   closePopup(profileForm);
+// };
 
 //обработчик события, добавляем новые карточки it's a life!!!!!!
 function formPlaceSubmitHandler (evt) {
@@ -108,31 +121,31 @@ function formPlaceSubmitHandler (evt) {
     closePopup(placeForm);
 };
 
-//открытие формы "Редактировать профиль"
-editButton.addEventListener('click', hendleOpenProfiler);
+// //открытие формы "Редактировать профиль"
+// editButton.addEventListener('click', hendleOpenProfiler);
 
-//открытие формы "Новое место"
-addCardButton.addEventListener('click', handleOpenPlace);
+// //открытие формы "Новое место"
+addCardButton.addEventListener('click', () => placeFormAdd.openPopup());
 
-//закрытие формы "Редактировать профиль"
-closeProfileFormBtn.addEventListener('click',() => {
-  closePopup(profileForm);
-});
+// //закрытие формы "Редактировать профиль"
+// closeProfileFormBtn.addEventListener('click',() => {
+//   closePopup(profileForm);
+// });
 
-//закрытие формы "Новое место"
-closePlaceFormBtn.addEventListener('click',() =>{
-  closePopup(placeForm);
+// //закрытие формы "Новое место"
+// closePlaceFormBtn.addEventListener('click',() =>{
+//   closePopup(placeForm);
 
-});
+// });
 
 // //закрытие формы просмотра изображения
 // closeImgFormBtn.addEventListener('click', ()=> {
 //   closePopup(imgForm);
 // });
 
-//добавление карточки
-placeForm.addEventListener('submit',formPlaceSubmitHandler);
+// //добавление карточки
+// placeForm.addEventListener('submit',formPlaceSubmitHandler);
 
 
-//редактирование профиля
-profileForm.addEventListener('submit', formProfileSubmitHandler);
+// //редактирование профиля
+// profileForm.addEventListener('submit', formProfileSubmitHandler);

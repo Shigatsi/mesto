@@ -4,10 +4,41 @@ import Popup from './Popup.js';
 
 export default class PopupWithForm extends Popup{
   constructor({popupSelector, handleFormSubmit}){
-    //приватный метод: собирает данные всех полей формы
-    _getInputValues (){
-
-    }
+    super(popupSelector),
+    this._popupElement = document.querySelector(popupSelector);
+    this._handleFormSubmit = handleFormSubmit;//CALLBACK
   }
 
+    //приватный метод: собирает данные всех полей формы
+    _getInputValues (){
+      // достаём все элементы полей
+      this._inputList = this._element.querySelectorAll('.popup__input');
+      // создаём пустой объект
+      this._formValues = {};
+      // добавляем в этот объект значения всех полей
+      this._inputList.forEach(input => {
+        this._formValues[input.name] = input.value;
+      });
+      // возвращаем объект значений
+      return this._formValues;
+    }
+
+    //приватный метод: установка слушателя
+    _setEventListeners() {
+      super.setEventListeners();
+      this._popupElement.addEventListener('submit', (evt) => {
+        // Эта строчка отменяет стандартную отправку формы.
+        evt.preventDefault();
+        // добавим вызов функции _handleFormSubmit
+       // передадим ей объект — результат работы _getInputValues
+        this._handleFormSubmit(this._getInputValues());
+        super.closePopup()
+      });
+    }
+ //публичный метод:перезаписываем родительский метод закрытия окна
+    closePopup(){
+      super.closePopup();
+      this._popupElement.querySelector('.popup__form').reset()
+      console.log(this._popupElement.querySelector('.popup__form'));
+    }
 }
