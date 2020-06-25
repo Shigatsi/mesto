@@ -29,11 +29,11 @@ formLifestyleValidation.enableValidation();
 const formAddPlaceValidation = new FormValidator(formConfig,placeForm);
 formAddPlaceValidation.enableValidation();
 
-//открытие окна
-import {openPopup} from '../utils/utils.js';
+// //открытие окна
+// import {openPopup} from '../utils/utils.js';
 
-//закрытие окна
-import {closePopup} from '../utils/utils.js';
+// //закрытие окна
+// import {closePopup} from '../utils/utils.js';
 
 //подготовка к открытию формы редактирования профиля
 function hendleOpenProfiler(){
