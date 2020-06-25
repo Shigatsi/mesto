@@ -80,8 +80,15 @@ fullSizeImg.setEventListeners();
 //форма добавления места
 const placeFormAdd = new PopupWithForm({
   popupSelector:'#edit-place',
-  handleFormSubmit:(popupData)=>{
-    cardList.renderItems([{ name: popupData.place, link: popupData.url }])
+  handleFormSubmit:(item)=>{
+  const userCardard = new Card({
+    data:{ name: inputPlace.value, link: inputLink.value, alt: inputPlace.value},
+    cardSelector:'#element-template',
+    handleCardClick:(popupData)=>{
+      fullSizeImg.openPopup(popupData);
+    }});
+    const cardElement = userCardard.generateCard();
+    cardList.addItem(cardElement);
   }
 });
 placeFormAdd.setEventListeners();
@@ -110,16 +117,16 @@ placeFormAdd.setEventListeners();
 //   closePopup(profileForm);
 // };
 
-//обработчик события, добавляем новые карточки it's a life!!!!!!
-function formPlaceSubmitHandler (evt) {
-  evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
-    const userCard = new Card ({name: inputPlace.value, link: inputLink.value, alt: inputPlace.value}, '#element-template')
-    const cardElement = userCard.generateCard();
-    elemSection.prepend(cardElement);
-    inputPlace.value = '';
-    inputLink.value = '';
-    closePopup(placeForm);
-};
+// //обработчик события, добавляем новые карточки it's a life!!!!!!
+// function formPlaceSubmitHandler (evt) {
+//   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
+//     const userCard = new Card ({name: inputPlace.value, link: inputLink.value, alt: inputPlace.value}, '#element-template')
+//     const cardElement = userCard.generateCard();
+//     elemSection.prepend(cardElement);
+//     inputPlace.value = '';
+//     inputLink.value = '';
+//     closePopup(placeForm);
+// };
 
 // //открытие формы "Редактировать профиль"
 // editButton.addEventListener('click', hendleOpenProfiler);

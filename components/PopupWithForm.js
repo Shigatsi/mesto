@@ -12,7 +12,7 @@ export default class PopupWithForm extends Popup{
     //приватный метод: собирает данные всех полей формы
     _getInputValues (){
       // достаём все элементы полей
-      this._inputList = this._element.querySelectorAll('.popup__input');
+      this._inputList = this._popupElement.querySelectorAll('.popup__input');
       // создаём пустой объект
       this._formValues = {};
       // добавляем в этот объект значения всех полей
@@ -24,9 +24,9 @@ export default class PopupWithForm extends Popup{
     }
 
     //приватный метод: установка слушателя
-    _setEventListeners() {
+    setEventListeners() {
       super.setEventListeners();
-      this._popupElement.addEventListener('submit', (evt) => {
+      this._popupElement.querySelector('.popup__form').addEventListener('submit', (evt) => {
         // Эта строчка отменяет стандартную отправку формы.
         evt.preventDefault();
         // добавим вызов функции _handleFormSubmit
