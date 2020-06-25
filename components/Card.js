@@ -6,11 +6,12 @@
 // import {  openPopup } from '../utils/utils.js';
 
 export default class Card{
-  constructor(data, cardSelector){
+  constructor({data, cardSelector, handleCardClick}){
     this._name = data.name;
     this._alt = data.alt;
     this._link = data.link;
     this._cardSelector = cardSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate(){
@@ -48,7 +49,8 @@ export default class Card{
     //кнопка корзина: удоление карточки
     this._element.querySelector('.elements__rbin-button').addEventListener('click', ()=>{this._deletButtonHandler()});
     //кнопка-изображение: для открытия формы просмотра фото
-    this._element.querySelector('.elements__image').addEventListener('click',()=>{this._imageFullsizeHandler()});
+    this._element.querySelector('.elements__image').addEventListener('click',()=>{this._handleCardClick(this._element.querySelector('.elements__image'))});
+    //this._element.querySelector('.elements__image')
   }
 
    //публичный метод создание карточки

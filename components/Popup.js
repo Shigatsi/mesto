@@ -2,7 +2,8 @@
 
 export default class Popup {
   constructor (popupSelector) {
-    this._popupElement = popupSelector;
+    this._popupElement =  document.querySelector(popupSelector);
+    this._popupCloseBtn = this._popupElement.querySelector('.popup__close-button');
   }
 
   //публичный метод: открытие окна
@@ -16,30 +17,27 @@ export default class Popup {
   }
 
   //приватный метод: закрытие попапа клавишей Esc
-  _handleEscClose() {
+  _handleEscClose(evt) {
     if(evt.key==='Escape') {
-      this._popupElement.classList.add('popup_hidden');
+      this.closePopup();
     }
   }
   //приватный метод: закрытие попапа по клику на оверлей
   _handleOverlayClose(evt){
     if(evt.target.classList.contains('popup')){
-      closePopup(evt.target);
+      this.closePopup();
     };
   };
 
   //публичный метод: добавляет слушатели
   setEventListeners() {
-    this._popupCloseBtn = this._popupElement
-    .querySelector('.popup')
-    .querySelector('.popup__close-button');
     //слушатель клика по иконке закрытия попапа
     this._popupCloseBtn.addEventListener('click', () =>{
-      this.close()
+      this.closePopup()
     })
     //слушатель нажатия клавиши Esc
-    document.addEventListener('keyup', () => {
-      this._handleEscClose()
+    document.addEventListener('keyup', (evt) => {
+      this._handleEscClose(evt)
     })
 
     //слушатель клика на оверлей

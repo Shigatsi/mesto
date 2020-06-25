@@ -1,6 +1,7 @@
 
 import {FormValidator} from '../components/FormValidator.js';
 import Card from '../components/Card.js';
+import PopupWithImage from '../components/PopupWithImage.js';
 import {
   cardListSelector,
   elemSection,
@@ -50,11 +51,15 @@ function handleOpenPlace(){
 }
 
 //рисуем массив начальных карточек
-
 const cardList = new Section ({
   items: initialCards,
   renderer: (item) => {
-    const card = new Card(item, '#element-template');
+    const card = new Card({
+      data:item,
+      cardSelector:'#element-template',
+      handleCardClick:(popupData)=>{
+        fullSizeImg.openPopup(popupData);
+      }});
     const cardElement = card.generateCard();
     cardList.addItem(cardElement);
     },
@@ -64,6 +69,11 @@ const cardList = new Section ({
 
 cardList.renderItems();
 
+
+//эксземпляр PopupWithImage
+const fullSizeImg = new PopupWithImage ('#img-fullsize');
+console.log(fullSizeImg);
+fullSizeImg.setEventListeners();
 
 // //рисуем массив начальных карточек
 // initialCards.forEach((item)=>{
@@ -115,10 +125,10 @@ closePlaceFormBtn.addEventListener('click',() =>{
 
 });
 
-//закрытие формы просмотра изображения
-closeImgFormBtn.addEventListener('click', ()=> {
-  closePopup(imgForm);
-});
+// //закрытие формы просмотра изображения
+// closeImgFormBtn.addEventListener('click', ()=> {
+//   closePopup(imgForm);
+// });
 
 //добавление карточки
 placeForm.addEventListener('submit',formPlaceSubmitHandler);
