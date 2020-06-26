@@ -89,6 +89,8 @@ const placeFormAdd = new PopupWithForm({
     }});
     const cardElement = userCardard.generateCard();
     cardList.addItem(cardElement);
+    inputPlace.value = '';
+    inputLink.value = '';
   }
 });
 placeFormAdd.setEventListeners();
