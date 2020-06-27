@@ -1,8 +1,7 @@
 import {
   inputName,
   inputLifestyle,
-  profileName,
-  profileLifestyle
+
 } from '../utils/constants.js';
 
 export default class UserInfo {

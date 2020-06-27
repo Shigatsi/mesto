@@ -47,7 +47,7 @@ const cardList = new Section ({
         fullSizeImg.openPopup(popupData);
       }});
     const cardElement = card.generateCard();
-    cardList.addItem(cardElement);
+    cardList.addItem(cardElement, true);
     },
   },
   cardListSelector
