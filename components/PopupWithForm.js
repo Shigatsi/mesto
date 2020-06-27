@@ -38,7 +38,6 @@ export default class PopupWithForm extends Popup{
  //публичный метод:перезаписываем родительский метод закрытия окна
     closePopup(){
       super.closePopup();
-      this._popupElement.querySelector('.popup__form').reset()
-      console.log(this._popupElement.querySelector('.popup__form'));
+      this._popupElement.querySelector('.popup__form').reset();
     }
 }

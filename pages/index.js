@@ -28,33 +28,13 @@ import UserInfo from '../components/UserInfo.js';
 
 
 
-
-
 const formLifestyleValidation = new FormValidator(formConfig, profileForm);
 formLifestyleValidation.enableValidation();
 
 const formAddPlaceValidation = new FormValidator(formConfig,placeForm);
 formAddPlaceValidation.enableValidation();
 
-// //открытие окна
-// import {openPopup} from '../utils/utils.js';
 
-// //закрытие окна
-// import {closePopup} from '../utils/utils.js';
-
-//подготовка к открытию формы редактирования профиля
-function hendleOpenProfiler(){
-  inputName.value = profileName.textContent;
-  inputLifestyle.value=profileLifestyle.textContent;
-  openPopup(profileForm);
-}
-
-//подготовка к открытию формы добавления карточек
-function handleOpenPlace(){
-  inputPlace.value = '';
-  inputLink.value = '';
-  openPopup(placeForm);
-}
 
 //создаем массив начальных карточек
 const cardList = new Section ({
@@ -104,80 +84,27 @@ const userProfile = new UserInfo({
   userNameSelector:'.profile__name',
   userLifestyleSelector: '.profile__lifestyle'});
 
+
+
 //форма редактирования профиля
-
-
 const profileFormEdit = new PopupWithForm({
   popupSelector: '#edit-profile',
   handleFormSubmit:(profileData) => {
-    userProfile.getUserInfo();
-    profileName.textContent = inputName.value;
-    profileLifestyle.textContent = inputLifestyle.value;
-    userProfile.getUserInfo(profileData);
+    userProfile.setUserInfo(profileData);
   }
 });
-
 profileFormEdit.setEventListeners();
-// //рисуем массив начальных карточек
-// initialCards.forEach((item)=>{
-//   const card = new Card(item, '#element-template');
-//   const cardElement = card.generateCard();
-
-//   elemSection.append(cardElement);
-// })
-
-// Обработчик «отправки» формы, хотя пока
-// она никуда отправляться не будет
-// function formProfileSubmitHandler (evt) {
-//   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
-//                         // Так мы можем определить свою логику отправки.
-//                         // О том, как это делать, расскажем позже.
-//   // Получите значение полей из свойства value
-//   // Выберите элементы, куда должны быть вставлены значения полей
-//   // Вставьте новые значения с помощью textContent
-//   profileName.textContent = inputName.value;
-//   profileLifestyle.textContent = inputLifestyle.value;
-//   closePopup(profileForm);
-// };
-
-// //обработчик события, добавляем новые карточки it's a life!!!!!!
-// function formPlaceSubmitHandler (evt) {
-//   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
-//     const userCard = new Card ({name: inputPlace.value, link: inputLink.value, alt: inputPlace.value}, '#element-template')
-//     const cardElement = userCard.generateCard();
-//     elemSection.prepend(cardElement);
-//     inputPlace.value = '';
-//     inputLink.value = '';
-//     closePopup(placeForm);
-// };
 
 // //открытие формы "Редактировать профиль"
- editButton.addEventListener('click', () =>  profileFormEdit.openPopup());
+ editButton.addEventListener('click', () => {
+  const formValues  = userProfile.getUserInfo();
+  console.log(formValues);
+  inputName.value =  formValues.name;
+  inputLifestyle.value =  formValues.lifestyle;
+  profileFormEdit.openPopup()
+});
 
 // //открытие формы "Новое место"
 addCardButton.addEventListener('click', () =>{
   placeFormAdd.openPopup();
 });
-
-// //закрытие формы "Редактировать профиль"
-// closeProfileFormBtn.addEventListener('click',() => {
-//   closePopup(profileForm);
-// });
-
-// //закрытие формы "Новое место"
-// closePlaceFormBtn.addEventListener('click',() =>{
-//   closePopup(placeForm);
-
-// });
-
-// //закрытие формы просмотра изображения
-// closeImgFormBtn.addEventListener('click', ()=> {
-//   closePopup(imgForm);
-// });
-
-// //добавление карточки
-// placeForm.addEventListener('submit',formPlaceSubmitHandler);
-
-
-// //редактирование профиля
-// profileForm.addEventListener('submit', formProfileSubmitHandler);
