@@ -3,7 +3,11 @@ import {FormValidator} from '../components/FormValidator.js';
 import Card from '../components/Card.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import {
+  profileName,
   cardListSelector,
+  inputName,
+  inputLifestyle,
+  profileLifestyle,
   elemSection,
   initialCards,
   imgForm,
@@ -20,6 +24,7 @@ import {
 }  from '../utils/constants.js';
 import Section from '../components/Section.js'
 import PopupWithForm from '../components/PopupWithForm.js';
+import UserInfo from '../components/UserInfo.js';
 
 
 
@@ -73,21 +78,20 @@ cardList.renderItems();
 
 //эксземпляр PopupWithImage
 const fullSizeImg = new PopupWithImage ('#img-fullsize');
-console.log(fullSizeImg);
 fullSizeImg.setEventListeners();
 
 //эксземпляры PopupWithForm
 //форма добавления места
 const placeFormAdd = new PopupWithForm({
   popupSelector:'#edit-place',
-  handleFormSubmit:(item)=>{
-  const userCardard = new Card({
+  handleFormSubmit:()=>{
+  const userCard = new Card({
     data:{ name: inputPlace.value, link: inputLink.value, alt: inputPlace.value},
     cardSelector:'#element-template',
     handleCardClick:(popupData)=>{
       fullSizeImg.openPopup(popupData);
     }});
-    const cardElement = userCardard.generateCard();
+    const cardElement = userCard.generateCard();
     cardList.addItem(cardElement);
     inputPlace.value = '';
     inputLink.value = '';
@@ -95,8 +99,25 @@ const placeFormAdd = new PopupWithForm({
 });
 placeFormAdd.setEventListeners();
 
+//эксземпляр UserInfo
+const userProfile = new UserInfo({
+  userNameSelector:'.profile__name',
+  userLifestyleSelector: '.profile__lifestyle'});
+
+//форма редактирования профиля
 
 
+const profileFormEdit = new PopupWithForm({
+  popupSelector: '#edit-profile',
+  handleFormSubmit:(profileData) => {
+    userProfile.getUserInfo();
+    profileName.textContent = inputName.value;
+    profileLifestyle.textContent = inputLifestyle.value;
+    userProfile.getUserInfo(profileData);
+  }
+});
+
+profileFormEdit.setEventListeners();
 // //рисуем массив начальных карточек
 // initialCards.forEach((item)=>{
 //   const card = new Card(item, '#element-template');
@@ -131,10 +152,12 @@ placeFormAdd.setEventListeners();
 // };
 
 // //открытие формы "Редактировать профиль"
-// editButton.addEventListener('click', hendleOpenProfiler);
+ editButton.addEventListener('click', () =>  profileFormEdit.openPopup());
 
 // //открытие формы "Новое место"
-addCardButton.addEventListener('click', () => placeFormAdd.openPopup());
+addCardButton.addEventListener('click', () =>{
+  placeFormAdd.openPopup();
+});
 
 // //закрытие формы "Редактировать профиль"
 // closeProfileFormBtn.addEventListener('click',() => {

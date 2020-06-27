@@ -1,19 +1,27 @@
+import {
+  inputName,
+  inputLifestyle
+} from '../utils/constants.js';
+
 export default class UserInfo {
-  constructor (userNameSelector, userLifestyleSelector) {
+  constructor ({userNameSelector, userLifestyleSelector}) {
     this._userName = document.querySelector(userNameSelector);
-    this._userLifestyle = document.querySelector(userLifestyleSlector);
+    console.log( this._userName);
+    this._userLifestyle = document.querySelector(userLifestyleSelector);
   }
 
   //публичный метод: возвращает объект с данными пользователя
   getUserInfo() {
-    const userName = this._userName.textContent;
-    const userLifestyle = this._userLifestyle.textContent;
-    return [userName, userLifestyle];
+    this._formValues = {};
+    this._formValues[inputName.name] =  this._userName.textContent;
+    this._formValues[inputLifestyle.name] = this._userLifestyle.textContent;
+    console.log(this._formValues);
+    return this._formValues;
   }
 
   //публичный метод: принимает новые данные пользователя и добавляет их на страницу
-  setUserInfo() {
-    this._userName.textContent = userName;
-    this._userLifestyle.textContent = userLifestyle;
+  setUserInfo(profileData) {
+    this._userName.textContent = profileData.name;
+    this._userLifestyle.textContent = profileData.name;
   }
 }

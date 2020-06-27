@@ -1,11 +1,11 @@
 import {formConfig} from './constants.js';
 
-// очищение поля ошибок, в случае закрытия окна
-function setInputsErrorClear(form, popupCharObj ){
-  Array.from(form.querySelectorAll(popupCharObj .inputErrorSelector)).forEach(element =>{
-    element.classList.add(popupCharObj.errorClass);
-  });
-};
+// // очищение поля ошибок, в случае закрытия окна
+// function setInputsErrorClear(form, popupCharObj ){
+//   Array.from(form.querySelectorAll(popupCharObj .inputErrorSelector)).forEach(element =>{
+//     element.classList.add(popupCharObj.errorClass);
+//   });
+// };
 
 // //открытие окна
 // export function openPopup (popupElement) {
