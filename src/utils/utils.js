@@ -1,4 +1,4 @@
-import {formConfig} from './constants.js';
+
 
 // // очищение поля ошибок, в случае закрытия окна
 // function setInputsErrorClear(form, popupCharObj ){

@@ -1,24 +1,20 @@
+//импортируем стили
+import './index.css';
 
+//импортируем модули и константы
 import {FormValidator} from '../components/FormValidator.js';
 import Card from '../components/Card.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import {
-  profileName,
   cardListSelector,
   inputName,
   inputLifestyle,
-  profileLifestyle,
-  elemSection,
   initialCards,
-  imgForm,
   formConfig,
   placeForm,
   profileForm,
   editButton,
   addCardButton,
-  closeProfileFormBtn,
-  closePlaceFormBtn,
-  closeImgFormBtn,
   inputPlace,
   inputLink
 }  from '../utils/constants.js';
