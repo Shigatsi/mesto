@@ -17,7 +17,7 @@ export default class Popup {
     //слушатель клика на оверлей
     document.addEventListener('mousedown', (evt) => {
       this._handleOverlayClose(evt);
-    }, true)
+    }, true); //once:true - слушатель автоматически удаляется при вызове
   }
 
  //публичный метод: закрытие окна
@@ -47,14 +47,5 @@ export default class Popup {
     this._popupCloseBtn.addEventListener('click', () =>{
       this.closePopup()
     })
-    // //слушатель нажатия клавиши Esc
-    // document.addEventListener('keyup', (evt) => {
-    //   this._handleEscClose(evt)
-    // })
-
-    // //слушатель клика на оверлей
-    // document.addEventListener('click', (evt) => {
-    //   this._handleOverlayClose(evt);
-    // })
   }
 }
