@@ -1,5 +1,7 @@
-// класс Popup, отвечает за открытие и закрытие попапа
+import {setInputsErrorClear} from '../utils/utils.js'
+import {formConfig} from '../utils/constants.js'
 
+// класс Popup, отвечает за открытие и закрытие попапа
 export default class Popup {
   constructor (popupSelector) {
     this._popupElement =  document.querySelector(popupSelector);
@@ -18,6 +20,7 @@ export default class Popup {
     document.addEventListener('mousedown', (evt) => {
       this._handleOverlayClose(evt);
     }, true); //once:true - слушатель автоматически удаляется при вызове
+    setInputsErrorClear(this._popupElement, formConfig)
   }
 
  //публичный метод: закрытие окна
