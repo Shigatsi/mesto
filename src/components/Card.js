@@ -23,17 +23,11 @@ export default class Card{
     this._element.querySelector('.elements__like-button').classList.toggle('elements__like-button_active');
   }
 
-  //приватный метод fullsize
-  _imageFullsizeHandler(){
-    const elemImg = this._element.querySelector('.elements__image');
-    fullsizeImg.src = elemImg.src;
-    fullsizeImgCaption.textContent = elemImg.alt;
-    openPopup(imgForm);
-  }
-
   //приватный метод delete
-  _deletButtonHandler(){
-    this._element.querySelector('.elements__rbin-button').closest('.elements__item').remove();
+  _deleteButtonHandler(){
+    this._element.remove();
+    // Зануляем ссылку на элемент, чтобы сборщик мусора начал работать.
+    this._element = null;
   }
 
   //приватный метод установка слушателей
@@ -41,7 +35,7 @@ export default class Card{
     // кнопка лайк: тоггл класса
     this._element.querySelector('.elements__like-button').addEventListener('click', ()=>{this._toggleLikeActive()});
     //кнопка корзина: удоление карточки
-    this._element.querySelector('.elements__rbin-button').addEventListener('click', ()=>{this._deletButtonHandler()});
+    this._element.querySelector('.elements__rbin-button').addEventListener('click', ()=>{this._deleteButtonHandler()});
     //кнопка-изображение: для открытия формы просмотра фото
     this._element.querySelector('.elements__image').addEventListener('click',()=>{this._handleCardClick(this._element.querySelector('.elements__image'))});
     //this._element.querySelector('.elements__image')
