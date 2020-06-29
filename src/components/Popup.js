@@ -6,14 +6,26 @@ export default class Popup {
     this._popupCloseBtn = this._popupElement.querySelector('.popup__close-button');
   }
 
+
   //публичный метод: открытие окна
   openPopup() {
     this._popupElement.classList.remove('popup_hidden');
+    //добавляем слушатель нажатия клавиши Esc
+     document.addEventListener('keyup', (evt) => {
+       this._handleEscClose(evt)
+      },true);//once:true - слушатель автоматически удаляется при вызове
+    //слушатель клика на оверлей
+    document.addEventListener('mousedown', (evt) => {
+      this._handleOverlayClose(evt);
+    }, true)
   }
 
  //публичный метод: закрытие окна
  closePopup() {
   this._popupElement.classList.add('popup_hidden');
+  document.removeEventListener('mousedown', (evt) => {
+    this._handleOverlayClose(evt);
+    })
   }
 
   //приватный метод: закрытие попапа клавишей Esc
@@ -35,14 +47,14 @@ export default class Popup {
     this._popupCloseBtn.addEventListener('click', () =>{
       this.closePopup()
     })
-    //слушатель нажатия клавиши Esc
-    document.addEventListener('keyup', (evt) => {
-      this._handleEscClose(evt)
-    })
+    // //слушатель нажатия клавиши Esc
+    // document.addEventListener('keyup', (evt) => {
+    //   this._handleEscClose(evt)
+    // })
 
-    //слушатель клика на оверлей
-    document.addEventListener('click', (evt) => {
-      this._handleOverlayClose(evt);
-    })
+    // //слушатель клика на оверлей
+    // document.addEventListener('click', (evt) => {
+    //   this._handleOverlayClose(evt);
+    // })
   }
 }
