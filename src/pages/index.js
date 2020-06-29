@@ -94,7 +94,6 @@ profileFormEdit.setEventListeners();
 // //открытие формы "Редактировать профиль"
  editButton.addEventListener('click', () => {
   const formValues  = userProfile.getUserInfo();
-  console.log(formValues);
   inputName.value =  formValues.name;
   inputLifestyle.value =  formValues.lifestyle;
   profileFormEdit.openPopup()
