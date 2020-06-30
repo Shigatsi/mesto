@@ -6,7 +6,6 @@ export default class PopupWithImage extends Popup{
   constructor (popupSelector) {
     super (popupSelector);
     this._popupElement = document.querySelector(popupSelector);
-    console.log(this._popupElement);
   }
   //публичный метод:перезаписываем родительский метод открытия окна
   openPopup(cardElementImage) {
