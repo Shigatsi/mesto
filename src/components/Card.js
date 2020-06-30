@@ -33,11 +33,13 @@ export default class Card{
   //приватный метод установка слушателей
   _setEventListeners(){
     // кнопка лайк: тоггл класса
-    this._element.querySelector('.elements__like-button').addEventListener('click', ()=>{this._toggleLikeActive()});
+    this._element.querySelector('.elements__like-button').addEventListener('click', () => {this._toggleLikeActive()});
     //кнопка корзина: удоление карточки
-    this._element.querySelector('.elements__rbin-button').addEventListener('click', ()=>{this._deleteButtonHandler()});
+    this._element.querySelector('.elements__rbin-button').addEventListener('click', () => {this._deleteButtonHandler()});
     //кнопка-изображение: для открытия формы просмотра фото
-    this._element.querySelector('.elements__image').addEventListener('click',()=>{this._handleCardClick(this._element.querySelector('.elements__image'))});
+    this._element.querySelector('.elements__image').addEventListener('click',() => {
+      this._handleCardClick(this._element.querySelector('.elements__image'))
+    });
     //this._element.querySelector('.elements__image')
   }
 

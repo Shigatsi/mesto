@@ -1,12 +1,19 @@
 //класс PopupWithForm
 
 import Popup from './Popup.js';
+import { formConfig } from '../utils/constants.js';
 
 export default class PopupWithForm extends Popup{
   constructor({popupSelector, handleFormSubmit}){
     super(popupSelector),
     this._popupElement = document.querySelector(popupSelector);
     this._handleFormSubmit = handleFormSubmit;//CALLBACK
+    this._errorInput = this._popupElement.querySelectorAll(formConfig.inputErrorSelector);
+    this._inputsErrorClear = (popupCharObj) => {
+      this._errorInput.forEach(element =>{
+        element.classList.add(popupCharObj.errorClass);
+      });
+    }
   }
 
     //приватный метод: собирает данные всех полей формы
@@ -39,5 +46,6 @@ export default class PopupWithForm extends Popup{
     closePopup(){
       super.closePopup();
       this._popupElement.querySelector('.popup__form').reset();
+      this._inputsErrorClear(formConfig);
     }
 }

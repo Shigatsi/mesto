@@ -1,11 +1,20 @@
-import {setInputsErrorClear} from '../utils/utils.js'
-import {formConfig} from '../utils/constants.js'
-
 // класс Popup, отвечает за открытие и закрытие попапа
 export default class Popup {
   constructor (popupSelector) {
     this._popupElement =  document.querySelector(popupSelector);
     this._popupCloseBtn = this._popupElement.querySelector('.popup__close-button');
+    //приватный метод: закрытие попапа клавишей Esc
+    this._handleEscClose = (evt) => {
+      if(evt.key==='Escape') {
+        this.closePopup();
+      }
+    };
+    //приватный метод: закрытие попапа по клику на оверлей
+    this._handleOverlayClose = (evt) => {
+      if(evt.target.classList.contains('popup')){
+        this.closePopup();
+      }
+    };
   }
 
 
@@ -13,36 +22,20 @@ export default class Popup {
   openPopup() {
     this._popupElement.classList.remove('popup_hidden');
     //добавляем слушатель нажатия клавиши Esc
-     document.addEventListener('keyup', (evt) => {
-       this._handleEscClose(evt)
-      },true);//once:true - слушатель автоматически удаляется при вызове
-    //слушатель клика на оверлей
-    document.addEventListener('mousedown', (evt) => {
-      this._handleOverlayClose(evt);
-    }, true); //once:true - слушатель автоматически удаляется при вызове
-    setInputsErrorClear(this._popupElement, formConfig)
+    document.addEventListener('keyup', this._handleEscClose);
+    //добавляем слушатель клика на оверлей
+    document.addEventListener('mousedown',this._handleOverlayClose);
   }
 
  //публичный метод: закрытие окна
  closePopup() {
   this._popupElement.classList.add('popup_hidden');
-  document.removeEventListener('mousedown', (evt) => {
-    this._handleOverlayClose(evt);
-    })
+  //удаляем слушатель нажатия клавиши Esc
+  document.removeEventListener('keyup', this._handleEscClose);
+  //удаляем слушатель клика на оверлей
+  document.removeEventListener('mousedown',this._handleOverlayClose);
   }
 
-  //приватный метод: закрытие попапа клавишей Esc
-  _handleEscClose(evt) {
-    if(evt.key==='Escape') {
-      this.closePopup();
-    }
-  }
-  //приватный метод: закрытие попапа по клику на оверлей
-  _handleOverlayClose(evt){
-    if(evt.target.classList.contains('popup')){
-      this.closePopup();
-    };
-  };
 
   //публичный метод: добавляет слушатели
   setEventListeners() {
