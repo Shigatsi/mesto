@@ -7,15 +7,6 @@ export default class Section {
     this._containerSelector = document.querySelector(containerSelector);
   }
 
-  // публичный метод: отрисовка всех элементов
-  // renderItems(items = false) {
-  //   if (items) {
-  //     items.forEach(item => this._renderer(item));
-  //   } else {
-  //     this._items.forEach(item => this._renderer(item));
-  //   }
-  // }
-
     renderItems() {
       this._items.forEach((item) =>{
         this._renderer(item);

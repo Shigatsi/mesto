@@ -21,7 +21,7 @@ import {
 import Section from '../components/Section.js'
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
-
+import Api from '../components/Api.js';
 
 
 const formLifestyleValidation = new FormValidator(formConfig, profileForm);
@@ -30,7 +30,21 @@ formLifestyleValidation.enableValidation();
 const formAddPlaceValidation = new FormValidator(formConfig,placeForm);
 formAddPlaceValidation.enableValidation();
 
+//экземпляр класса Api
+const api = new Api ({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-14',
+    headers: 'cf883479-ba69-4170-b793-165731887c32',
+})
 
+api.getUserData()
+.catch((err) => {
+  console.log(err); // выведем ошибку в консоль
+});
+
+api.getInitialCards()
+.catch((err) => {
+  console.log(err); // выведем ошибку в консоль
+});
 
 //создаем массив начальных карточек
 const cardList = new Section ({
