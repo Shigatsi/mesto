@@ -149,7 +149,10 @@ export default class Api {
       method: 'PATCH',
       headers: {
         authorization: this.headers,
-      }
+      },
+      body: JSON.stringify({
+        avatar: userAvatarUrl,
+      })
     })
     .then(res => {
       if (res.ok) {
