@@ -37,6 +37,11 @@ const api = new Api ({
 })
 
 api.getUserData()
+.then ((res/* { name, about } */) => {
+  // let lifestyle=about;
+   console.log(res);
+  userProfile.setUserInfo(res/* { name, lifestyle } */);
+})
 .catch((err) => {
   console.log(err); // выведем ошибку в консоль
 });
@@ -109,7 +114,7 @@ profileFormEdit.setEventListeners();
  editButton.addEventListener('click', () => {
   const formValues  = userProfile.getUserInfo();
   inputName.value =  formValues.name;
-  inputLifestyle.value =  formValues.lifestyle;
+  inputLifestyle.value =  formValues.about;//.lifestyle
   profileFormEdit.openPopup()
 });
 

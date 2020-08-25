@@ -5,9 +5,10 @@ import {
 } from '../utils/constants.js';
 
 export default class UserInfo {
-  constructor ({userNameSelector, userLifestyleSelector}) {
+  constructor ({userNameSelector, userLifestyleSelector, userAvatarSelector}) {
     this._userName = document.querySelector(userNameSelector);
     this._userLifestyle = document.querySelector(userLifestyleSelector);
+    this._userAvatar = document.querySelector(userAvatarSelector);
 
   }
 
@@ -22,6 +23,7 @@ export default class UserInfo {
   //публичный метод: принимает новые данные пользователя и добавляет их на страницу
   setUserInfo(popupData) {
     this._userName.textContent = popupData.name;
-    this._userLifestyle.textContent = popupData.lifestyle;
+    this._userLifestyle.textContent = popupData.about;//.lifestyle
+    // this._userAvatar.src = popupData.avatar;
   }
 }
