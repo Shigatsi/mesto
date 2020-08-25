@@ -23,7 +23,7 @@ export default class UserInfo {
   //публичный метод: принимает новые данные пользователя и добавляет их на страницу
   setUserInfo(popupData) {
     this._userName.textContent = popupData.name;
-    this._userLifestyle.textContent = popupData.about;//.lifestyle
+    this._userLifestyle.textContent = popupData.about;//.lifestyle - ето id Попапа!!!!!
     // this._userAvatar.src = popupData.avatar;
   }
 }
