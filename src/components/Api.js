@@ -49,7 +49,7 @@ export default class Api {
   }
 
   //публичный метод сохранения отредактированных данных профиля
-  patchUserInfo(/* аргумент такойже как в name  и about */) {
+  patchUserInfo(popupData) {
     return fetch(this.baseUrl + '/users/me', {
       method: 'PATCH',
       headers: {
@@ -57,8 +57,8 @@ export default class Api {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-      name: 'Marie Skłodowska Curie'/* Тут получаем из формы прописать в классе UseInfo, потом тут поменять!argument.Name */,
-      about:'Physicist and Chemist' /* Тут получаем из формы прописать в классе UseInfo, потом тут поменять! argument.Lifestyle */
+      name: popupData.name,
+      about: popupData.about
      })
     })
     .then(res => {

@@ -24,6 +24,6 @@ export default class UserInfo {
   setUserInfo(popupData) {
     this._userName.textContent = popupData.name;
     this._userLifestyle.textContent = popupData.about;//.lifestyle - ето id Попапа!!!!!
-    // this._userAvatar.src = popupData.avatar;
+    this._userAvatar.src = popupData.avatar;
   }
 }

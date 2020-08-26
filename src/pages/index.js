@@ -36,39 +36,40 @@ const api = new Api ({
     headers: 'cf883479-ba69-4170-b793-165731887c32',
 })
 
+//получаем данные профиля с сервера
 api.getUserData()
-.then ((res/* { name, about } */) => {
-  // let lifestyle=about;
-   console.log(res);
-  userProfile.setUserInfo(res/* { name, lifestyle } */);
+.then ((userData) => { // userData - это результат ответа с сервера
+  userProfile.setUserInfo(userData);
 })
 .catch((err) => {
   console.log(err); // выведем ошибку в консоль
 });
 
+//создаем массив начальных карточек
 api.getInitialCards()
+.then((initialCards)=> { //initialCards - это набор карточек с сервера
+  //создаем массив начальных карточек
+  const cardList = new Section ({
+    items: initialCards,
+    renderer: (item) => {
+      const card = new Card({
+        data:item,
+        cardSelector:'#element-template',
+        handleCardClick:(popupData)=>{
+          fullSizeImg.openPopup(popupData);
+        }});
+      const cardElement = card.generateCard();
+      cardList.addItem(cardElement, true);
+      },
+    },
+    cardListSelector
+  );
+  //рисуем массив начальных карточек
+cardList.renderItems();
+})
 .catch((err) => {
   console.log(err); // выведем ошибку в консоль
 });
-
-//создаем массив начальных карточек
-const cardList = new Section ({
-  items: initialCards,
-  renderer: (item) => {
-    const card = new Card({
-      data:item,
-      cardSelector:'#element-template',
-      handleCardClick:(popupData)=>{
-        fullSizeImg.openPopup(popupData);
-      }});
-    const cardElement = card.generateCard();
-    cardList.addItem(cardElement, true);
-    },
-  },
-  cardListSelector
-);
-//рисуем массив начальных карточек
-cardList.renderItems();
 
 
 //эксземпляр PopupWithImage
@@ -97,17 +98,25 @@ placeFormAdd.setEventListeners();
 //эксземпляр UserInfo
 const userProfile = new UserInfo({
   userNameSelector:'.profile__name',
-  userLifestyleSelector: '.profile__lifestyle'});
+  userLifestyleSelector: '.profile__lifestyle',
+  userAvatarSelector: '.profile__avatar'
+});
 
 
 
-//форма редактирования профиля
+// //форма редактирования профиля
 const profileFormEdit = new PopupWithForm({
   popupSelector: '#edit-profile',
   handleFormSubmit:(profileData) => {
-    userProfile.setUserInfo(profileData);
+    api.patchUserInfo(profileData)
+    .then((profileData)=> {
+      userProfile.setUserInfo(profileData);
+      console.log(profileData);
+    })
+    // userProfile.setUserInfo(profileData);
   }
 });
+
 profileFormEdit.setEventListeners();
 
 // //открытие формы "Редактировать профиль"
