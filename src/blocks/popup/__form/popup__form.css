@@ -6,6 +6,7 @@
   width: 430px;
   border-radius: 10px;
   position: relative;
+  align-self: start;
 }
 
 @media screen and (max-width: 540px){
