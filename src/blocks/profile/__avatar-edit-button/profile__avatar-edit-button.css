@@ -1,0 +1,18 @@
+.profile__avatar-edit-button{
+  background: no-repeat center url(../../../images/avatarEdit.svg);
+  width: 26px;
+  height: 26px;
+  position:fixed;
+  align-self: center;
+  margin-top: 5px;
+  border: none;
+  /* box-sizing: border-box; */
+}
+
+.profile__avatar-edit-button:focus{
+  outline: none;
+}
+
+.profile__avatar-edit-button:hover{
+  cursor: pointer;
+}

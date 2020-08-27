@@ -2,7 +2,6 @@
 <html lang="ru">
   <head>
     <meta charset="UTF-8">
-    <!-- <link rel="stylesheet" href="./pages/index.css"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="живописные места в России">
     <meta name="author" content="Евгения 'Shigatsi' Зубкова">
@@ -17,7 +16,12 @@
       <main class="content">
         <section class="profile">
           <div class="profile__data">
-            <img class="profile__avatar" src="./images/avatar.jpg" alt="фото Профиля"/>
+            <div class="profile__avatar-conteiner">
+              <img class="profile__avatar" src="./images/avatar.jpg" alt="фото Профиля"/>
+              <div class="profile__avatar-overlay">
+                <button class="profile__avatar-edit-button" type="button"></button>
+              </div>
+            </div>
               <div class="profile__info">
                 <p class="profile__name">Жак-Ив Кусто </p>
                 <p class="profile__lifestyle">Исследователь океана</p>
