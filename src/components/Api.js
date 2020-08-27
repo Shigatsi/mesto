@@ -1,13 +1,3 @@
-// //Запрос к серверу
-// fetch('https://mesto.nomoreparties.co/v1/cohort-14/cards', {
-//   headers: {
-//     authorization: ' cf883479-ba69-4170-b793-165731887c32'
-//   }
-// })
-//   .then(res => res.json())
-//   .then((result) => {
-//     console.log(result);
-//   });
 
 //конструктор API
 export default class Api {
@@ -72,7 +62,7 @@ export default class Api {
   }
 
   //публичный метод добавления новой карточки
-  postNewCadr (/* аргумент */) {
+  postNewCadr (popupData) {
    return fetch (this.baseUrl + '/cards', {
     method: 'POST',
     headers: {
@@ -80,8 +70,8 @@ export default class Api {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      name: 'Marie Skłodowska Curie'/* Тут получаем из формы прописать в классе UseInfo, потом тут поменять!argument.Name */,
-      link:'Physicist and Chemist' /* Тут получаем из формы прописать в классе UseInfo, потом тут поменять! argument.Link */
+      name: popupData.name/* Тут получаем из формы прописать в классе UseInfo, потом тут поменять!argument.Name */,
+      link:popupData.link /* Тут получаем из формы прописать в классе UseInfo, потом тут поменять! argument.Link */
       })
     })
     .then(res => {

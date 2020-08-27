@@ -50,7 +50,7 @@ export default class Card{
     this._element.querySelector('.elements__title').textContent =this._name;
     const cardElementImage = this._element.querySelector('.elements__image');
     cardElementImage.src=this._link;
-    cardElementImage.alt = this._alt;
+    cardElementImage.alt = this._name;
 
     return this._element;
   }
