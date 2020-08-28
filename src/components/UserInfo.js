@@ -9,7 +9,6 @@ export default class UserInfo {
     this._userName = document.querySelector(userNameSelector);
     this._userLifestyle = document.querySelector(userLifestyleSelector);
     this._userAvatar = document.querySelector(userAvatarSelector);
-
   }
 
   //публичный метод: возвращает объект с данными пользователя

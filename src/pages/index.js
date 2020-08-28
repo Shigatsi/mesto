@@ -22,6 +22,7 @@ import Section from '../components/Section.js'
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
+import { data } from 'autoprefixer';
 
 
 const formLifestyleValidation = new FormValidator(formConfig, profileForm);
@@ -46,17 +47,20 @@ const api = new Api ({
       userLifestyleSelector: '.profile__lifestyle',
       userAvatarSelector: '.profile__avatar'
     });
-    userProfile.setUserInfo(userData);
 
+    userProfile.setUserInfo(userData);
     //создаём экземпля карточки
-    const cardCreateFunction = (item) => {
+    const cardCreateFunction = (item, userId) => {
+      userId = userData._id;
+      console.log(item.owner._id);
       const card = new Card({
         data:item,
         cardSelector:'#element-template',
         handleCardClick:(popupData)=>{
           fullSizeImg.openPopup(popupData);
+
         }});
-        const cardElement = card.generateCard();
+        const cardElement = card.generateCard(userId);
         cardList.addItem(cardElement,true);
 
       }
@@ -97,10 +101,9 @@ const api = new Api ({
         console.log(popupData);
         api.postNewCadr(popupData)
         .then ((popupData)=>{
-          console.log(popupData)
           cardCreateFunction(popupData);
-          const cardElement = card.generateCard();
-          cardList.addItem(cardElement, true);
+          // const cardElement = card.generateCard();
+          // cardList.addItem(cardElement, true);
         })
         .catch((err) => {
           console.log(err); // выведем ошибку в консоль

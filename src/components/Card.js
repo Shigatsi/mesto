@@ -4,8 +4,12 @@ export default class Card{
     this._name = data.name;
     this._alt = data.alt;
     this._link = data.link;
+    this.like = data.like;
+    this._cardId = data._id;
+    this._cardOwnerId = data.owner._id;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
+
   }
 
   _getTemplate(){
@@ -44,13 +48,19 @@ export default class Card{
   }
 
    //публичный метод создание карточки
-   generateCard(){
+   generateCard(userId){
     this._element = this._getTemplate();
     this._setEventListeners();
     this._element.querySelector('.elements__title').textContent =this._name;
     const cardElementImage = this._element.querySelector('.elements__image');
     cardElementImage.src=this._link;
     cardElementImage.alt = this._name;
+    //не отображаем корзину на чужых карточках
+    // не раотает покашто
+    if (this._cardOwnerId != userId) {
+      console.log(this._name, 'cardOwnerId', this._cardOwnerId, 'userId', userId)
+      this._element.querySelector('.elements__rbin-button').classList.add('elements__rbin-button_hidden');
+    }
 
     return this._element;
   }

@@ -1,3 +1,4 @@
+@import url(./_hidden/elements__rbin-button_hiden.css);
 .elements__rbin-button{
 background: no-repeat url(../../../images/trash.svg);
 width:18px;
