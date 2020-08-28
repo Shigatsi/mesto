@@ -63,15 +63,15 @@ export default class Api {
 
   //публичный метод добавления новой карточки
   postNewCadr (popupData) {
-   return fetch (this.baseUrl + '/cards', { /* this.baseUrl + '/cards' */
+   return fetch (this.baseUrl + '/cards', {
     method: 'POST',
     headers: {
       authorization: this.headers,
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      name: popupData.place/* Тут получаем из формы прописать в классе UseInfo, потом тут поменять!argument.Name */,
-      link:popupData.place_url /* Тут получаем из формы прописать в классе UseInfo, потом тут поменять! argument.Link */
+      name: popupData.place,
+      link:popupData.place_url
       })
     })
     .then(res => {
@@ -83,8 +83,25 @@ export default class Api {
     })
   }
 
-  //публичный метод постановки лайка
-  putLike (cardId) {
+  //публичный метод удоления карточки
+  deleteCard (cardId) {
+    return fetch (this.baseUrl + '/cards/' + cardId, {
+      method: 'DELETE',
+      headers: {
+        authorization: this.headers,
+      }
+    })
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      }
+    // если ошибка, отклоняем промис
+     return Promise.reject(`Ошибка: ${res.status}`);
+    })
+  }
+
+   //публичный метод постановки лайка
+   putLike (cardId) {
     return fetch (this.baseUrl + '/cards/likes' + cardId, {
       method: 'PUT',
       headers: {
@@ -117,22 +134,6 @@ export default class Api {
     })
   }
 
-  //публичный метод удоления карточки
-  deleteCard (cardId) {
-    return fetch (this.baseUrl + '/cards/' + cardId, {
-      method: 'DELETE',
-      headers: {
-        authorization: this.headers,
-      }
-    })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-    // если ошибка, отклоняем промис
-     return Promise.reject(`Ошибка: ${res.status}`);
-    })
-  }
   //публичный метод обновления аватара пользователя
   patchUserAvatar (userAvatarUrl) {
     return fetch (this.baseUrl + '/users/me/avatar/', {

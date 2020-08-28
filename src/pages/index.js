@@ -9,7 +9,6 @@ import {
   cardListSelector,
   inputName,
   inputLifestyle,
-  // initialCards,
   formConfig,
   placeForm,
   profileForm,
@@ -52,14 +51,21 @@ const api = new Api ({
     //создаём экземпля карточки
     const cardCreateFunction = (item, userId) => {
       userId = userData._id;
-      console.log(item.owner._id);
       const card = new Card({
         data:item,
         cardSelector:'#element-template',
         handleCardClick:(popupData)=>{
           fullSizeImg.openPopup(popupData);
+        },
+        deleteButtonHandler:(cardId)=>{
+            api.deleteCard(cardId)
+            .then(() => {
+              card.removeCard();//it's a life!
+            })
+            .catch(err => console.error(err));//выведем ошибку
+        }
+      });
 
-        }});
         const cardElement = card.generateCard(userId);
         cardList.addItem(cardElement,true);
 
@@ -86,14 +92,8 @@ const api = new Api ({
         cardListSelector
       );
 
-    //   //рисуем массив начальных карточек
-    // cardList.renderItems();
-
     // //эксземпляр PopupWithImage
     const fullSizeImg = new PopupWithImage ('#img-fullsize');
-    // fullSizeImg.setEventListeners();
-
-    //эксземпляры PopupWithForm
     //форма добавления места
     const placeFormAdd = new PopupWithForm({
       popupSelector:'#edit-place',
