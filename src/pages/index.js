@@ -56,14 +56,19 @@ const api = new Api ({
         handleCardClick:(popupData)=>{
           fullSizeImg.openPopup(popupData);
         }});
-      const cardElement = card.generateCard();
-      cardList.addItem(cardElement, true);
+        const cardElement = card.generateCard();
+        cardList.addItem(cardElement,true);
+
       }
 
       //создаем массив начальных карточек
       const cardList = new Section ({
         items: initialCards,
-        renderer:  cardCreateFunction /* (item) => {
+        renderer:  cardCreateFunction,
+
+        // const cardElement = card.generateCard(),
+
+         /* (item) => {
           const card = new Card({
             data:item,
             cardSelector:'#element-template',
@@ -75,8 +80,8 @@ const api = new Api ({
           }, */
         },
         cardListSelector
-
       );
+
     //   //рисуем массив начальных карточек
     // cardList.renderItems();
 
@@ -88,22 +93,22 @@ const api = new Api ({
     //форма добавления места
     const placeFormAdd = new PopupWithForm({
       popupSelector:'#edit-place',
-      handleFormSubmit:()=>{
-      const userCard = new Card({
-        data:{ name: inputPlace.value, link: inputLink.value, alt: inputPlace.value},
-        cardSelector:'#element-template',
-        handleCardClick: cardCreateFunction/* (popupData)=>{
-          fullSizeImg.openPopup(popupData);
-        } */});
-        const cardElement = userCard.generateCard();
-        cardList.addItem(cardElement);
-        inputPlace.value = '';
-        inputLink.value = '';
+      handleFormSubmit:(popupData)=>{
+        console.log(popupData);
+        api.postNewCadr(popupData)
+        .then ((popupData)=>{
+          console.log(popupData)
+          cardCreateFunction(popupData);
+          const cardElement = card.generateCard();
+          cardList.addItem(cardElement, true);
+        })
+        .catch((err) => {
+          console.log(err); // выведем ошибку в консоль
+        });
       }
     });
-    // placeFormAdd.setEventListeners();
 
-    // // //форма редактирования профиля
+   //форма редактирования профиля
     const profileFormEdit = new PopupWithForm({
       popupSelector: '#edit-profile',
       handleFormSubmit:(profileData) => {
@@ -117,20 +122,6 @@ const api = new Api ({
       }
     })
 
-    // profileFormEdit.setEventListeners();
-
-    // // //открытие формы "Редактировать профиль"
-    // editButton.addEventListener('click', () => {
-    //   const formValues  = userProfile.getUserInfo();
-    //   inputName.value =  formValues.name;
-    //   inputLifestyle.value =  formValues.about;//.lifestyle
-    //   profileFormEdit.openPopup()
-    // });
-
-    // // //открытие формы "Новое место"
-    // addCardButton.addEventListener('click', () =>{
-    //   placeFormAdd.openPopup();
-    // });
     return {
       userProfile,
       cardList,
@@ -140,26 +131,26 @@ const api = new Api ({
     }
   })
  .then ((res) => {
-  const {userProfile, cardList, fullSizeImg, placeFormAdd, profileFormEdit} = res;
+    const {userProfile, cardList, fullSizeImg, placeFormAdd, profileFormEdit} = res;
     fullSizeImg.setEventListeners();
     placeFormAdd.setEventListeners();
     profileFormEdit.setEventListeners();
 
-      //рисуем массив начальных карточек
+    //рисуем массив начальных карточек
     cardList.renderItems();
 
-  // //открытие формы "Редактировать профиль"
-  editButton.addEventListener('click', () => {
-    const formValues  = userProfile.getUserInfo();
-    inputName.value =  formValues.name;
-    inputLifestyle.value =  formValues.about;//.lifestyle
-    profileFormEdit.openPopup()
-  });
+    //открытие формы "Редактировать профиль"
+    editButton.addEventListener('click', () => {
+      const formValues  = userProfile.getUserInfo();
+      inputName.value =  formValues.name;
+      inputLifestyle.value =  formValues.about;//.lifestyle
+      profileFormEdit.openPopup()
+    });
 
-  // //открытие формы "Новое место"
-  addCardButton.addEventListener('click', () =>{
-    placeFormAdd.openPopup();
-  });
+    //открытие формы "Новое место"
+    addCardButton.addEventListener('click', () =>{
+      placeFormAdd.openPopup();
+    });
 
  })
  .catch((err) => {

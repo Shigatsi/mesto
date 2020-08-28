@@ -63,15 +63,15 @@ export default class Api {
 
   //публичный метод добавления новой карточки
   postNewCadr (popupData) {
-   return fetch (this.baseUrl + '/cards', {
+   return fetch (this.baseUrl + '/cards', { /* this.baseUrl + '/cards' */
     method: 'POST',
     headers: {
       authorization: this.headers,
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      name: popupData.name/* Тут получаем из формы прописать в классе UseInfo, потом тут поменять!argument.Name */,
-      link:popupData.link /* Тут получаем из формы прописать в классе UseInfo, потом тут поменять! argument.Link */
+      name: popupData.place/* Тут получаем из формы прописать в классе UseInfo, потом тут поменять!argument.Name */,
+      link:popupData.place_url /* Тут получаем из формы прописать в классе UseInfo, потом тут поменять! argument.Link */
       })
     })
     .then(res => {
