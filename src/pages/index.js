@@ -217,11 +217,13 @@ const api = new Api ({
       placeFormAdd._popupInputs.forEach((item) =>{
           item.value = '';
         })
+
     });
 
     //открытие формы "Редактируем аватар"
     avatarEditButton.addEventListener('click', ()=> {
       avatarFormEdit.openPopup();
+      avatarFormEdit._popupInputs.value = '';
     })
 
  })

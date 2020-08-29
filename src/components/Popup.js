@@ -18,7 +18,6 @@ export default class Popup {
     };
   }
 
-
   //публичный метод: открытие окна
   openPopup() {
     this._popupElement.classList.remove('popup_hidden');
@@ -26,10 +25,6 @@ export default class Popup {
     document.addEventListener('keyup', this._handleEscClose);
     //добавляем слушатель клика на оверлей
     document.addEventListener('mousedown',this._handleOverlayClose);
-    // //очищаем поля ввода
-    // this._popupInputs.forEach((item) =>{
-    //   item.value = '';
-    // })
   }
 
  //публичный метод: закрытие окна
