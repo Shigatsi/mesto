@@ -68,7 +68,7 @@ const api = new Api ({
                   .then(() => {
                     card.removeCard();//it's a life!
                   })
-                  .catch(err => console.error(err));//выведем ошибку
+                  .catch(err => console.error(err))//выведем ошибку
           })
           popupDelete.openPopup();
 
@@ -129,13 +129,15 @@ const api = new Api ({
     const placeFormAdd = new PopupWithForm({
       popupSelector:'#edit-place',
       handleFormSubmit:(popupData)=>{
+      placeFormAdd.addBtnLoading();
         api.postNewCadr(popupData)
         .then ((popupData)=>{
           cardCreateFunction(popupData);
           // const cardElement = card.generateCard();
           // cardList.addItem(cardElement, true);
         })
-        .catch(err => console.error(err));//выведем ошибку
+        .catch(err => console.error(err))//выведем ошибку
+        .finally(()=>placeFormAdd.removeBtnLoading())
       }
     });
 
@@ -143,23 +145,27 @@ const api = new Api ({
     const profileFormEdit = new PopupWithForm({
       popupSelector: '#edit-profile',
       handleFormSubmit:(profileData) => {
+        profileFormEdit.addBtnLoading();
         api.patchUserInfo(profileData)
         .then((profileData)=> {
           userProfile.setUserInfo(profileData);
         })
-        .catch(err => console.error(err));//выведем ошибку
+        .catch(err => console.error(err))//выведем ошибку
+        .finally(()=>profileFormEdit.removeBtnLoading())
       }
     })
     //форма редактирования аватара
     const avatarFormEdit = new PopupWithForm({
       popupSelector:'#edit-avatar',
       handleFormSubmit:(profileData) =>{
+        avatarFormEdit.addBtnLoading();
         api.patchUserAvatar(profileData.avatar_url)
         .then((data)=>{
           console.log(data)
           userProfile.setNewUserAvatar(data);
         })
-        .catch(err => console.error(err));//выведем ошибку
+        .catch(err => console.error(err))//выведем ошибку
+        .finally(()=>avatarFormEdit.removeBtnLoading())
       }
 
     })

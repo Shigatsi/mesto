@@ -9,6 +9,8 @@ export default class PopupWithForm extends Popup{
     this._popupElement = document.querySelector(popupSelector);
     this._handleFormSubmit = handleFormSubmit;//CALLBACK
     this._errorInput = this._popupElement.querySelectorAll(formConfig.inputErrorSelector);
+    this._submitButton = this._popupElement.querySelector('.popup__save-button');// кнопка сабмита
+    this._submitButtonTextContent = this._submitButton.textContent; //сохранение текста кнопки начального
     this._inputsErrorClear = (popupCharObj) => {
       this._errorInput.forEach(element =>{
         element.classList.add(popupCharObj.errorClass);
@@ -28,6 +30,16 @@ export default class PopupWithForm extends Popup{
       });
       // возвращаем объект значений
       return this._formValues;
+    }
+
+    //добавление надписи Сохранение...
+    addBtnLoading() {
+      this._submitButton.textContent = 'Сохранение...';
+    }
+
+    //удаление надписи Сохранение...
+    removeBtnLoading() {
+      this._submitButton.textContent = this._submitButtonTextContent;
     }
 
     //публичный метод: установка слушателя
