@@ -14,6 +14,14 @@ export default class Section {
       })
   }
 
+  // addItem(element, initial) {
+  //   if (initial){
+  //     this._containerSelector.append(element);
+  //   } else {
+  //     this._containerSelector.prepend(element);
+  //   }
+  // }
+
   //публичный метод: принимает DOM-элемент и добавляет в контейнер, отрисовываем карточки с сервера
   addItem(element){
     this._containerSelector.append(element);

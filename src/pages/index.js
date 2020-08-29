@@ -52,7 +52,7 @@ const api = new Api ({
 
     userProfile.setUserInfo(userData);
     //создаём экземпля карточки
-    const cardCreateFunction = (item, userId) => {
+    const cardCreateFunction = (item, userId, index) => {
       userId = userData._id;
       const card = new Card({
         data:item,
@@ -85,19 +85,15 @@ const api = new Api ({
         // deleteLikeHandler:()=>{
         //   //api.deleteLike(cardId)
         // }
-
-        //   // deleteButtonHandler:(cardId)=>{
-        //   //     api.deleteCard(cardId)
-        //   //     .then(() => {
-        //   //       card.removeCard();//it's a life!
-        //   //     })
-        //   //     .catch(err => console.error(err));//выведем ошибку
-          // }
-
       });
 
-        const cardElement = card.generateCard(userId);
-        cardList.addItem(cardElement);
+        const cardElement = card.generateCard(userId, true);
+        if (index === true){
+          cardList.addItem(cardElement);
+        } else {
+          cardList.addUserItem(cardElement);
+        }
+        // cardList.addItem(cardElement, true);
         return card
 
       }
@@ -132,7 +128,7 @@ const api = new Api ({
       placeFormAdd.addBtnLoading();
         api.postNewCadr(popupData)
         .then ((popupData)=>{
-          cardCreateFunction(popupData);
+          cardCreateFunction(popupData, false);
           // const cardElement = card.generateCard();
           // cardList.addItem(cardElement, true);
         })

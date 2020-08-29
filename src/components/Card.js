@@ -69,14 +69,13 @@ export default class Card{
   }
 
    //публичный метод создания карточки
-   generateCard(userId){
-    // const name = item.name;
-    // const link = item.link
+   generateCard(userId, index){
     this._element = this._getTemplate();
     this._setEventListeners();
     this._element.querySelector('.elements__title').textContent =this._name;
     this._element.querySelector('.elements__like-counter').textContent = this.likeNum;//отоброжаем количество лайков
     const cardElementImage = this._element.querySelector('.elements__image');
+    this._element.index = index;
     cardElementImage.src=this._link;
     cardElementImage.alt = this._name;
     //не отображаем корзину на чужых карточках
