@@ -12,6 +12,7 @@ import {
   formConfig,
   placeForm,
   profileForm,
+  EditAvatar,
   editButton,
   addCardButton,
   avatarEditButton
@@ -29,6 +30,10 @@ formLifestyleValidation.enableValidation();
 
 const formAddPlaceValidation = new FormValidator(formConfig,placeForm);
 formAddPlaceValidation.enableValidation();
+
+const formEditAvatarValidation = new FormValidator(formConfig, EditAvatar);
+console.log(formConfig);
+formEditAvatarValidation.enableValidation();
 
 
 //экземпляр класса Api
