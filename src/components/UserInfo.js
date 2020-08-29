@@ -25,4 +25,7 @@ export default class UserInfo {
     this._userLifestyle.textContent = popupData.about;//.lifestyle - ето id Попапа!!!!!
     this._userAvatar.src = popupData.avatar;
   }
+  setNewUserAvatar(profileData){
+    this._userAvatar.src = profileData.avatar;
+  }
 }

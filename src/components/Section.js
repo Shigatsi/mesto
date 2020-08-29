@@ -9,18 +9,18 @@ export default class Section {
   }
 
     renderItems() {
-      this._items.forEach((item) =>{
+        this._items.forEach((item) =>{
         this._renderer(item);
       })
   }
 
-  //публичный метод: принимает DOM-элемент и добавляет в контейнер
-  addItem(element, initial) {
-    if (initial){
-      this._containerSelector.append(element);
-    } else {
+  //публичный метод: принимает DOM-элемент и добавляет в контейнер, отрисовываем карточки с сервера
+  addItem(element){
+    this._containerSelector.append(element);
+  }
+  //публичный метод: принимает DOM-элемент и добавляет в контейнер, отрисовываем новые карточки
+  addUserItem(element){
       this._containerSelector.prepend(element);
-    }
   }
 
 }

@@ -6,16 +6,14 @@ export default class PopupWithDelConfirm extends Popup {
     this._popupElement = document.querySelector(popupSelector);
     this._handleFormSubmit = handleFormSubmit;//CALLBACK
   }
-  //приватный метод: установка слушателя
-  _setEventListeners() {
+  //публичный метод: установка слушателя
+  setEventListeners() {
     super.setEventListeners();
     this._popupElement.querySelector('.popup__form').addEventListener('submit', (evt) => {
       // Эта строчка отменяет стандартную отправку формы.
       evt.preventDefault();
       // добавим вызов функции _handleFormSubmit
-     // передадим ей объект — результат работы _getInputValues
-      this._handleFormSubmit(this._getInputValues());
-      super.closePopup()
+       this._handleFormSubmit(this._card);
     });
   }
 }

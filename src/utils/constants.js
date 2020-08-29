@@ -52,6 +52,7 @@ export const placeForm = document.querySelector('#edit-place');//форма до
 export const addCardButton = document.querySelector('.profile__add-button');//кнопка добавления нового места
 export const closePlaceFormBtn = document.querySelector('#place-close');//кнопка закрытия формы добавления места
 
+export const avatarEditButton = document.querySelector('.profile__avatar-edit-button');//кнопка редактирования аватара
 
 export const profileName = document.querySelector('.profile__name');//имя профиля
 export const profileLifestyle = document.querySelector('.profile__lifestyle');//профессия профиля

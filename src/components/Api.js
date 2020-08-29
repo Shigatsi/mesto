@@ -139,6 +139,7 @@ export default class Api {
     return fetch (this.baseUrl + '/users/me/avatar/', {
       method: 'PATCH',
       headers: {
+      'Content-Type': 'application/json',
         authorization: this.headers,
       },
       body: JSON.stringify({
@@ -148,9 +149,11 @@ export default class Api {
     .then(res => {
       if (res.ok) {
         return res.json();
+
       }
     // если ошибка, отклоняем промис
      return Promise.reject(`Ошибка: ${res.status}`);
     })
+    .catch(err => console.error(err));//выведем ошибку
   }
 }

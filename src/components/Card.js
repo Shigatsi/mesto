@@ -4,7 +4,10 @@ export default class Card{
     data,
     cardSelector,
     handleCardClick,
-    deleteButtonHandler}){
+    deleteButtonHandler,
+    putLikeHandler,
+    deleteLikeHandler
+  }){
     this._name = data.name;
     this._alt = data.alt;
     this._link = data.link;
@@ -12,10 +15,12 @@ export default class Card{
     this._cardId = data._id;
     this._cardOwnerId = data.owner._id;
     this.likeNum = data.likes.length;
+    this.like = data.likes;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
     this._deleteButtonHandler = deleteButtonHandler;
-
+    this.putLikeHandler = putLikeHandler;
+    this.deleteLikeHandler = deleteLikeHandler
   }
 
   _getTemplate(){
@@ -45,9 +50,17 @@ export default class Card{
   //приватный метод установка слушателей
   _setEventListeners(){
     // кнопка лайк: тоггл класса
-    this._element.querySelector('.elements__like-button').addEventListener('click', () => {this._toggleLikeActive()});
+    this._element.querySelector('.elements__like-button').addEventListener('click', () => {
+      this._toggleLikeActive()
+      if ( this._element.querySelector('.elements__like-button').classList.contains('elements__like-button_active')){
+        console.log('zalike!')
+        this.deleteLikeHandler(this._cardId)
+      } else {this.putLikeHandler(this._cardId)}
+    });
+    //
     //кнопка корзина: удоление карточки
-    this._element.querySelector('.elements__rbin-button').addEventListener('click', () => {this._deleteButtonHandler(this._cardId)});
+    // this._element.querySelector('.elements__rbin-button').addEventListener('click', () => {this._deleteButtonHandler(this._cardId)});
+    this._element.querySelector('.elements__rbin-button').addEventListener('click', () => {this._deleteButtonHandler()});
     //кнопка-изображение: для открытия формы просмотра фото
     this._element.querySelector('.elements__image').addEventListener('click',() => {
       this._handleCardClick(this._element.querySelector('.elements__image'))
@@ -57,6 +70,8 @@ export default class Card{
 
    //публичный метод создания карточки
    generateCard(userId){
+    // const name = item.name;
+    // const link = item.link
     this._element = this._getTemplate();
     this._setEventListeners();
     this._element.querySelector('.elements__title').textContent =this._name;
@@ -70,5 +85,10 @@ export default class Card{
     }
 
     return this._element;
+  }
+
+  //получение ID карточки
+  getCardId(){
+  return this._cardId;
   }
 }

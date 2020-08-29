@@ -14,14 +14,14 @@ import {
   profileForm,
   editButton,
   addCardButton,
-  inputPlace,
-  inputLink
+  avatarEditButton
 }  from '../utils/constants.js';
 import Section from '../components/Section.js'
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
 import { data } from 'autoprefixer';
+import PopupWithDelConfirm from '../components/PopupWithDelConfiirm';
 
 
 const formLifestyleValidation = new FormValidator(formConfig, profileForm);
@@ -29,6 +29,7 @@ formLifestyleValidation.enableValidation();
 
 const formAddPlaceValidation = new FormValidator(formConfig,placeForm);
 formAddPlaceValidation.enableValidation();
+
 
 //экземпляр класса Api
 const api = new Api ({
@@ -57,13 +58,31 @@ const api = new Api ({
         handleCardClick:(popupData)=>{
           fullSizeImg.openPopup(popupData);
         },
-        deleteButtonHandler:(cardId)=>{
-            api.deleteCard(cardId)
-            .then(() => {
-              card.removeCard();//it's a life!
-            })
-            .catch(err => console.error(err));//выведем ошибку
-        }
+        deleteButtonHandler: ()=>{
+          popupDelete.openPopup();
+
+        },
+        // putLikeHandler:(cardId)=>{
+        //   api.putLike(cardId)
+        //   .then((res)=> {
+        //     console.log(res);
+        //   })
+        //   .catch(err => console.error(err));//выведем ошибку
+        // },
+
+        // deleteLikeHandler:()=>{
+        //   //api.deleteLike(cardId)
+        // }
+
+        //   // deleteButtonHandler:(cardId)=>{
+        //   //     api.deleteCard(cardId)
+        //   //     .then(() => {
+        //   //       card.removeCard();//it's a life!
+        //   //     })
+        //   //     .catch(err => console.error(err));//выведем ошибку
+          // }
+          // экземпляр класса PopupWithDelConfirm
+
       });
 
         const cardElement = card.generateCard(userId);
@@ -98,16 +117,13 @@ const api = new Api ({
     const placeFormAdd = new PopupWithForm({
       popupSelector:'#edit-place',
       handleFormSubmit:(popupData)=>{
-        console.log(popupData);
         api.postNewCadr(popupData)
         .then ((popupData)=>{
           cardCreateFunction(popupData);
           // const cardElement = card.generateCard();
           // cardList.addItem(cardElement, true);
         })
-        .catch((err) => {
-          console.log(err); // выведем ошибку в консоль
-        });
+        .catch(err => console.error(err));//выведем ошибку
       }
     });
 
@@ -119,25 +135,58 @@ const api = new Api ({
         .then((profileData)=> {
           userProfile.setUserInfo(profileData);
         })
-        .catch((err) => {
-          console.log(err); // выведем ошибку в консоль
-        });
+        .catch(err => console.error(err));//выведем ошибку
       }
     })
+    //форма редактирования аватара
+    const avatarFormEdit = new PopupWithForm({
+      popupSelector:'#edit-avatar',
+      handleFormSubmit:(profileData) =>{
+        api.patchUserAvatar(profileData.avatar_url)
+        .then((data)=>{
+          console.log(data)
+          userProfile.setNewUserAvatar(data);
+        })
+        .catch(err => console.error(err));//выведем ошибку
+      }
+
+    })
+
+     //экземпляр класса PopupWithDelConfirm
+     const popupDelete = new PopupWithDelConfirm (
+      {
+        popupSelector: "#confirm",
+        handleFormSubmit:(card)=>{
+          console.log(card)
+          card.getCardId;
+          api.deleteCard(cardId)
+            .then(() => {
+              card.removeCard();//it's a life!
+            })
+            .catch(err => console.error(err));//выведем ошибку
+        }
+       }
+    )
 
     return {
       userProfile,
       cardList,
       fullSizeImg,
       placeFormAdd,
-      profileFormEdit
+      profileFormEdit,
+      popupDelete,
+      avatarFormEdit
     }
   })
  .then ((res) => {
-    const {userProfile, cardList, fullSizeImg, placeFormAdd, profileFormEdit} = res;
+    const {userProfile, cardList, fullSizeImg, placeFormAdd, profileFormEdit, popupDelete, avatarFormEdit, } = res;
     fullSizeImg.setEventListeners();
     placeFormAdd.setEventListeners();
     profileFormEdit.setEventListeners();
+    popupDelete.setEventListeners();
+    avatarFormEdit.setEventListeners();
+
+
 
     //рисуем массив начальных карточек
     cardList.renderItems();
@@ -155,10 +204,13 @@ const api = new Api ({
       placeFormAdd.openPopup();
     });
 
+    //открытие формы "Редактируем аватар"
+    avatarEditButton.addEventListener('click', ()=> {
+      avatarFormEdit.openPopup();
+    })
+
  })
- .catch((err) => {
-    console.log(err); // выведем ошибку в консоль
-  });
+ .catch(err => console.error(err));//выведем ошибку
 //
 
 // эк-р класса Section
