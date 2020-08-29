@@ -48,6 +48,8 @@ const api = new Api ({
       userAvatarSelector: '.profile__avatar'
     });
 
+
+
     userProfile.setUserInfo(userData);
     //создаём экземпля карточки
     const cardCreateFunction = (item, userId) => {
@@ -58,8 +60,18 @@ const api = new Api ({
         handleCardClick:(popupData)=>{
           fullSizeImg.openPopup(popupData);
         },
-        deleteButtonHandler: ()=>{
+        deleteButtonHandler: (cardId)=>{
+          popupDelete.setSubmitAction(()=>{
+              cardId = item._id;
+              console.log(cardId)
+                api.deleteCard(cardId)
+                  .then(() => {
+                    card.removeCard();//it's a life!
+                  })
+                  .catch(err => console.error(err));//выведем ошибку
+          })
           popupDelete.openPopup();
+
 
         },
         // putLikeHandler:(cardId)=>{
@@ -81,12 +93,11 @@ const api = new Api ({
         //   //     })
         //   //     .catch(err => console.error(err));//выведем ошибку
           // }
-          // экземпляр класса PopupWithDelConfirm
 
       });
-
         const cardElement = card.generateCard(userId);
-        cardList.addItem(cardElement,true);
+        cardList.addItem(cardElement);
+        return card
 
       }
 
@@ -156,15 +167,15 @@ const api = new Api ({
      const popupDelete = new PopupWithDelConfirm (
       {
         popupSelector: "#confirm",
-        handleFormSubmit:(card)=>{
-          console.log(card)
-          card.getCardId;
-          api.deleteCard(cardId)
-            .then(() => {
-              card.removeCard();//it's a life!
-            })
-            .catch(err => console.error(err));//выведем ошибку
-        }
+        // handleFormSubmit:(card)=>{
+        //   console.log(card)
+        //   card.getCardId;
+        //   api.deleteCard(cardId)
+        //     .then(() => {
+        //       card.removeCard();//it's a life!
+        //     })
+        //     .catch(err => console.error(err));//выведем ошибку
+        // }
        }
     )
 

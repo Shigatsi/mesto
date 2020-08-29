@@ -4,7 +4,11 @@ export default class PopupWithDelConfirm extends Popup {
   constructor({popupSelector, handleFormSubmit}) {
     super(popupSelector),
     this._popupElement = document.querySelector(popupSelector);
-    this._handleFormSubmit = handleFormSubmit;//CALLBACK
+    // this._handleFormSubmit = handleFormSubmit;//CALLBACK
+  }
+
+  setSubmitAction(submitAction) {
+    this._handleFormSubmit = submitAction;
   }
   //публичный метод: установка слушателя
   setEventListeners() {
@@ -14,6 +18,7 @@ export default class PopupWithDelConfirm extends Popup {
       evt.preventDefault();
       // добавим вызов функции _handleFormSubmit
        this._handleFormSubmit(this._card);
+       super.closePopup()
     });
   }
 }
