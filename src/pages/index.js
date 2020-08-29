@@ -95,6 +95,7 @@ const api = new Api ({
           // }
 
       });
+
         const cardElement = card.generateCard(userId);
         cardList.addItem(cardElement);
         return card
@@ -213,6 +214,9 @@ const api = new Api ({
     //открытие формы "Новое место"
     addCardButton.addEventListener('click', () =>{
       placeFormAdd.openPopup();
+      placeFormAdd._popupInputs.forEach((item) =>{
+          item.value = '';
+        })
     });
 
     //открытие формы "Редактируем аватар"

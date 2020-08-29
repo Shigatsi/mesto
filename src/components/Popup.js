@@ -3,6 +3,7 @@ export default class Popup {
   constructor (popupSelector) {
     this._popupElement =  document.querySelector(popupSelector);
     this._popupCloseBtn = this._popupElement.querySelector('.popup__close-button');
+    this._popupInputs = this._popupElement.querySelectorAll('.popup__input');
     //приватный метод: закрытие попапа клавишей Esc
     this._handleEscClose = (evt) => {
       if(evt.key==='Escape') {
@@ -25,11 +26,16 @@ export default class Popup {
     document.addEventListener('keyup', this._handleEscClose);
     //добавляем слушатель клика на оверлей
     document.addEventListener('mousedown',this._handleOverlayClose);
+    // //очищаем поля ввода
+    // this._popupInputs.forEach((item) =>{
+    //   item.value = '';
+    // })
   }
 
  //публичный метод: закрытие окна
  closePopup() {
   this._popupElement.classList.add('popup_hidden');
+
   //удаляем слушатель нажатия клавиши Esc
   document.removeEventListener('keyup', this._handleEscClose);
   //удаляем слушатель клика на оверлей
