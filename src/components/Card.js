@@ -2,11 +2,13 @@
 export default class Card{
   constructor({
     data,
+    myId,
     cardSelector,
     handleCardClick,
     deleteButtonHandler,
     putLikeHandler,
-    deleteLikeHandler
+    deleteLikeHandler,
+
   }){
     this._name = data.name;
     this._alt = data.alt;
@@ -15,13 +17,12 @@ export default class Card{
     this._cardOwnerId = data.owner._id;
     this.likeNum = data.likes.length;
     this.likes = data.likes;
-
-    console.log(this.likes);
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
     this._deleteButtonHandler = deleteButtonHandler;
     this.putLikeHandler = putLikeHandler;
-    this.deleteLikeHandler = deleteLikeHandler
+    this.deleteLikeHandler = deleteLikeHandler;
+    this.myId = myId;
   }
 
   _getTemplate(){
@@ -33,12 +34,6 @@ export default class Card{
 
     return cardElement;
   }
-
-  // //приватный метод like
-  // _toggleLikeActive(){
-  //   this._element.querySelector('.elements__like-button').classList.toggle('elements__like-button_active');
-  // }
-
 
   //публичный метод удаления карточки из разметки
   removeCard(){
@@ -52,8 +47,11 @@ export default class Card{
   _setEventListeners(){
     // кнопка лайк: тоггл класса
     this._element.querySelector('.elements__like-button').addEventListener('click', () => {
-     this.putLikeHandler(this._cardId);
-    //  this.deleteLikeHandler(this._cardId);
+      if(this._element.querySelector('.elements__like-button').classList.contains('elements__like-button_active')){
+        this.deleteLikeHandler(this._cardId)
+      } else {
+        this.putLikeHandler(this._cardId);
+      }
     });
     this._element.querySelector('.elements__rbin-button').addEventListener('click', () => {this._deleteButtonHandler(this._cardId)});
     //кнопка-изображение: для открытия формы просмотра фото
@@ -63,37 +61,56 @@ export default class Card{
 
   }
 
+  renderLikes(){
+    this._element.querySelector('.elements__like-counter').textContent = this.likeNum;
+    this.likes.forEach((like)=> {
+      if(like._id == this.myId) {
+        this._element.querySelector('.elements__like-button').classList.add('.elements__like-button_active');
+      }
+
+    });
+  }
+
+  updateLikesNum (likes) {
+    this.likeNum = likes.length;
+    this._element.querySelector('.elements__like-button').classList.toggle('elements__like-button_active');
+    this.renderLikes();
+  }
+
+  isLiked () {
+    return this.likes.some((like) =>{
+       return like._id === this.myId;
+
+    })
+  }
+
    //публичный метод создания карточки
    generateCard(userId, index){
     this._element = this._getTemplate();
     this._setEventListeners();
     this._element.querySelector('.elements__title').textContent =this._name;
-    this._element.querySelector('.elements__like-counter').textContent = this.likeNum;//отоброжаем количество лайков
+    //отоброжаем изначальное количество лайков
+    this.renderLikes();
+    // this._element.querySelector('.elements__like-counter').textContent = this.likeNum;
+    // //отоброжаем изначальное количество лайков
     const cardElementImage = this._element.querySelector('.elements__image');
     this._element.index = index;
     cardElementImage.src=this._link;
     cardElementImage.alt = this._name;
     //не отображаем корзину на чужых карточках
-    if (this._cardOwnerId != userId) {
+    if (this._cardOwnerId != this.myId) {
       this._element.querySelector('.elements__rbin-button').classList.add('elements__rbin-button_hidden');
     }
 
     //отображение своего лайка
-    this.likes.forEach((like)=> {
-      if(like._id == userId) {
-        this._element.querySelector('.elements__like-button').classList.add('elements__like-button_active');
-      }
-    });
+    // this.likes.forEach((like)=> {
+    //   if(like._id == this.myId) {
+    //     this._element.querySelector('.elements__like-button').classList.add('elements__like-button_active');
+    //   }
+
+    // });
 
     return this._element;
   }
 
-  isLiked (){
-
-  }
-
-  //получение ID карточки
-  getCardId(){
-  return this._cardId;
-  }
 }
