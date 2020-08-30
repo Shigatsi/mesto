@@ -11,11 +11,12 @@ export default class Card{
     this._name = data.name;
     this._alt = data.alt;
     this._link = data.link;
-    this.like = data.like;
     this._cardId = data._id;
     this._cardOwnerId = data.owner._id;
     this.likeNum = data.likes.length;
-    this.like = data.likes;
+    this.likes = data.likes;
+
+    console.log(this.likes);
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
     this._deleteButtonHandler = deleteButtonHandler;
@@ -33,10 +34,10 @@ export default class Card{
     return cardElement;
   }
 
-  //приватный метод like
-  _toggleLikeActive(){
-    this._element.querySelector('.elements__like-button').classList.toggle('elements__like-button_active');
-  }
+  // //приватный метод like
+  // _toggleLikeActive(){
+  //   this._element.querySelector('.elements__like-button').classList.toggle('elements__like-button_active');
+  // }
 
 
   //публичный метод удаления карточки из разметки
@@ -51,16 +52,10 @@ export default class Card{
   _setEventListeners(){
     // кнопка лайк: тоггл класса
     this._element.querySelector('.elements__like-button').addEventListener('click', () => {
-      this._toggleLikeActive()
-      if ( this._element.querySelector('.elements__like-button').classList.contains('elements__like-button_active')){
-        console.log('zalike!')
-        this.deleteLikeHandler(this._cardId)
-      } else {this.putLikeHandler(this._cardId)}
+     this.putLikeHandler(this._cardId);
+    //  this.deleteLikeHandler(this._cardId);
     });
-    //
-    //кнопка корзина: удоление карточки
-    // this._element.querySelector('.elements__rbin-button').addEventListener('click', () => {this._deleteButtonHandler(this._cardId)});
-    this._element.querySelector('.elements__rbin-button').addEventListener('click', () => {this._deleteButtonHandler()});
+    this._element.querySelector('.elements__rbin-button').addEventListener('click', () => {this._deleteButtonHandler(this._cardId)});
     //кнопка-изображение: для открытия формы просмотра фото
     this._element.querySelector('.elements__image').addEventListener('click',() => {
       this._handleCardClick(this._element.querySelector('.elements__image'))
@@ -83,7 +78,18 @@ export default class Card{
       this._element.querySelector('.elements__rbin-button').classList.add('elements__rbin-button_hidden');
     }
 
+    //отображение своего лайка
+    this.likes.forEach((like)=> {
+      if(like._id == userId) {
+        this._element.querySelector('.elements__like-button').classList.add('elements__like-button_active');
+      }
+    });
+
     return this._element;
+  }
+
+  isLiked (){
+
   }
 
   //получение ID карточки

@@ -58,6 +58,7 @@ const api = new Api ({
     //создаём экземпля карточки
     const cardCreateFunction = (item, userId, index) => {
       userId = userData._id;
+      // cardId = item._id;
       const card = new Card({
         data:item,
         cardSelector:'#element-template',
@@ -66,8 +67,7 @@ const api = new Api ({
         },
         deleteButtonHandler: (cardId)=>{
           popupDelete.setSubmitAction(()=>{
-              cardId = item._id;
-              console.log(cardId)
+              // cardId = item._id;
                 api.deleteCard(cardId)
                   .then(() => {
                     card.removeCard();//it's a life!
@@ -75,19 +75,22 @@ const api = new Api ({
                   .catch(err => console.error(err))//выведем ошибку
           })
           popupDelete.openPopup();
-
-
         },
-        // putLikeHandler:(cardId)=>{
-        //   api.putLike(cardId)
+        putLikeHandler:(cardId)=>{
+          // cardId = item._id;
+          console.log(cardId, userId);
+          api.putLike(cardId)
+          .then((res)=> {
+            console.log(res);
+          })
+          .catch(err => console.error(err));//выведем ошибку
+        },
+
+        // deleteLikeHandler:(cardId)=>{
+        //   api.deleteLike(cardId)
         //   .then((res)=> {
         //     console.log(res);
         //   })
-        //   .catch(err => console.error(err));//выведем ошибку
-        // },
-
-        // deleteLikeHandler:()=>{
-        //   //api.deleteLike(cardId)
         // }
       });
 

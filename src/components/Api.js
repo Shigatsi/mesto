@@ -102,7 +102,7 @@ export default class Api {
 
    //публичный метод постановки лайка
    putLike (cardId) {
-    return fetch (this.baseUrl + '/cards/likes' + cardId, {
+    return fetch (this.baseUrl + '/cards/likes/' + cardId, {
       method: 'PUT',
       headers: {
         authorization: this.headers,
