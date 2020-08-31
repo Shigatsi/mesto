@@ -6,6 +6,15 @@ export default class Api {
     this.headers = headers;
   }
 
+  //приватный метод проверки ответа сервера и преобразование из json
+  _transformResJson (res) {
+      if (res.ok) {
+        return res.json();
+      }
+      // если ошибка, отклоняем промис
+      return Promise.reject(`Ошибка: ${res.status}`);
+  }
+
   // публичный метод загрузки информации о пользователе
   getUserData () {
     return fetch(this.baseUrl + '/users/me', {
@@ -13,13 +22,8 @@ export default class Api {
         authorization: this.headers
       }
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      // если ошибка, отклоняем промис
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+
+    .then(this._transformResJson)
   }
 
   //публичный метод загрузки карточек
@@ -29,13 +33,7 @@ export default class Api {
         authorization:  this.headers
       }
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`);
-      });
+    .then(this._transformResJson)
   }
 
   //публичный метод сохранения отредактированных данных профиля
@@ -51,14 +49,7 @@ export default class Api {
       about: popupData.about
      })
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-    // если ошибка, отклоняем промис
-      return Promise.reject(`Ошибка: ${res.status}`);
-
-    })
+    .then(this._transformResJson)
   }
 
   //публичный метод добавления новой карточки
@@ -74,13 +65,7 @@ export default class Api {
       link:popupData.place_url
       })
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-    // если ошибка, отклоняем промис
-     return Promise.reject(`Ошибка: ${res.status}`);
-    })
+    .then(this._transformResJson)
   }
 
   //публичный метод удоления карточки
@@ -91,13 +76,7 @@ export default class Api {
         authorization: this.headers,
       }
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-    // если ошибка, отклоняем промис
-     return Promise.reject(`Ошибка: ${res.status}`);
-    })
+    .then(this._transformResJson)
   }
 
    //публичный метод постановки лайка
@@ -108,13 +87,7 @@ export default class Api {
         authorization: this.headers,
       }
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-    // если ошибка, отклоняем промис
-     return Promise.reject(`Ошибка: ${res.status}`);
-    })
+    .then(this._transformResJson)
   }
 
   //публичный метод удоления лайка
@@ -125,13 +98,7 @@ export default class Api {
         authorization: this.headers,
       }
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-    // если ошибка, отклоняем промис
-     return Promise.reject(`Ошибка: ${res.status}`);
-    })
+    .then(this._transformResJson)
   }
 
   //публичный метод обновления аватара пользователя
@@ -146,14 +113,7 @@ export default class Api {
         avatar: userAvatarUrl,
       })
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-
-      }
-    // если ошибка, отклоняем промис
-     return Promise.reject(`Ошибка: ${res.status}`);
-    })
+    .then(this._transformResJson)
     .catch(err => console.error(err));//выведем ошибку
   }
 }

@@ -83,7 +83,9 @@
         <section class="popup  popup_hidden" id="edit-avatar">
           <form class="popup__form" name="edit_avatar" method="POST" action="#" novalidate>
             <h2 class="popup__header">Обновить аватар</h2>
-            <input type="text" id="popup_link"name="avatar_url" required  placeholder="Ссылка на аватар" class="popup__input" pattern="^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w\.-]*)*\/?$/">
+            <input type="text" id="popup_link"name="avatar_url" required  placeholder="Ссылка на аватар" class="popup__input" pattern="/^(https?:\/\/)?([\w\.]+)\.([a-z]{2,6}\.?)(\/[\w\.]*)*\/?$/">
+            <!-- /^(https?:\/\/)?([\w\.]+)\.([a-z]{2,6}\.?)(\/[\w\.]*)*\/?$/ -->
+            <!-- ыpattern="^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w\.-]*)*\/?$/" -->
             <span class='popup__input-error' id='popup_link-input-error'></span>
             <button type="submit" id="avatar-submit" class="popup__save-button">Сохранить</button>
           </form>
