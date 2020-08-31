@@ -4,7 +4,8 @@ export default class PopupWithDelConfirm extends Popup {
   constructor({popupSelector, handleFormSubmit}) {
     super(popupSelector),
     this._popupElement = document.querySelector(popupSelector);
-    // this._handleFormSubmit = handleFormSubmit;//CALLBACK
+    this._submitButton = this._popupElement.querySelector('.popup__save-button');// кнопка сабмита
+    this._submitButtonTextContent = this._submitButton.textContent; //сохранение текста кнопки начального
   }
 
   setSubmitAction(submitAction) {
@@ -18,7 +19,18 @@ export default class PopupWithDelConfirm extends Popup {
       evt.preventDefault();
       // добавим вызов функции _handleFormSubmit
        this._handleFormSubmit(this._card);
-       super.closePopup()
+      //  super.closePopup()
     });
   }
+    //добавление надписи Удаление...
+    addBtnDeleting() {
+      this._submitButton.textContent = 'Удаление...';
+    }
+
+    //удаление надписи Удаление...
+    removeBtnDeleting() {
+      this._submitButton.textContent = this._submitButtonTextContent;
+    }
+
+
 }

@@ -62,15 +62,21 @@ const api = new Api ({
           fullSizeImg.openPopup(popupData);
         },
         deleteButtonHandler: (cardId)=>{
+          popupDelete.openPopup(cardId);
           popupDelete.setSubmitAction(()=>{
-              // cardId = item._id;
-                api.deleteCard(cardId)
-                  .then(() => {
-                    card.removeCard();//it's a life!
-                  })
-                  .catch(err => console.error(err))//выведем ошибку
+            // popupDelete.openPopup();
+            popupDelete.addBtnDeleting()
+            api.deleteCard(cardId)
+              .then(() => {
+                card.removeCard();//it's a life!
+              })
+              .catch(err => console.error(err))//выведем ошибку
+            .finally(()=>
+              popupDelete.removeBtnDeleting(),
+              popupDelete.closePopup()
+            )
           })
-          popupDelete.openPopup();
+          // popupDelete.openPopup();
         },
         putLikeHandler:(cardId)=>{
           api.putLike(cardId)
@@ -122,7 +128,10 @@ const api = new Api ({
           // cardList.addItem(cardElement, true);
         })
         .catch(err => console.error(err))//выведем ошибку
-        .finally(()=>placeFormAdd.removeBtnLoading())
+        .finally(()=>
+        placeFormAdd.removeBtnLoading(),
+        placeFormAdd.closePopup()
+        )
       }
     });
 
@@ -136,7 +145,10 @@ const api = new Api ({
           userProfile.setUserInfo(profileData);
         })
         .catch(err => console.error(err))//выведем ошибку
-        .finally(()=>profileFormEdit.removeBtnLoading())
+        .finally(()=>
+        profileFormEdit.removeBtnLoading(),
+        profileFormEdit.closePopup()
+        )
       }
     })
     //форма редактирования аватара
@@ -149,7 +161,10 @@ const api = new Api ({
           userProfile.setNewUserAvatar(data);
         })
         .catch(err => console.error(err))//выведем ошибку
-        .finally(()=>avatarFormEdit.removeBtnLoading())
+        .finally(()=>
+        avatarFormEdit.removeBtnLoading(),
+        avatarFormEdit.closePopup()
+        )
       }
     });
 
