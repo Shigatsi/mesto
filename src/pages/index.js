@@ -202,18 +202,17 @@ const api = new Api ({
       profileFormEdit.openPopup()
     });
 
+
     //открытие формы "Новое место"
     addCardButton.addEventListener('click', () =>{
       placeFormAdd.openPopup();
-      placeFormAdd._popupInputs.forEach((item) =>{
-          item.value = '';
-        })
+      placeFormAdd.clearInputsValues();
     });
 
     //открытие формы "Редактируем аватар"
     avatarEditButton.addEventListener('click', ()=> {
       avatarFormEdit.openPopup();
-      avatarFormEdit._popupInputs.value = '';
+      avatarFormEdit.clearInputsValues();
     })
  })
  .catch(err => console.error(err));//выведем ошибку

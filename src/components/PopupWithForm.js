@@ -32,6 +32,11 @@ export default class PopupWithForm extends Popup{
       return this._formValues;
     }
 
+     //публичный метод: очистки полей формы
+     clearInputsValues (){
+      this._formValues = '';
+     }
+
     //добавление надписи Сохранение...
     addBtnLoading() {
       this._submitButton.textContent = 'Сохранение...';
@@ -41,6 +46,8 @@ export default class PopupWithForm extends Popup{
     removeBtnLoading() {
       this._submitButton.textContent = this._submitButtonTextContent;
     }
+
+
 
     //публичный метод: установка слушателя
     setEventListeners() {
